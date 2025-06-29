@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useSession } from "@/lib/auth-client"
 
 interface NavItem {
   label: string
@@ -80,19 +81,57 @@ const Navigation = () => {
   )
 }
 
-const AuthButtons = () => (
-  <div className="hidden md:block">
-    <div className="flex items-center gap-2">
-      {authButtons.map((button) => (
-        <Link key={button.href} href={button.href}>
-          <Button variant={button.variant} className={button.className}>
-            {button.label}
+const AuthButtons = () => {
+  const { data: session, isPending } = useSession()
+
+  if (isPending) {
+    return (
+      <div className="hidden md:block">
+        <div className="flex items-center gap-2">
+          <div className="h-9 w-16 bg-gray-200 animate-pulse rounded-lg"></div>
+        </div>
+      </div>
+    )
+  }
+
+  if (session) {
+    return (
+      <div className="hidden md:block">
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-600">
+            Hi, {session.user.name || session.user.email}
+          </span>
+          <Link href="/dashboard">
+            <Button variant="ghost" className="h-9 rounded-lg px-3 hover:bg-neutral-200/50">
+              Dashboard
+            </Button>
+          </Link>
+          <Button 
+            variant="ghost" 
+            className="h-9 rounded-lg px-3 hover:bg-neutral-200/50"
+            onClick={() => window.location.href = "/api/auth/sign-out"}
+          >
+            Sign Out
           </Button>
-        </Link>
-      ))}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="hidden md:block">
+      <div className="flex items-center gap-2">
+        {authButtons.map((button) => (
+          <Link key={button.href} href={button.href}>
+            <Button variant={button.variant} className={button.className}>
+              {button.label}
+            </Button>
+          </Link>
+        ))}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export function Header() {
   return (

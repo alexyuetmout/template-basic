@@ -1,0 +1,255 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String     @id @default(cuid()) // 用户唯一标识符
+  email              String     @unique // 用户邮箱（唯一）
+  countryCode        String?    @map("country_code") @db.VarChar(2) // 国家代码
+  stripeCustomerId   String?    @unique @map("stripe_customer_id") // Stripe客户ID
+  balance            Int        @default(0) // 账户余额
+  oneTimePoints      Int        @default(0) @map("one_time_points") // 一次性积分
+  subscriptionPoints Int        @default(0) @map("subscription_points") // 订阅积分
+  pointsExpiresAt    DateTime?  @map("points_expires_at") // 积分过期时间
+  isAdmin            Boolean    @default(false) @map("is_admin") // 是否为管理员
+  status             UserStatus @default(ACTIVE) // 用户状态
+  createdAt          DateTime   @default(now()) @map("created_at") // 创建时间
+  updatedAt          DateTime   @updatedAt @map("updated_at") // 更新时间
+
+  // Better Auth required fields 
+  name  String? // 用户姓名
+  image String? // 用户图片
+
+  // Relations
+  sessions          Session[] // 用户会话
+  accounts          Account[] // 关联账户
+  orders            Order[] // 用户订单
+  subscriptions     Subscription[] // 用户订阅
+  pointTransactions PointTransaction[] // 积分交易记录
+
+  emailVerified Boolean @default(false)
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid()) // 会话唯一标识符
+  userId    String   @map("user_id") // 关联用户ID
+  expiresAt DateTime @map("expires_at") // 会话过期时间
+  token     String   @unique // 会话令牌（唯一）
+  ipAddress String?  @map("ip_address") // 会话IP地址
+  userAgent String?  @map("user_agent") // 用户代理信息
+  createdAt DateTime @default(now()) @map("created_at") // 创建时间
+  updatedAt DateTime @updatedAt @map("updated_at") // 更新时间
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade) // 关联用户
+
+  @@map("sessions")
+}
+
+model Account {
+  id                    String    @id @default(cuid()) // 账户唯一标识符
+  userId                String    @map("user_id") // 关联用户ID
+  accountId             String    @map("account_id") // 第三方账户ID
+  providerId            String    @map("provider_id") // 第三方提供商ID
+  accessToken           String?   @map("access_token") // 访问令牌
+  refreshToken          String?   @map("refresh_token") // 刷新令牌
+  idToken               String?   @map("id_token") // ID令牌
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at") // 访问令牌过期时间
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at") // 刷新令牌过期时间
+  scope                 String? // 授权范围
+  password              String? // 密码
+  createdAt             DateTime  @default(now()) @map("created_at") // 创建时间
+  updatedAt             DateTime  @updatedAt @map("updated_at") // 更新时间
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade) // 关联用户
+
+  @@unique([providerId, accountId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(cuid()) // 验证唯一标识符
+  identifier String // 验证标识符
+  value      String // 验证值
+  expiresAt  DateTime @map("expires_at") // 过期时间
+  createdAt  DateTime @default(now()) @map("created_at") // 创建时间
+  updatedAt  DateTime @updatedAt @map("updated_at") // 更新时间
+
+  @@unique([identifier, value])
+  @@map("verifications")
+}
+
+model Price {
+  id            String         @id @default(cuid()) // 价格唯一标识符
+  stripePriceId String         @unique @map("stripe_price_id") // Stripe价格ID
+  amount        Int // 价格金额（分为单位）
+  type          PriceType // 价格类型
+  interval      PriceInterval? // 计费周期
+  pointsReward  Int            @default(0) @map("points_reward") // 奖励积分
+  sortOrder     Int            @default(0) @map("sort_order") // 排序顺序
+  isActive      Boolean        @default(true) @map("is_active") // 是否激活
+  createdAt     DateTime       @default(now()) @map("created_at") // 创建时间
+  updatedAt     DateTime       @updatedAt @map("updated_at") // 更新时间
+
+  // Relations
+  orders        Order[] // 关联订单
+  subscriptions Subscription[] // 关联订阅
+
+  @@map("prices")
+}
+
+model Order {
+  id                    String      @id @default(cuid()) // 订单唯一标识符
+  orderNumber           String      @unique @default(uuid()) @map("order_number") // 订单号
+  userId                String      @map("user_id") // 关联用户ID
+  priceId               String      @map("price_id") // 关联价格ID
+  stripePaymentIntentId String?     @map("stripe_payment_intent_id") // Stripe支付意图ID
+  amount                Int // 订单金额（分为单位）
+  pointsAdded           Int         @default(0) @map("points_added") // 添加的积分
+  status                OrderStatus @default(PENDING) // 订单状态
+  createdAt             DateTime    @default(now()) @map("created_at") // 创建时间
+  updatedAt             DateTime    @updatedAt @map("updated_at") // 更新时间
+
+  // Relations
+  user              User               @relation(fields: [userId], references: [id]) // 关联用户
+  price             Price              @relation(fields: [priceId], references: [id]) // 关联价格
+  pointTransactions PointTransaction[] // 积分交易记录
+
+  @@map("orders")
+}
+
+model Subscription {
+  id                   String             @id @default(cuid()) // 订阅唯一标识符
+  userId               String             @map("user_id") // 关联用户ID
+  priceId              String             @map("price_id") // 关联价格ID
+  stripeSubscriptionId String             @unique @map("stripe_subscription_id") // Stripe订阅ID
+  subscriptionType     SubscriptionType   @map("subscription_type") // 订阅类型
+  status               SubscriptionStatus @default(ACTIVE) // 订阅状态
+  currentPeriodStart   DateTime           @map("current_period_start") // 当前周期开始时间
+  currentPeriodEnd     DateTime           @map("current_period_end") // 当前周期结束时间
+  nextBillingDate      DateTime?          @map("next_billing_date") // 下次计费日期
+  lastPointsGrantedAt  DateTime?          @map("last_points_granted_at") // 最后积分发放时间
+  canceledAt           DateTime?          @map("canceled_at") // 取消时间
+  cancellationReason   String?            @map("cancellation_reason") // 取消原因
+  createdAt            DateTime           @default(now()) @map("created_at") // 创建时间
+  updatedAt            DateTime           @updatedAt @map("updated_at") // 更新时间
+
+  // Relations
+  user              User               @relation(fields: [userId], references: [id]) // 关联用户
+  price             Price              @relation(fields: [priceId], references: [id]) // 关联价格
+  pointTransactions PointTransaction[] // 积分交易记录
+
+  @@map("subscriptions")
+}
+
+model PointTransaction {
+  id              String          @id @default(cuid()) // 积分交易唯一标识符
+  userId          String          @map("user_id") // 关联用户ID
+  points          Int // 积分数量
+  pointType       PointType       @map("point_type") // 积分类型
+  transactionType TransactionType @map("transaction_type") // 交易类型
+  reason          String? // 交易原因
+  description     String? // 交易描述
+  orderId         String?         @map("order_id") // 关联订单ID
+  subscriptionId  String?         @map("subscription_id") // 关联订阅ID
+  referenceId     String?         @map("reference_id") // 参考ID
+  createdAt       DateTime        @default(now()) @map("created_at") // 创建时间
+
+  // Relations
+  user         User          @relation(fields: [userId], references: [id]) // 关联用户
+  order        Order?        @relation(fields: [orderId], references: [id]) // 关联订单
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id]) // 关联订阅
+
+  @@map("point_transactions")
+}
+
+model AppSetting {
+  id          String   @id @default(cuid()) // 应用设置唯一标识符
+  key         String   @unique // 设置键（唯一）
+  value       String? // 设置值
+  isEnabled   Boolean  @default(true) @map("is_enabled") // 是否启用
+  description String? // 设置描述
+  updatedAt   DateTime @updatedAt @map("updated_at") // 更新时间
+
+  @@map("app_settings")
+}
+
+// Enums 枚举类型定义
+
+enum UserStatus {
+  ACTIVE // 活跃
+  INACTIVE // 不活跃
+  SUSPENDED // 暂停
+
+  @@map("user_status")
+}
+
+enum PriceType {
+  ONE_TIME // 一次性
+  SUBSCRIPTION // 订阅
+  POINTS_PACKAGE // 积分包
+
+  @@map("price_type")
+}
+
+enum PriceInterval {
+  DAY // 每日
+  WEEK // 每周
+  MONTH // 每月
+  YEAR // 每年
+
+  @@map("price_interval")
+}
+
+enum OrderStatus {
+  PENDING // 待处理
+  SUCCEEDED // 成功
+  FAILED // 失败
+  CANCELED // 已取消
+  REFUNDED // 已退款
+
+  @@map("order_status")
+}
+
+enum SubscriptionType {
+  MONTHLY // 月度
+  YEARLY // 年度
+  WEEKLY // 周度
+  CUSTOM // 自定义
+
+  @@map("subscription_type")
+}
+
+enum SubscriptionStatus {
+  ACTIVE // 活跃
+  CANCELED // 已取消
+  INCOMPLETE // 未完成
+  PAST_DUE // 逾期
+  UNPAID // 未付款
+
+  @@map("subscription_status")
+}
+
+enum PointType {
+  ONE_TIME // 一次性积分
+  SUBSCRIPTION // 订阅积分
+
+  @@map("point_type")
+}
+
+enum TransactionType {
+  EARN // 获得
+  SPEND // 消费
+  EXPIRE // 过期
+  BONUS // 奖励
+  REFUND // 退款
+
+  @@map("transaction_type")
+}

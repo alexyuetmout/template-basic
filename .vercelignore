@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment variables
+.env*
+!.env.example
+
+# Build outputs
+.next/
+dist/
+out/
+
+# Logs
+*.log
+
+# Database
+prisma/migrations/
+*.db
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp

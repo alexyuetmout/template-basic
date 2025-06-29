@@ -2,30 +2,52 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import Link from "next/link"
 import React, { useState } from "react"
 import { Eye, EyeOff, Mail } from "lucide-react"
 import { AuthNavigation } from "@/components/auth/AuthNavigation"
+import { useRouter } from "next/navigation"
+import { authClient } from "@/lib/auth-client"
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [rememberMe, setRememberMe] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+  const router = useRouter()
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError("")
     setIsLoading(true)
-    // TODO: 实现邮箱登录逻辑
-    console.log("Email sign in:", { email, password })
-    setTimeout(() => setIsLoading(false), 1000)
+
+    try {
+      const result = await authClient.signIn.email({
+        email,
+        password,
+      })
+
+      if (result.error) {
+        setError(result.error.message || "Login failed")
+      } else {
+        // Login successful, redirect to home
+        router.push("/")
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleGoogleSignIn = async () => {
+    setError("")
     setIsLoading(true)
-    // TODO: 实现Google登录逻辑
-    console.log("Google sign in")
-    setTimeout(() => setIsLoading(false), 1000)
+    // Redirect to Google OAuth
+    window.location.href = "/api/auth/sign-in/google"
   }
 
   return (
@@ -88,6 +110,13 @@ export default function SignInPage() {
               </div>
             </div>
 
+            {/* 错误信息显示 */}
+            {error && (
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+
             {/* 邮箱登录表单 */}
             <form onSubmit={handleEmailSignIn} className="space-y-4">
               <div className="space-y-2">
@@ -133,15 +162,16 @@ export default function SignInPage() {
               </div>
 
               <div className="flex items-center justify-between">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="rounded border-neutral-300 dark:border-neutral-600 text-primary focus:ring-primary"
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="remember"
+                    checked={rememberMe}
+                    onCheckedChange={(checked) => setRememberMe(checked as boolean)}
                   />
-                  <span className="ml-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  <label htmlFor="remember" className="text-sm text-neutral-600 dark:text-neutral-400 cursor-pointer">
                     Remember me
-                  </span>
-                </label>
+                  </label>
+                </div>
                 <Link
                   href="/auth/forgot-password"
                   className="text-sm text-primary hover:text-primary/80"

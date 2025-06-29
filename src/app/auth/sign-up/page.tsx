@@ -2,21 +2,26 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import Link from "next/link"
 import React, { useState } from "react"
-import { Eye, EyeOff, Mail, User } from "lucide-react"
+import { Eye, EyeOff, Mail } from "lucide-react"
 import { AuthNavigation } from "@/components/auth/AuthNavigation"
+import { useRouter } from "next/navigation"
+import { authClient } from "@/lib/auth-client"
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
     confirmPassword: ""
   })
+  const [agreedToTerms, setAgreedToTerms] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+  const router = useRouter()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -27,21 +32,50 @@ export default function SignUpPage() {
 
   const handleEmailSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError("")
+
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don&apos;t match!")
+      setError("Passwords don't match!")
       return
     }
+    if (!agreedToTerms) {
+      setError("Please agree to the Terms of Service and Privacy Policy")
+      return
+    }
+
     setIsLoading(true)
-    // TODO: 实现邮箱注册逻辑
-    console.log("Email sign up:", formData)
-    setTimeout(() => setIsLoading(false), 1000)
+    try {
+      const result = await authClient.signUp.email({
+        email: formData.email,
+        password: formData.password,
+        name: formData.email.split("@")[0],
+      })
+
+      if (result.error) {
+        setError(result.error.message || "Registration failed")
+      } else {
+        // Registration successful, redirect to home
+        router.push("/")
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleGoogleSignUp = async () => {
+    setError("")
     setIsLoading(true)
-    // TODO: 实现Google注册逻辑
-    console.log("Google sign up")
-    setTimeout(() => setIsLoading(false), 1000)
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      })
+    } catch (err) {
+      setError("Google sign up failed. Please try again.")
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -53,7 +87,7 @@ export default function SignUpPage() {
             Create Account
           </h1>
           <p className="text-neutral-600 dark:text-neutral-400 mt-2">
-            Join us today and start building amazing things
+            Join us today with just your email and password
           </p>
         </div>
 
@@ -104,26 +138,15 @@ export default function SignUpPage() {
               </div>
             </div>
 
+            {/* 错误信息显示 */}
+            {error && (
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+
             {/* 邮箱注册表单 */}
             <form onSubmit={handleEmailSignUp} className="space-y-4">
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                  Full Name
-                </label>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-neutral-400" />
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full pl-10 pr-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-400 focus:ring-2 focus:ring-primary focus:border-transparent"
-                    required
-                  />
-                </div>
-              </div>
 
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
@@ -194,23 +217,21 @@ export default function SignUpPage() {
                 </div>
               </div>
 
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id="terms"
-                    type="checkbox"
-                    className="rounded border-neutral-300 dark:border-neutral-600 text-primary focus:ring-primary"
-                    required
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label htmlFor="terms" className="text-neutral-600 dark:text-neutral-400">
+              <div className="flex items-start space-x-3">
+                <Checkbox
+                  id="terms"
+                  checked={agreedToTerms}
+                  onCheckedChange={(checked) => setAgreedToTerms(checked as boolean)}
+                  className="mt-0.5"
+                />
+                <div className="text-sm">
+                  <label htmlFor="terms" className="text-neutral-600 dark:text-neutral-400 cursor-pointer">
                     I agree to the{" "}
-                    <Link href="/terms" className="text-primary hover:text-primary/80">
+                    <Link href="/terms" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
                       Terms of Service
                     </Link>{" "}
                     and{" "}
-                    <Link href="/privacy" className="text-primary hover:text-primary/80">
+                    <Link href="/privacy" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
                       Privacy Policy
                     </Link>
                   </label>
@@ -220,7 +241,7 @@ export default function SignUpPage() {
               <Button
                 type="submit"
                 className="w-full h-12"
-                disabled={isLoading}
+                disabled={isLoading || !agreedToTerms}
               >
                 {isLoading ? "Creating account..." : "Create Account"}
               </Button>
