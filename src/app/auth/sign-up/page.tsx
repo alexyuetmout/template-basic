@@ -68,9 +68,10 @@ export default function SignUpPage() {
     setError("")
     setIsLoading(true)
     try {
+      // 根据 Better Auth 官方文档的正确方式
       await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/",
+        callbackURL: "/", // 成功后重定向到首页
       })
     } catch (err) {
       setError("Google sign up failed. Please try again.")

@@ -23,7 +23,7 @@ export async function requireAdmin() {
 
   const { user } = authResult
   
-  if (!user.isAdmin) {
+  if (!(user as any).isAdmin) {
     return NextResponse.json({ error: "Forbidden - Admin access required" }, { status: 403 })
   }
 

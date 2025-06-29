@@ -46,8 +46,16 @@ export default function SignInPage() {
   const handleGoogleSignIn = async () => {
     setError("")
     setIsLoading(true)
-    // Redirect to Google OAuth
-    window.location.href = "/api/auth/sign-in/google"
+    try {
+      // 根据 Better Auth 官方文档的正确方式
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/", // 成功后重定向到首页
+      })
+    } catch (err) {
+      setError("Google sign in failed. Please try again.")
+      setIsLoading(false)
+    }
   }
 
   return (

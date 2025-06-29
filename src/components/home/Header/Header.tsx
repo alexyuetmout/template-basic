@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useSession } from "@/lib/auth-client"
+import { usePathname, useRouter } from "next/navigation"
+import { useSession, authClient } from "@/lib/auth-client"
 
 interface NavItem {
   label: string
@@ -83,6 +83,7 @@ const Navigation = () => {
 
 const AuthButtons = () => {
   const { data: session, isPending } = useSession()
+  const router = useRouter()
 
   if (isPending) {
     return (
@@ -109,7 +110,18 @@ const AuthButtons = () => {
           <Button 
             variant="ghost" 
             className="h-9 rounded-lg px-3 hover:bg-neutral-200/50"
-            onClick={() => window.location.href = "/api/auth/sign-out"}
+            onClick={async () => {
+              try {
+                await authClient.signOut()
+                // 重定向到首页并刷新路由状态
+                router.push("/")
+                router.refresh()
+              } catch (error) {
+                console.error('Sign out error:', error)
+                // 强制刷新页面
+                window.location.href = "/"
+              }
+            }}
           >
             Sign Out
           </Button>

@@ -89,33 +89,38 @@ export class SettingsService {
       {
         key: "points_expiry_months",
         value: "12",
-        description: "Number of months after which one-time points expire",
+        description: "一次性积分过期时间",
         isEnabled: true,
       },
       {
         key: "max_points_per_order",
         value: "1000",
-        description: "Maximum points that can be earned per order",
+        description: "每个订单最大积分",
         isEnabled: true,
       },
       {
         key: "subscription_cancellation_allowed",
         value: "true",
-        description: "Whether users can cancel their own subscriptions",
+        description: "是否允许用户取消自己的订阅",
         isEnabled: true,
       },
       {
         key: "email_notifications_enabled",
         value: "true",
-        description: "Whether email notifications are enabled",
+        description: "是否启用邮箱通知",
         isEnabled: true,
       },
       {
         key: "maintenance_mode",
         value: "false",
-        description: "Whether the application is in maintenance mode",
+        description: "是否维护模式",
         isEnabled: false,
-      },
+      },{
+        key:'register_points',
+        value:'2',
+        description:'注册赠送积分',
+        isEnabled:true
+      }
     ];
 
     for (const setting of defaultSettings) {
