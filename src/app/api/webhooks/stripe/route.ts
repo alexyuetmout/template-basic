@@ -3,7 +3,67 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { OrderService } from "@/lib/services/orders";
 import { SubscriptionService } from "@/lib/services/subscriptions";
+import { db } from "@/lib/db";
 import Stripe from "stripe";
+
+// 处理 Checkout Session 完成事件
+async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) {
+  const { metadata, mode, customer } = session;
+  
+  if (!metadata?.userId || !metadata?.priceId) {
+    console.error("Missing required metadata in checkout session");
+    return;
+  }
+
+  const userId = metadata.userId;
+  const priceId = metadata.priceId;
+
+  // 获取价格信息
+  const price = await db.price.findUnique({
+    where: { id: priceId },
+  });
+
+  if (!price) {
+    console.error(`Price not found: ${priceId}`);
+    return;
+  }
+
+  if (mode === "payment") {
+    // 一次性支付 - 创建订单记录
+    try {
+      const order = await db.order.create({
+        data: {
+          orderNumber: `CS_${session.id}`,
+          userId,
+          priceId,
+          amount: price.amount,
+          status: "SUCCEEDED",
+          stripePaymentIntentId: session.payment_intent as string,
+          pointsAdded: price.pointsReward,
+        },
+      });
+
+      // 如果有积分奖励，添加积分
+      if (price.pointsReward > 0) {
+        const expiresAt = new Date();
+        expiresAt.setFullYear(expiresAt.getFullYear() + 1); // 积分1年后过期
+
+        const { PointsService } = await import("@/lib/services/points");
+        await PointsService.grantPointsForOrder(
+          userId,
+          order.id,
+          price.pointsReward,
+          expiresAt
+        );
+      }
+    } catch (error) {
+      console.error("Error processing one-time payment:", error);
+    }
+  } else if (mode === "subscription") {
+    // 订阅 - 处理将在 customer.subscription.created 事件中进行
+    console.log(`Subscription checkout completed for session: ${session.id}`);
+  }
+}
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -109,6 +169,12 @@ export async function POST(req: NextRequest) {
             );
           }
         }
+        break;
+      }
+
+      case "checkout.session.completed": {
+        const session = event.data.object as Stripe.Checkout.Session;
+        await handleCheckoutSessionCompleted(session);
         break;
       }
 
