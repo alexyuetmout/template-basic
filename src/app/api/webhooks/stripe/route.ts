@@ -66,6 +66,14 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
 }
 
 export async function POST(req: NextRequest) {
+  // 检查 Stripe 是否配置
+  if (!stripe) {
+    return NextResponse.json(
+      { error: "Payment service not configured" },
+      { status: 503 }
+    );
+  }
+
   const body = await req.text();
   const signature = (await headers()).get("stripe-signature");
 

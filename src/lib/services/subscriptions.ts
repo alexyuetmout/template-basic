@@ -130,6 +130,11 @@ export class SubscriptionService {
     subscriptionId: string,
     reason?: string
   ): Promise<void> {
+    // 检查 Stripe 是否配置
+    if (!stripe) {
+      throw new Error("Payment service not configured");
+    }
+
     const subscription = await db.subscription.findUnique({
       where: { id: subscriptionId },
     });

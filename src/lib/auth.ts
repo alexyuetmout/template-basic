@@ -3,6 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { db } from "@/lib/db";
 import { SettingsService } from "@/lib/services/settings";
 import { createAuthMiddleware } from "better-auth/api";
+import { TRANSACTION_TYPE, POINT_TYPE } from "@/lib/constants/enums";
 
 export const auth = betterAuth({
   database: prismaAdapter(db, {
@@ -19,7 +20,7 @@ export const auth = betterAuth({
     },
   },
   secret: process.env.BETTER_AUTH_SECRET!,
-  baseURL: process.env.BETTER_AUTH_URL!,
+  baseURL: process.env.BETTER_AUTH_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days
   },
@@ -62,7 +63,7 @@ async function grantRegistrationPoints(user: any) {
       const existingTransaction = await db.pointTransaction.findFirst({
         where: {
           userId: user.id,
-          transactionType: "BONUS",
+          transactionType: TRANSACTION_TYPE.BONUS,
           reason: "新用户注册",
         },
       });
@@ -81,8 +82,8 @@ async function grantRegistrationPoints(user: any) {
           data: {
             userId: user.id,
             points: registerPoints,
-            pointType: "ONE_TIME",
-            transactionType: "BONUS",
+            pointType: POINT_TYPE.ONE_TIME,
+            transactionType: TRANSACTION_TYPE.BONUS,
             description: "注册赠送积分",
             reason: "新用户注册",
           },

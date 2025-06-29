@@ -11,11 +11,20 @@ export interface CreateUserData {
 
 export class UserService {
   static async createUser(data: CreateUserData): Promise<User> {
-    // Create Stripe customer
-    const stripeCustomer = await stripe.customers.create({
-      email: data.email,
-      name: data.name,
-    });
+    let stripeCustomerId: string | null = null;
+    
+    // Create Stripe customer if configured
+    if (stripe) {
+      try {
+        const stripeCustomer = await stripe.customers.create({
+          email: data.email,
+          name: data.name,
+        });
+        stripeCustomerId = stripeCustomer.id;
+      } catch (error) {
+        console.warn("Failed to create Stripe customer:", error);
+      }
+    }
 
     const user = await db.user.create({
       data: {
@@ -23,7 +32,7 @@ export class UserService {
         name: data.name,
         image: data.image,
         countryCode: data.countryCode,
-        stripeCustomerId: stripeCustomer.id,
+        stripeCustomerId,
       },
     });
 

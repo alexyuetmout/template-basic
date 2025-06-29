@@ -6,6 +6,14 @@ import { db } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   try {
+    // 检查 Stripe 是否配置
+    if (!stripe) {
+      return NextResponse.json(
+        { error: "Payment service not configured" },
+        { status: 503 }
+      );
+    }
+
     const session = await auth.api.getSession({
       headers: await headers(),
     });
