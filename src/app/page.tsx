@@ -16,10 +16,12 @@ import { ComparisonChart } from "@/components/home/ComparisonChart/ComparisonCha
 import { Blog } from "@/components/home/Blog/Blog"
 import { Stats } from "@/components/home/Stats/Stats"
 import { VideoTutorial } from "@/components/home/VideoTutorial/VideoTutorial"
+import { AutoOneTap } from "@/components/auth/AutoOneTap"
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-900">
+      <AutoOneTap callbackURL="/dashboard" delay={5000} />
       <PromoBanner />
       <Header />
       <main className="flex-1">
