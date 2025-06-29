@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { PointTransaction, PointType, TransactionType } from "@prisma/client";
+import { TRANSACTION_TYPE, POINT_TYPE } from "@/lib/constants/enums";
 
 export interface CreatePointTransactionData {
   userId: string;
@@ -22,15 +23,15 @@ export class PointsService {
       });
 
       // Update user points based on transaction type and point type
-      if (data.transactionType === "EARN" || data.transactionType === "BONUS") {
-        if (data.pointType === "ONE_TIME") {
+      if (data.transactionType === TRANSACTION_TYPE.PURCHASE || data.transactionType === TRANSACTION_TYPE.SUBSCRIPTION || data.transactionType === TRANSACTION_TYPE.BONUS) {
+        if (data.pointType === POINT_TYPE.ONE_TIME) {
           await tx.user.update({
             where: { id: data.userId },
             data: {
               oneTimePoints: { increment: data.points },
             },
           });
-        } else if (data.pointType === "SUBSCRIPTION") {
+        } else if (data.pointType === POINT_TYPE.SUBSCRIPTION) {
           await tx.user.update({
             where: { id: data.userId },
             data: {
@@ -38,15 +39,15 @@ export class PointsService {
             },
           });
         }
-      } else if (data.transactionType === "SPEND" || data.transactionType === "EXPIRE" || data.transactionType === "REFUND") {
-        if (data.pointType === "ONE_TIME") {
+      } else if (data.transactionType === TRANSACTION_TYPE.SPEND || data.transactionType === TRANSACTION_TYPE.EXPIRE || data.transactionType === TRANSACTION_TYPE.REFUND) {
+        if (data.pointType === POINT_TYPE.ONE_TIME) {
           await tx.user.update({
             where: { id: data.userId },
             data: {
               oneTimePoints: { decrement: Math.abs(data.points) },
             },
           });
-        } else if (data.pointType === "SUBSCRIPTION") {
+        } else if (data.pointType === POINT_TYPE.SUBSCRIPTION) {
           await tx.user.update({
             where: { id: data.userId },
             data: {
@@ -172,8 +173,8 @@ export class PointsService {
       const transaction = await this.createTransaction({
         userId,
         points,
-        pointType: "ONE_TIME",
-        transactionType: "EARN",
+        pointType: POINT_TYPE.ONE_TIME,
+        transactionType: TRANSACTION_TYPE.PURCHASE,
         reason: "Purchase reward",
         description: `Points earned from order ${orderId}`,
         orderId,
@@ -199,8 +200,8 @@ export class PointsService {
     return this.createTransaction({
       userId,
       points,
-      pointType: "SUBSCRIPTION",
-      transactionType: "EARN",
+      pointType: POINT_TYPE.SUBSCRIPTION,
+      transactionType: TRANSACTION_TYPE.SUBSCRIPTION,
       reason: "Subscription reward",
       description: `Monthly points from subscription ${subscriptionId}`,
       subscriptionId,
