@@ -1,0 +1,88 @@
+import { Card, CardContent } from "@/components/ui/card"
+import { ArrowRight } from "lucide-react"
+import Link from "next/link"
+
+export function Blog() {
+  const blogPosts = [
+    {
+      title: "Building Your First AI Chatbot",
+      date: "April 3, 2024",
+      description: "A comprehensive guide to building an intelligent chatbot using Next.js and OpenAI API",
+      image: "/images/blog/ai-chatbot.jpg",
+      slug: "building-ai-chatbot"
+    },
+    {
+      title: "Getting Started with AI Development", 
+      date: "April 2, 2024",
+      description: "Learn the basics of AI development and start building your first AI application",
+      image: "/images/blog/ai-development.jpg", 
+      slug: "getting-started-with-ai-development"
+    },
+    {
+      title: "Welcome to AImaker",
+      date: "April 1, 2024",
+      description: "Start your AI journey and explore unlimited possibilities in AI development",
+      image: "/images/blog/welcome.jpg",
+      slug: "welcome-to-aimaker"
+    }
+  ]
+
+  return (
+    <div className="relative py-20 bg-gray-50 dark:bg-neutral-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4">
+            Latest Blog Posts
+          </h2>
+          <p className="max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-400">
+            Explore cutting-edge AI development techniques and best practices
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {blogPosts.map((post, index) => (
+            <Card key={index} className="group bg-white dark:bg-neutral-900 rounded-2xl border-0 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-blue-600/20 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">📝</span>
+                  </div>
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <time className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                  {post.date}
+                </time>
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mt-2 mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <Link href={`/blog/${post.slug}`}>
+                    {post.title}
+                  </Link>
+                </h3>
+                <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                  {post.description}
+                </p>
+                <Link 
+                  href={`/blog/${post.slug}`}
+                  className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:gap-3 transition-all duration-200"
+                >
+                  Read More
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <Link 
+            href="/blog"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl transition-colors duration-200"
+          >
+            View All Posts
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
