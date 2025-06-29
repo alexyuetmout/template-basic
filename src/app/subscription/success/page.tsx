@@ -36,14 +36,14 @@ function SubscriptionSuccessContent() {
           
           <div className="flex flex-col gap-3 pt-4">
             <Button asChild className="w-full">
-              <Link href="/dashboard">
-                开始使用服务
+              <Link href="/profile">
+                前往个人中心
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
             
             <Button variant="outline" asChild className="w-full">
-              <Link href="/subscriptions">
+              <Link href="/profile/subscriptions">
                 管理订阅
               </Link>
             </Button>

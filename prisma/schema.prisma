@@ -32,6 +32,7 @@ model User {
   orders            Order[] // 用户订单
   subscriptions     Subscription[] // 用户订阅
   pointTransactions PointTransaction[] // 积分交易记录
+  settings          UserSettings? // 用户设置
 
   emailVerified Boolean @default(false)
 
@@ -245,11 +246,26 @@ enum PointType {
 }
 
 enum TransactionType {
-  EARN // 获得
+  PURCHASE // 购买获得
+  SUBSCRIPTION // 订阅获得
   SPEND // 消费
   EXPIRE // 过期
   BONUS // 奖励
   REFUND // 退款
 
   @@map("transaction_type")
+}
+
+model UserSettings {
+  id                    String   @id @default(cuid()) // 设置唯一标识符
+  userId                String   @unique @map("user_id") // 关联用户ID
+  notificationSettings  Json?    @map("notification_settings") // 通知设置（JSON格式）
+  preferences           Json?    // 用户偏好设置（JSON格式）
+  createdAt             DateTime @default(now()) @map("created_at") // 创建时间
+  updatedAt             DateTime @updatedAt @map("updated_at") // 更新时间
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade) // 关联用户
+
+  @@map("user_settings")
 }

@@ -102,9 +102,9 @@ const AuthButtons = () => {
           <span className="text-sm text-gray-600">
             Hi, {session.user.name || session.user.email}
           </span>
-          <Link href="/dashboard">
+          <Link href="/profile">
             <Button variant="ghost" className="h-9 rounded-lg px-3 hover:bg-neutral-200/50">
-              Dashboard
+              个人中心
             </Button>
           </Link>
           <Button 
