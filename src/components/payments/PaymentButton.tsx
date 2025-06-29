@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button, type ButtonProps } from "@/components/ui/button";
 
-interface PaymentButtonProps {
+interface PaymentButtonProps extends Omit<ButtonProps, 'onClick' | 'disabled'> {
   priceId: string;
   type: "payment" | "subscription";
   children: React.ReactNode;
-  className?: string;
   disabled?: boolean;
   trialDays?: number;
   successUrl?: string;
@@ -23,6 +22,9 @@ export function PaymentButton({
   trialDays,
   successUrl,
   cancelUrl,
+  variant,
+  size,
+  ...props
 }: PaymentButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -79,6 +81,9 @@ export function PaymentButton({
       onClick={handleClick}
       disabled={disabled || isLoading}
       className={className}
+      variant={variant}
+      size={size}
+      {...props}
     >
       {isLoading ? "Loading..." : children}
     </Button>

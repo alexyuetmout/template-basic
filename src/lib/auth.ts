@@ -13,6 +13,10 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: false,
+    sendResetPassword: async () => {
+      // 可以在这里添加发送重置密码邮件的逻辑
+      // 现在暂时留空，因为我们主要用 setPassword 功能
+    },
   },
   socialProviders: {
     google: {

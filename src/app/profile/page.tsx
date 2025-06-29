@@ -7,6 +7,7 @@ import { ProfileLayout } from "@/components/profile/ProfileLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { User, Mail, Calendar, Save, Loader2 } from "lucide-react";
+import { updateUser, useSession } from "@/lib/auth-client";
 
 interface UserProfile {
   id: string;
@@ -17,30 +18,16 @@ interface UserProfile {
 }
 
 export default function ProfilePage() {
-  const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { data: session, isPending } = useSession();
   const [saving, setSaving] = useState(false);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  const fetchProfile = async () => {
-    try {
-      const response = await fetch("/api/user/profile");
-      if (response.ok) {
-        const data = await response.json();
-        setProfile(data);
-        setName(data.name || "");
-      }
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-    } finally {
-      setLoading(false);
+    if (session?.user) {
+      setName(session.user.name || "");
     }
-  };
+  }, [session]);
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,21 +35,14 @@ export default function ProfilePage() {
     setMessage("");
 
     try {
-      const response = await fetch("/api/user/profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name }),
+      const { data, error } = await updateUser({
+        name,
       });
 
-      if (response.ok) {
-        const updatedProfile = await response.json();
-        setProfile(updatedProfile);
-        setMessage("个人信息更新成功！");
+      if (error) {
+        setMessage(error.message || "更新失败，请稍后重试");
       } else {
-        const errorData = await response.json();
-        setMessage(errorData.error || "更新失败，请稍后重试");
+        setMessage("个人信息更新成功！");
       }
     } catch (error) {
       setMessage("更新失败，请稍后重试");
@@ -71,7 +51,7 @@ export default function ProfilePage() {
     }
   };
 
-  if (loading) {
+  if (isPending) {
     return (
       <div className="min-h-screen bg-white dark:bg-neutral-900">
         <Header />
@@ -130,7 +110,7 @@ export default function ProfilePage() {
                   <input
                     type="email"
                     id="email"
-                    value={profile?.email || ""}
+                    value={session?.user?.email || ""}
                     disabled
                     className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed"
                   />
@@ -185,13 +165,13 @@ export default function ProfilePage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-2 border-b border-gray-100">
                   <span className="text-sm font-medium text-gray-600">用户ID</span>
-                  <span className="text-sm text-gray-900 font-mono">{profile?.id}</span>
+                  <span className="text-sm text-gray-900 font-mono">{session?.user?.id}</span>
                 </div>
                 
                 <div className="flex items-center justify-between py-2 border-b border-gray-100">
                   <span className="text-sm font-medium text-gray-600">注册时间</span>
                   <span className="text-sm text-gray-900">
-                    {profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString("zh-CN") : "-"}
+                    {session?.user?.createdAt ? new Date(session.user.createdAt).toLocaleDateString("zh-CN") : "-"}
                   </span>
                 </div>
                 

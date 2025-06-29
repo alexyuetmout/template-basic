@@ -1,6 +1,21 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { PaymentButton } from "./PaymentButton";
+import { PRICE_INTERVAL } from "@/lib/constants/enums";
+
+interface PriceData {
+  id: string;
+  stripePriceId: string;
+  amount: number;
+  type: string;
+  interval: string | null;
+  pointsReward: number;
+  sortOrder: number;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface Plan {
   id: string;
@@ -14,72 +29,268 @@ interface Plan {
   popular?: boolean;
 }
 
-const plans: Plan[] = [
+type PricingMode = 'onetime' | 'monthly' | 'yearly';
+
+// 定价模式配置
+const pricingModeConfig = {
+  defaultMode: 'yearly' as PricingMode, // 默认选中年订阅
+  popularIds: {
+    onetime: 'onetime_pro',        // 一次性模式的流行选项
+    monthly: 'subscribe_pro',      // 月订阅模式的流行选项
+    yearly: 'subscribe_basic_year' // 年订阅模式的流行选项
+  },
+  buttonText: '立即开始', // 统一的按钮文案
+  modes: [
+    { key: 'onetime', label: '一次性' },
+    { key: 'monthly', label: '月订阅' },
+    { key: 'yearly', label: '年订阅' }
+  ]
+};
+
+// 预定义文案配置数组
+const cardContent = [
   {
-    id: "basic",
-    name: "Basic",
-    description: "Experience Cursor tutorials and AI programming basics",
-    price: "Free",
-    priceDetail: "",
+    id: 'onetime_basic',
+    name: 'Basic',
+    description: 'Experience Cursor tutorials and AI programming basics',
     features: [
-      "Basic Cursor tutorials",
-      "AI programming environment setup",
-      "Basic development tools",
-      "Public community access",
-      "×Complete Cursor tutorials",
-      "×AI programming Q&A service",
-      "×VIP community group",
-      "×AI application templates"
-    ],
-    buttonText: "Start Learning",
-    buttonVariant: "secondary"
+      'Basic Cursor tutorials',
+      'AI programming environment setup',
+      'Basic development tools',
+      'Public community access',
+      '×Complete Cursor tutorials',
+      '×AI programming Q&A service',
+      '×VIP community group',
+      '×AI application templates'
+    ]
   },
   {
-    id: "complete",
-    name: "Complete Course",
-    description: "Master Cursor and AI programming systematically",
-    price: "$99",
-    priceDetail: "/month",
+    id: 'onetime_pro',
+    name: 'Pro',
+    description: 'Master Cursor and AI programming systematically',
     features: [
-      "Complete Cursor tutorials",
-      "AI programming projects",
-      "One-on-one support",
-      "VIP community access",
-      "Lifetime course updates",
-      "×Priority technical support",
-      "×AI application templates",
-      "×Login system source code",
-      "×Payment system integration",
-      "×Commercial license"
-    ],
-    buttonText: "Limited Time Offer",
-    buttonVariant: "primary",
-    popular: true
+      'Complete Cursor tutorials',
+      'AI programming projects',
+      'One-on-one support',
+      'VIP community access',
+      'Lifetime course updates',
+      '×Priority technical support',
+      '×AI application templates',
+      '×Login system source code',
+      '×Payment system integration',
+      '×Commercial license'
+    ]
   },
   {
-    id: "advanced",
-    name: "Advanced",
-    description: "Master professional AI programming skills",
-    price: "$199",
-    priceDetail: "/month",
+    id: 'onetime_premium',
+    name: 'Premium',
+    description: 'Master professional AI programming skills',
     features: [
-      "Complete Cursor tutorials",
-      "AI programming projects",
-      "One-on-one support",
-      "VIP community access",
-      "Lifetime course updates",
-      "Priority technical support",
-      "AI application templates",
-      "Login system source code",
-      "Payment system integration",
-      "Commercial license"
-    ],
-    buttonText: "View Demo",
-    buttonVariant: "secondary"
+      'Complete Cursor tutorials',
+      'AI programming projects',
+      'One-on-one support',
+      'VIP community access',
+      'Lifetime course updates',
+      'Priority technical support',
+      'AI application templates',
+      'Login system source code',
+      'Payment system integration',
+      'Commercial license'
+    ]
+  },
+  {
+    id: 'subscribe_basic',
+    name: 'Basic',
+    description: 'Experience Cursor tutorials and AI programming basics',
+    features: [
+      'Basic Cursor tutorials',
+      'AI programming environment setup',
+      'Basic development tools',
+      'Public community access',
+      '×Complete Cursor tutorials',
+      '×AI programming Q&A service',
+      '×VIP community group',
+      '×AI application templates'
+    ]
+  },
+  {
+    id: 'subscribe_pro',
+    name: 'Pro',
+    description: 'Master Cursor and AI programming systematically',
+    features: [
+      'Complete Cursor tutorials',
+      'AI programming projects',
+      'One-on-one support',
+      'VIP community access',
+      'Lifetime course updates',
+      '×Priority technical support',
+      '×AI application templates',
+      '×Login system source code',
+      '×Payment system integration',
+      '×Commercial license'
+    ]
+  },
+  {
+    id: 'subscribe_premium',
+    name: 'Premium',
+    description: 'Master professional AI programming skills',
+    features: [
+      'Complete Cursor tutorials',
+      'AI programming projects',
+      'One-on-one support',
+      'VIP community access',
+      'Lifetime course updates',
+      'Priority technical support',
+      'AI application templates',
+      'Login system source code',
+      'Payment system integration',
+      'Commercial license'
+    ]
+  },
+  {
+    id: 'subscribe_basic_year',
+    name: 'Basic',
+    description: 'Experience Cursor tutorials and AI programming basics',
+    features: [
+      'Basic Cursor tutorials',
+      'AI programming environment setup',
+      'Basic development tools',
+      'Public community access',
+      '×Complete Cursor tutorials',
+      '×AI programming Q&A service',
+      '×VIP community group',
+      '×AI application templates'
+    ]
+  },
+  {
+    id: 'subscribe_pro_year',
+    name: 'Pro',
+    description: 'Master Cursor and AI programming systematically',
+    features: [
+      'Complete Cursor tutorials',
+      'AI programming projects',
+      'One-on-one support',
+      'VIP community access',
+      'Lifetime course updates',
+      '×Priority technical support',
+      '×AI application templates',
+      '×Login system source code',
+      '×Payment system integration',
+      '×Commercial license'
+    ]
+  },
+  {
+    id: 'subscribe_pre_year',
+    name: 'Premium',
+    description: 'Master professional AI programming skills',
+    features: [
+      'Complete Cursor tutorials',
+      'AI programming projects',
+      'One-on-one support',
+      'VIP community access',
+      'Lifetime course updates',
+      'Priority technical support',
+      'AI application templates',
+      'Login system source code',
+      'Payment system integration',
+      'Commercial license'
+    ]
   }
 ];
 
 export function PricingPlans() {
+  const [pricingMode, setPricingMode] = useState<PricingMode>(pricingModeConfig.defaultMode);
+  const [priceData, setPriceData] = useState<PriceData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [plans, setPlans] = useState<Plan[]>([]);
+
+  // 获取价格数据
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await fetch('/api/prices');
+        const data = await response.json();
+        setPriceData(data);
+      } catch (error) {
+        console.error('Error fetching prices:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPrices();
+  }, []);
+
+  // 根据定价模式筛选和组合数据
+  useEffect(() => {
+    if (priceData.length === 0) return;
+
+    let filteredPrices: PriceData[] = [];
+    
+    // 根据定价模式筛选价格数据
+    switch (pricingMode) {
+      case 'onetime':
+        filteredPrices = priceData.filter(price => price.interval === null);
+        break;
+      case 'monthly':
+        filteredPrices = priceData.filter(price => price.interval === PRICE_INTERVAL.MONTH);
+        break;
+      case 'yearly':
+        filteredPrices = priceData.filter(price => price.interval === PRICE_INTERVAL.YEAR);
+        break;
+    }
+
+    // 组合价格数据和文案配置
+    const combinedPlans: Plan[] = filteredPrices.map(priceItem => {
+      const contentConfig = cardContent.find(content => content.id === priceItem.id);
+      
+      // 动态判断是否为当前模式的流行选项
+      const isPopular = pricingModeConfig.popularIds[pricingMode] === priceItem.id;
+      
+      if (!contentConfig) {
+        // 如果没有找到对应的文案配置，使用默认值
+        return {
+          id: priceItem.id,
+          name: 'Unknown',
+          description: 'Plan description not available',
+          price: `$${(priceItem.amount / 100).toFixed(2)}`,
+          priceDetail: pricingMode === 'onetime' ? '' : `/${pricingMode === 'monthly' ? 'month' : 'year'}`,
+          features: [],
+          buttonText: pricingModeConfig.buttonText,
+          buttonVariant: isPopular ? 'primary' : 'secondary',
+          popular: isPopular
+        };
+      }
+
+      return {
+        id: priceItem.id,
+        name: contentConfig.name,
+        description: contentConfig.description,
+        price: `$${(priceItem.amount / 100).toFixed(2)}`,
+        priceDetail: pricingMode === 'onetime' ? '' : `/${pricingMode === 'monthly' ? 'month' : 'year'}`,
+        features: contentConfig.features,
+        buttonText: pricingModeConfig.buttonText,
+        buttonVariant: isPopular ? 'primary' : 'secondary',
+        popular: isPopular
+      };
+    });
+
+    setPlans(combinedPlans);
+  }, [priceData, pricingMode]);
+
+  if (loading) {
+    return (
+      <div className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <p className="mt-2 text-gray-600">Loading pricing plans...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,6 +305,25 @@ export function PricingPlans() {
           <p className="text-xl text-gray-600">
             Start your AI development journey with the perfect plan for you
           </p>
+        </div>
+
+        {/* Pricing Mode Selector */}
+        <div className="flex justify-center mb-12">
+          <div className="bg-white rounded-lg p-1 shadow-sm border border-gray-200">
+            {pricingModeConfig.modes.map((mode) => (
+              <button
+                key={mode.key}
+                onClick={() => setPricingMode(mode.key as PricingMode)}
+                className={`px-6 py-3 rounded-md text-sm font-medium transition-all duration-200 ${
+                  pricingMode === mode.key
+                    ? 'bg-blue-600 text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {mode.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Pricing Cards */}
@@ -168,23 +398,32 @@ export function PricingPlans() {
 
               {/* Button */}
               <div className="text-center">
-                {plan.buttonVariant === "primary" ? (
-                  <PaymentButton
-                    priceId={plan.id}
-                    type="payment"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105"
-                  >
-                    {plan.buttonText}
-                  </PaymentButton>
-                ) : (
-                  <button className="w-full border border-gray-300 hover:border-gray-400 text-gray-700 font-semibold py-4 px-6 rounded-xl transition-all duration-200 hover:bg-gray-50">
-                    {plan.buttonText}
-                  </button>
-                )}
+                <PaymentButton
+                  priceId={plan.id}
+                  type="payment"
+                  variant={plan.buttonVariant === "primary" ? "default" : "outline"}
+                  size="xl"
+                  className={`w-full mx-auto max-w-xs rounded-2xl transition-all duration-200 ${
+                    plan.buttonVariant === "primary" 
+                      ? "transform hover:scale-105 shadow-lg hover:shadow-xl" 
+                      : ""
+                  }`}
+                >
+                  {plan.buttonText}
+                </PaymentButton>
               </div>
             </div>
           ))}
         </div>
+
+        {/* No Data Message */}
+        {plans.length === 0 && !loading && (
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg">
+              No pricing plans available for the selected option.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

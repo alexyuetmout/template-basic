@@ -1,19 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { 
   User, 
-  Key, 
   ShoppingBag, 
   Coins, 
   CreditCard,
   Settings,
   Bell,
-  Shield
+  Shield,
+  Loader2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useSession } from "@/lib/auth-client";
 
 interface ProfileLayoutProps {
   children: React.ReactNode;
@@ -59,8 +60,34 @@ const menuItems = [
 ];
 
 export function ProfileLayout({ children }: ProfileLayoutProps) {
+  const { data: session, isPending } = useSession();
+  const router = useRouter();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isPending && !session) {
+      router.push("/auth/sign-in");
+      return;
+    }
+  }, [session, isPending, router]);
+
+  // 显示加载状态
+  if (isPending) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="w-6 h-6 animate-spin" />
+          <span>加载中...</span>
+        </div>
+      </div>
+    );
+  }
+
+  // 如果没有登录，不渲染内容（重定向中）
+  if (!session) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
