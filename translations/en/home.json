@@ -1,0 +1,386 @@
+{
+  "topBanner": {
+    "offer": "🎁 Special Launch Offer",
+    "template": "AIMaker Template",
+    "description": "- Ship Your AI Product in Hours",
+    "getStarted": "Get Started"
+  },
+  "header": {
+    "navigation": {
+      "home": "Home",
+      "features": "Features", 
+      "pricing": "Pricing",
+      "blog": "Blog"
+    },
+    "auth": {
+      "login": "Log in",
+      "signup": "Sign up"
+    }
+  },
+  "hero": {
+    "badge": "🚀 Modern AI Development Template",
+    "title": {
+      "main": "Ship AI Products Fast",
+      "sub": "From Idea to Launch"
+    },
+    "subtitle": "A complete Next.js 15 development framework with authentication, payments, rich components, and AI integration. Focus on innovation while we handle the infrastructure.",
+    "buttons": {
+      "startBuilding": "Start Building",
+      "viewComponents": "View Components"
+    },
+    "techStack": "Powered by Modern Tech Stack"
+  },
+  "features1": {
+    "badge": "Why Choose AIMaker",
+    "title": "Everything You Need for AI Development",
+    "subtitle": "Launch your AI product in hours, not weeks. Built with modern tech stack and designed for rapid development.",
+    "items": [
+      {
+        "title": "Complete AI Framework",
+        "description": "Built-in AI integration with modern components and infrastructure. Everything you need to build and scale your AI application."
+      },
+      {
+        "title": "Production Ready",
+        "description": "Authentication with GitHub/Google OAuth, Stripe payments, and scalable infrastructure with best practices built-in."
+      },
+      {
+        "title": "Ship Fast",
+        "description": "Next.js 15, React 19, TypeScript, and modern development tools. Deploy your AI product in hours, not weeks."
+      }
+    ]
+  },
+  "features2": {
+    "badge": "Template Features",
+    "title": "Everything You Need",
+    "subtitle": "A comprehensive Next.js template with rich components and modern features. Built for developers, designed for rapid development.",
+    "items": [
+      {
+        "title": "Modern Authentication",
+        "description": "Complete authentication system with GitHub and Google OAuth support"
+      },
+      {
+        "title": "Payment Integration",
+        "description": "Built-in Stripe payment system for subscriptions and one-time payments"
+      },
+      {
+        "title": "Dark Mode Support",
+        "description": "Seamless dark mode integration with modern design system"
+      },
+      {
+        "title": "Responsive Design",
+        "description": "Fully responsive layouts that work perfectly on all devices"
+      },
+      {
+        "title": "SEO Optimized",
+        "description": "Auto-generated sitemap and SEO-friendly structure"
+      },
+      {
+        "title": "Modular Architecture",
+        "description": "Clean and modular code structure for easy customization"
+      }
+    ]
+  },
+  "stats": {
+    "title": "Trusted by Developers Worldwide",
+    "subtitle": "Join thousands of developers building the future of AI applications",
+    "items": [
+      {
+        "label": "Active Users",
+        "value": "250+"
+      },
+      {
+        "label": "Components",
+        "value": "30+"
+      },
+      {
+        "label": "Launch Time",
+        "value": "5 min"
+      },
+      {
+        "label": "Active Communities",
+        "value": "50+"
+      }
+    ]
+  },
+  "videoTutorial": {
+    "title": "Quick Start Guide: Build Your First AI App",
+    "subtitle": "Learn how to build and deploy your AI application in minutes using our template.",
+    "watchButton": "Watch Tutorial"
+  },
+  "pricing": {
+    "badge": "Pricing Plans",
+    "title": "Choose Your Learning Plan",
+    "subtitle": "Start your AI development journey with the perfect plan for you",
+    "mostPopular": "Most Popular",
+    "plans": [
+      {
+        "name": "Basic",
+        "description": "Experience Cursor tutorials and AI programming basics",
+        "price": "Free",
+        "ctaText": "Start Learning",
+        "ctaHref": "/sign-up",
+        "ctaVariant": "outline",
+        "features": [
+          {
+            "text": "Basic Cursor tutorials",
+            "included": true
+          },
+          {
+            "text": "AI programming environment setup",
+            "included": true
+          },
+          {
+            "text": "Basic development tools",
+            "included": true
+          },
+          {
+            "text": "Public community access",
+            "included": true
+          },
+          {
+            "text": "Complete Cursor tutorials",
+            "included": false
+          },
+          {
+            "text": "AI programming Q&A service",
+            "included": false
+          },
+          {
+            "text": "VIP community group",
+            "included": false
+          },
+          {
+            "text": "AI application templates",
+            "included": false
+          }
+        ]
+      },
+      {
+        "name": "Complete Course",
+        "description": "Master Cursor and AI programming systematically",
+        "price": "$99",
+        "priceUnit": "/month",
+        "ctaText": "Limited Time Offer",
+        "ctaHref": "/pricing",
+        "ctaVariant": "default",
+        "isPopular": true,
+        "features": [
+          {
+            "text": "Complete Cursor tutorials",
+            "included": true
+          },
+          {
+            "text": "AI programming projects",
+            "included": true
+          },
+          {
+            "text": "One-on-one support",
+            "included": true
+          },
+          {
+            "text": "VIP community access",
+            "included": true
+          },
+          {
+            "text": "Lifetime course updates",
+            "included": true
+          },
+          {
+            "text": "Priority technical support",
+            "included": false
+          },
+          {
+            "text": "AI application templates",
+            "included": false
+          },
+          {
+            "text": "Login system source code",
+            "included": false
+          },
+          {
+            "text": "Payment system integration",
+            "included": false
+          },
+          {
+            "text": "Commercial license",
+            "included": false
+          }
+        ]
+      },
+      {
+        "name": "Advanced",
+        "description": "Master professional AI programming skills",
+        "price": "$199",
+        "priceUnit": "/month",
+        "ctaText": "View Demo",
+        "ctaHref": "/demo",
+        "ctaVariant": "outline",
+        "features": [
+          {
+            "text": "Complete Cursor tutorials",
+            "included": true
+          },
+          {
+            "text": "AI programming projects",
+            "included": true
+          },
+          {
+            "text": "One-on-one support",
+            "included": true
+          },
+          {
+            "text": "VIP community access",
+            "included": true
+          },
+          {
+            "text": "Lifetime course updates",
+            "included": true
+          },
+          {
+            "text": "Priority technical support",
+            "included": true
+          },
+          {
+            "text": "AI application templates",
+            "included": true
+          },
+          {
+            "text": "Login system source code",
+            "included": true
+          },
+          {
+            "text": "Payment system integration",
+            "included": true
+          },
+          {
+            "text": "Commercial license",
+            "included": true
+          }
+        ]
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "Customer Reviews",
+    "title": "What Our Users Say",
+    "subtitle": "Real feedback from developers worldwide about how AIMaker accelerates AI application development",
+    "items": [
+    {
+      "id": 1,
+      "name": "Sarah Chen",
+      "title": "Full Stack Developer",
+      "avatar": "/images/avatar/avatar-1.webp",
+      "content": "This template saved me weeks of development time. The AI integration is seamless and the code quality is exceptional. Highly recommended for any AI project.",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "Marcus Rodriguez",
+      "title": "AI Engineer",
+      "avatar": "/images/avatar/avatar-2.webp",
+      "content": "The authentication system and payment integration work flawlessly. Perfect starting point for any SaaS application with AI capabilities.",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "name": "Emily Watson",
+      "title": "Product Manager",
+      "avatar": "/images/avatar/avatar-3.webp",
+      "content": "From a design perspective, this template is outstanding. The component library is comprehensive, animations are smooth, and the overall aesthetic is modern and professional.",
+      "rating": 5
+    },
+    {
+      "id": 4,
+      "name": "David Kim",
+      "title": "Startup Founder",
+      "avatar": "/images/avatar/avatar-1.webp",
+      "content": "Built our MVP in record time using this template. The documentation is clear, the code is well-structured, and support is excellent.",
+      "rating": 5
+    },
+    {
+      "id": 5,
+      "name": "Lisa Zhang",
+      "title": "DevOps Engineer",
+      "avatar": "/images/avatar/avatar-2.webp",
+      "content": "Deployment was a breeze. The CI/CD setup is perfect and the performance optimizations are already built-in. Saves so much time!",
+      "rating": 5
+    }
+    ]
+  },
+  "blog": {
+    "title": "Latest Blog Posts",
+    "subtitle": "Explore cutting-edge AI development techniques and best practices",
+    "readMore": "Read More",
+    "viewAllPosts": "View All Posts"
+  },
+  "cta": {
+    "title": {
+      "start": "Ready to Build Your",
+      "highlight": "Modern Website",
+      "end": "Today?"
+    },
+    "subtitle": "Start with our comprehensive Next.js template featuring rich components and modern features. Save weeks of development time and focus on what matters most - your product.",
+    "buttons": {
+      "getStarted": "Get Started Now",
+      "viewPlans": "View Plans"
+    }
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently asked questions",
+    "subtitle": "For any unanswered questions, reach out to our support team via email. We'll respond as soon as possible to assist you.",
+    "items": [
+      {
+        "question": "What is AIMaker Template?",
+        "answer": "AIMaker Template is a comprehensive Next.js 15 development framework designed for building AI-powered applications quickly. It includes pre-built authentication, payment processing, modern UI components, and AI integration capabilities."
+      },
+      {
+        "question": "What components are included?",
+        "answer": "The template includes 30+ modern UI components built with shadcn/ui, authentication components with GitHub/Google OAuth support, payment integration with Stripe, AI chat interfaces, dashboard layouts, forms, modals, and navigation components."
+      },
+      {
+        "question": "What technologies does it use?",
+        "answer": "Built with Next.js 15, React 19, TypeScript, Tailwind CSS, shadcn/ui components, Better Auth for authentication, Stripe for payments, Resend for emails, and optimized for deployment on Vercel, Zeabur, or Cloudflare."
+      },
+      {
+        "question": "How customizable is the template?",
+        "answer": "Extremely customizable! The template uses CSS variables for theming, modular component architecture, and follows modern React patterns. You can easily customize colors, fonts, layouts, add your own components, and extend the AI integration."
+      },
+      {
+        "question": "How do I get started?",
+        "answer": "Getting started is simple: 1) Purchase and download the template, 2) Clone the repository and install dependencies, 3) Set up your environment variables, 4) Customize the design and components, and 5) Deploy to your preferred hosting platform."
+      }
+    ]
+  },
+  "footer": {
+    "description": "Empowering everyone with AI tools. Build faster, smarter, and more efficiently.",
+    "sections": {
+      "product": {
+        "title": "Product",
+        "items": {
+          "home": "Home",
+          "pricing": "Pricing", 
+          "blog": "Blog"
+        }
+      },
+      "resources": {
+        "title": "Resources",
+        "items": {
+          "documentation": "Documentation",
+          "community": "Community",
+          "support": "Support"
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "items": {
+          "privacy": "Privacy Policy",
+          "terms": "Terms of Service",
+          "cookies": "Cookie Policy"
+        }
+      }
+    },
+    "copyright": "© 2025 AIMaker. All rights reserved.",
+    "madeWith": "Made with"
+  }
+} 

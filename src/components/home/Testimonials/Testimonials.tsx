@@ -1,40 +1,46 @@
-"use client"
+"use client";
+
+import { useState, useEffect } from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
-import { Card, CardContent } from "@/components/ui/card"
-import Image from "next/image"
-import Autoplay from "embla-carousel-autoplay"
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/hooks/useTranslation";
 
 // 星级评分组件
-function StarRating({ rating = 5 }: { rating?: number }) {
+function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center mt-4">
+    <div className="flex gap-1 mb-4">
       {[...Array(5)].map((_, i) => (
-        <svg
+        <Star
           key={i}
-          className={`w-4 h-4 ${i < rating ? 'text-yellow-400' : 'text-gray-300'} fill-current`}
-          viewBox="0 0 20 20"
-        >
-          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-        </svg>
+          className={`w-5 h-5 ${
+            i < rating
+              ? "fill-yellow-400 text-yellow-400"
+              : "fill-gray-200 text-gray-200"
+          }`}
+        />
       ))}
     </div>
-  )
+  );
 }
 
 // 评价数据类型
 interface Testimonial {
-  id: number
-  name: string
-  title: string
-  avatar: string
-  content: string
-  rating: number
+  id: number;
+  name: string;
+  title: string;
+  avatar: string;
+  content: string;
+  rating: number;
 }
 
 // 单个评价卡片组件
@@ -52,7 +58,9 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             />
           </div>
           <div>
-            <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+            <h4 className="font-semibold text-foreground">
+              {testimonial.name}
+            </h4>
             <p className="text-sm text-muted-foreground">{testimonial.title}</p>
           </div>
         </div>
@@ -62,91 +70,187 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         <StarRating rating={testimonial.rating} />
       </CardContent>
     </Card>
-  )
+  );
 }
 
-// 评价数据
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Sarah Chen",
-    title: "Full Stack Developer",
-    avatar: "/images/avatar/avatar-1.webp",
-    content: "This template saved me weeks of development time. The AI integration is seamless and the code quality is exceptional. Highly recommended for any AI project.",
-    rating: 5
-  },
-  {
-    id: 2,
-    name: "Marcus Rodriguez",
-    title: "AI Engineer",
-    avatar: "/images/avatar/avatar-2.webp",
-    content: "The authentication system and payment integration work flawlessly. Perfect starting point for any SaaS application with AI capabilities.",
-    rating: 5
-  },
-  {
-    id: 3,
-    name: "Emily Watson",
-    title: "Product Manager",
-    avatar: "/images/avatar/avatar-3.webp",
-    content: "From a design perspective, this template is outstanding. The component library is comprehensive, animations are smooth, and the overall aesthetic is modern and professional.",
-    rating: 5
-  },
-  {
-    id: 4,
-    name: "David Kim",
-    title: "Startup Founder",
-    avatar: "/images/avatar/avatar-1.webp",
-    content: "Built our MVP in record time using this template. The documentation is clear, the code is well-structured, and support is excellent.",
-    rating: 5
-  },
-  {
-    id: 5,
-    name: "Lisa Zhang",
-    title: "DevOps Engineer",
-    avatar: "/images/avatar/avatar-2.webp",
-    content: "Deployment was a breeze. The CI/CD setup is perfect and the performance optimizations are already built-in. Saves so much time!",
-    rating: 5
-  }
-]
-
 export function Testimonials() {
+  const { t } = useTranslation("home");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // 从翻译中获取评价数据
+  const testimonialsData = t("testimonials", {
+    returnObjects: true,
+  }) as { items: Testimonial[] };
+  const testimonials: Testimonial[] = testimonialsData?.items || [];
+
+  // 防止空数据导致的错误
+  if (!testimonials || testimonials.length === 0) {
+    return null;
+  }
+
+  // 自动轮播
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextTestimonial();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
+  const nextTestimonial = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setTimeout(() => setIsAnimating(false), 300);
+  };
+
+  const prevTestimonial = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+    setTimeout(() => setIsAnimating(false), 300);
+  };
+
+  const goToTestimonial = (index: number) => {
+    if (isAnimating || index === currentIndex) return;
+    setIsAnimating(true);
+    setCurrentIndex(index);
+    setTimeout(() => setIsAnimating(false), 300);
+  };
+
   return (
-    <section className="py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="py-24 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
-            What Developers Say
+          <div className="inline-block bg-blue-100 dark:bg-blue-500/20 bg-opacity-20 px-4 py-1.5 rounded-full text-blue-700 dark:text-blue-300 text-sm font-medium mb-4">
+            {t("testimonials.badge")}
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-6">
+            {t("testimonials.title")}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of developers who are building amazing AI applications with our template
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            {t("testimonials.subtitle")}
           </p>
         </div>
 
-        <div className="relative">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 4000,
-              }),
-            ]}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {testimonials.map((testimonial) => (
-                <CarouselItem key={testimonial.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <TestimonialCard testimonial={testimonial} />
-                </CarouselItem>
+        <div className="relative max-w-4xl mx-auto">
+          {/* 主要评价卡片 */}
+          <div className="relative overflow-hidden">
+            <div
+              className={`transition-all duration-300 ${
+                isAnimating
+                  ? "opacity-0 transform scale-95"
+                  : "opacity-100 transform scale-100"
+              }`}
+            >
+              <Card className="bg-white dark:bg-neutral-800 border-0 shadow-2xl">
+                <CardContent className="p-8 md:p-12">
+                  <div className="flex flex-col md:flex-row items-center gap-8">
+                    {/* 头像 */}
+                    <div className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+                      {testimonials[currentIndex]?.avatar && (
+                        <Image
+                          src={testimonials[currentIndex].avatar}
+                          alt={
+                            testimonials[currentIndex]?.name || "User avatar"
+                          }
+                          fill
+                          className="object-cover rounded-full ring-4 ring-primary/20"
+                        />
+                      )}
+                    </div>
+
+                    {/* 评价内容 */}
+                    <div className="flex-1 text-center md:text-left">
+                      <StarRating rating={testimonials[currentIndex]?.rating} />
+
+                      <blockquote className="text-lg md:text-xl text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">
+                        "{testimonials[currentIndex]?.content}"
+                      </blockquote>
+
+                      <div>
+                        <div className="font-semibold text-lg text-neutral-900 dark:text-neutral-100">
+                          {testimonials[currentIndex]?.name}
+                        </div>
+                        <div className="text-sm text-neutral-600 dark:text-neutral-400">
+                          {testimonials[currentIndex]?.title}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* 导航按钮 */}
+          <div className="flex justify-center items-center gap-4 mt-8">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={prevTestimonial}
+              disabled={isAnimating}
+              className="rounded-full w-10 h-10 p-0"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </Button>
+
+            {/* 指示器 */}
+            <div className="flex gap-2 mx-4">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToTestimonial(index)}
+                  disabled={isAnimating}
+                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                    index === currentIndex
+                      ? "bg-primary w-8"
+                      : "bg-neutral-300 dark:bg-neutral-600 hover:bg-neutral-400"
+                  }`}
+                />
               ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-0" />
-            <CarouselNext className="right-0" />
-          </Carousel>
+            </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={nextTestimonial}
+              disabled={isAnimating}
+              className="rounded-full w-10 h-10 p-0"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* 缩略图预览 */}
+          <div className="flex justify-center gap-4 mt-8 overflow-x-auto pb-4">
+            {testimonials.map((testimonial, index) => (
+              <button
+                key={testimonial.id}
+                onClick={() => goToTestimonial(index)}
+                disabled={isAnimating}
+                className={`flex-shrink-0 relative w-16 h-16 rounded-full transition-all duration-200 ${
+                  index === currentIndex
+                    ? "ring-2 ring-primary scale-110"
+                    : "opacity-60 hover:opacity-80 hover:scale-105"
+                }`}
+              >
+                {testimonial.avatar && (
+                  <Image
+                    src={testimonial.avatar}
+                    alt={testimonial.name || "User avatar"}
+                    fill
+                    className="object-cover rounded-full"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
-  )
-} 
+  );
+}

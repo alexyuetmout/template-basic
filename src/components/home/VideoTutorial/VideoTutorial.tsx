@@ -1,12 +1,14 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Play } from "lucide-react"
-import Image from "next/image"
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Play } from "lucide-react";
+import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export function VideoTutorial() {
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
+  const { t } = useTranslation("home");
 
   return (
     <div className="relative py-20 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20">
@@ -15,10 +17,10 @@ export function VideoTutorial() {
           <CardContent className="p-8 lg:p-12">
             <div className="text-center mb-8">
               <h3 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
-                Quick Start Guide: Build Your First AI App
+                {t("videoTutorial.title")}
               </h3>
               <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-                Learn how to build and deploy your AI application in minutes using our template.
+                {t("videoTutorial.subtitle")}
               </p>
             </div>
 
@@ -39,7 +41,9 @@ export function VideoTutorial() {
                         className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
                       >
                         <Play className="h-6 w-6 fill-current" />
-                        <span className="font-medium">Watch Tutorial</span>
+                        <span className="font-medium">
+                          {t("videoTutorial.watchButton")}
+                        </span>
                       </button>
                     </div>
                   </>
@@ -63,5 +67,5 @@ export function VideoTutorial() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

@@ -5,6 +5,18 @@ import i18nConfig from '../i18nConfig'
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
+  // Skip middleware for API routes, static files, etc.
+  if (
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/_next/') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname.startsWith('/robots.txt') ||
+    pathname.startsWith('/sitemap.xml') ||
+    pathname.includes('.')
+  ) {
+    return NextResponse.next()
+  }
+  
   // Handle /en/* paths - redirect to remove /en prefix (English is default)
   if (pathname.startsWith('/en/') || pathname === '/en') {
     const url = request.nextUrl.clone()
@@ -30,6 +42,14 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|images|.*\\..*|logo.svg).*)'
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public folder files
+     */
+    '/((?!api/|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\..*).*)' 
   ]
 }

@@ -1,0 +1,386 @@
+{
+  "topBanner": {
+    "offer": "🎁 特別ローンチオファー",
+    "template": "AIMaker テンプレート",
+    "description": "- 数時間でAI製品をリリース",
+    "getStarted": "始める"
+  },
+  "header": {
+    "navigation": {
+      "home": "ホーム",
+      "features": "機能", 
+      "pricing": "料金",
+      "blog": "ブログ"
+    },
+    "auth": {
+      "login": "ログイン",
+      "signup": "サインアップ"
+    }
+  },
+  "hero": {
+    "badge": "🚀 モダンAI開発テンプレート",
+    "title": {
+      "main": "AI製品を高速リリース",
+      "sub": "アイデアからローンチまで"
+    },
+    "subtitle": "認証、決済、豊富なコンポーネント、AI統合を含む完全なNext.js 15開発フレームワーク。イノベーションに集中し、インフラは私たちにお任せください。",
+    "buttons": {
+      "startBuilding": "構築開始",
+      "viewComponents": "コンポーネントを見る"
+    },
+    "techStack": "モダンテックスタック採用"
+  },
+  "features1": {
+    "badge": "AIMakerを選ぶ理由",
+    "title": "AI開発に必要なすべて",
+    "subtitle": "数週間ではなく数時間でAI製品をリリース。モダンテックスタックで構築され、迅速な開発のために設計されています。",
+    "items": [
+      {
+        "title": "完全AIフレームワーク",
+        "description": "モダンコンポーネントとインフラを備えたAI統合。AIアプリケーションの構築とスケールに必要なすべて。"
+      },
+      {
+        "title": "プロダクション対応",
+        "description": "GitHub/Google OAuth認証、Stripe決済、ベストプラクティスが組み込まれたスケーラブルなインフラ。"
+      },
+      {
+        "title": "高速リリース",
+        "description": "Next.js 15、React 19、TypeScript、モダン開発ツール。数週間ではなく数時間でAI製品をデプロイ。"
+      }
+    ]
+  },
+  "features2": {
+    "badge": "テンプレート機能",
+    "title": "必要なすべて",
+    "subtitle": "豊富なコンポーネントとモダン機能を持つ包括的なNext.jsテンプレート。開発者のために構築され、迅速な開発のために設計されています。",
+    "items": [
+      {
+        "title": "モダン認証",
+        "description": "GitHubとGoogle OAuthをサポートする完全な認証システム"
+      },
+      {
+        "title": "決済統合",
+        "description": "サブスクリプションと一回払いをサポートする内蔵Stripe決済システム"
+      },
+      {
+        "title": "ダークモードサポート",
+        "description": "モダンデザインシステムとシームレスなダークモード統合"
+      },
+      {
+        "title": "レスポンシブデザイン",
+        "description": "すべてのデバイスで完璧に動作する完全レスポンシブレイアウト"
+      },
+      {
+        "title": "SEO最適化",
+        "description": "自動生成サイトマップとSEOフレンドリー構造"
+      },
+      {
+        "title": "モジュラー設計",
+        "description": "カスタマイズが容易なクリーンでモジュラーなコード構造"
+      }
+    ]
+  },
+  "stats": {
+    "title": "世界中の開発者に信頼されています",
+    "subtitle": "AI アプリケーションの未来を構築する数千人の開発者に参加",
+    "items": [
+      {
+        "label": "アクティブユーザー",
+        "value": "250+"
+      },
+      {
+        "label": "コンポーネント",
+        "value": "30+"
+      },
+      {
+        "label": "起動時間",
+        "value": "5分"
+      },
+      {
+        "label": "アクティブコミュニティ",
+        "value": "50+"
+      }
+    ]
+  },
+  "videoTutorial": {
+    "title": "クイックスタートガイド：初めてのAIアプリを構築",
+    "subtitle": "テンプレートを使用して数分でAIアプリケーションを構築・デプロイする方法を学習。",
+    "watchButton": "チュートリアルを見る"
+  },
+  "pricing": {
+    "badge": "料金プラン",
+    "title": "学習プランを選択",
+    "subtitle": "最適なプランでAI開発の旅を始めましょう",
+    "mostPopular": "最人気",
+    "plans": [
+      {
+        "name": "ベーシック",
+        "description": "Cursorチュートリアルとプログラミング基礎を体験",
+        "price": "無料",
+        "ctaText": "学習開始",
+        "ctaHref": "/sign-up",
+        "ctaVariant": "outline",
+        "features": [
+          {
+            "text": "基本Cursorチュートリアル",
+            "included": true
+          },
+          {
+            "text": "AIプログラミング環境セットアップ",
+            "included": true
+          },
+          {
+            "text": "基本開発ツール",
+            "included": true
+          },
+          {
+            "text": "パブリックコミュニティアクセス",
+            "included": true
+          },
+          {
+            "text": "完全Cursorチュートリアル",
+            "included": false
+          },
+          {
+            "text": "AIプログラミングQ&Aサービス",
+            "included": false
+          },
+          {
+            "text": "VIPコミュニティグループ",
+            "included": false
+          },
+          {
+            "text": "AIアプリテンプレート",
+            "included": false
+          }
+        ]
+      },
+      {
+        "name": "完全コース",
+        "description": "CursorとAIプログラミングを体系的にマスター",
+        "price": "¥9,900",
+        "priceUnit": "/月",
+        "ctaText": "期間限定オファー",
+        "ctaHref": "/pricing",
+        "ctaVariant": "default",
+        "isPopular": true,
+        "features": [
+          {
+            "text": "完全Cursorチュートリアル",
+            "included": true
+          },
+          {
+            "text": "AIプログラミングプロジェクト",
+            "included": true
+          },
+          {
+            "text": "1対1サポート",
+            "included": true
+          },
+          {
+            "text": "VIPコミュニティアクセス",
+            "included": true
+          },
+          {
+            "text": "生涯コースアップデート",
+            "included": true
+          },
+          {
+            "text": "優先テクニカルサポート",
+            "included": false
+          },
+          {
+            "text": "AIアプリテンプレート",
+            "included": false
+          },
+          {
+            "text": "ログインシステムソースコード",
+            "included": false
+          },
+          {
+            "text": "決済システム統合",
+            "included": false
+          },
+          {
+            "text": "商用ライセンス",
+            "included": false
+          }
+        ]
+      },
+      {
+        "name": "アドバンス",
+        "description": "プロフェッショナルAIプログラミングスキルをマスター",
+        "price": "¥19,900",
+        "priceUnit": "/月",
+        "ctaText": "デモを見る",
+        "ctaHref": "/demo",
+        "ctaVariant": "outline",
+        "features": [
+          {
+            "text": "完全Cursorチュートリアル",
+            "included": true
+          },
+          {
+            "text": "AIプログラミングプロジェクト",
+            "included": true
+          },
+          {
+            "text": "1対1サポート",
+            "included": true
+          },
+          {
+            "text": "VIPコミュニティアクセス",
+            "included": true
+          },
+          {
+            "text": "生涯コースアップデート",
+            "included": true
+          },
+          {
+            "text": "優先テクニカルサポート",
+            "included": true
+          },
+          {
+            "text": "AIアプリテンプレート",
+            "included": true
+          },
+          {
+            "text": "ログインシステムソースコード",
+            "included": true
+          },
+          {
+            "text": "決済システム統合",
+            "included": true
+          },
+          {
+            "text": "商用ライセンス",
+            "included": true
+          }
+        ]
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "お客様の声",
+    "title": "ユーザーの声",
+    "subtitle": "世界中の開発者からの実際のフィードバックで、AIMakerがどのようにAIアプリケーション開発を加速するかをご覧ください",
+    "items": [
+    {
+      "id": 1,
+      "name": "サラ・チェン",
+      "title": "フルスタック開発者",
+      "avatar": "/images/avatar/avatar-1.webp",
+      "content": "このテンプレートにより数週間の開発時間を節約できました。AI統合はシームレスで、コード品質は卓越しています。AIプロジェクトに強く推奨します。",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "マーカス・ロドリゲス",
+      "title": "AIエンジニア",
+      "avatar": "/images/avatar/avatar-2.webp",
+      "content": "認証システムと決済統合が完璧に動作します。AI機能を持つSaaSアプリケーションの完璧なスタートポイントです。",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "name": "エミリー・ワトソン",
+      "title": "プロダクトマネージャー",
+      "avatar": "/images/avatar/avatar-3.webp",
+      "content": "デザインの観点から、このテンプレートは素晴らしいです。コンポーネントライブラリは包括的で、アニメーションは滑らかで、全体的な美学はモダンでプロフェッショナルです。",
+      "rating": 5
+    },
+    {
+      "id": 4,
+      "name": "デイビッド・キム",
+      "title": "スタートアップ創設者",
+      "avatar": "/images/avatar/avatar-1.webp",
+      "content": "このテンプレートを使用して記録的な時間でMVPを構築しました。ドキュメントは明確で、コードは適切に構造化されており、サポートは素晴らしいです。",
+      "rating": 5
+    },
+    {
+      "id": 5,
+      "name": "リサ・チャン",
+      "title": "DevOpsエンジニア",
+      "avatar": "/images/avatar/avatar-2.webp",
+      "content": "デプロイは簡単でした。CI/CDセットアップは完璧で、パフォーマンス最適化はすでに組み込まれています。多くの時間を節約できます！",
+      "rating": 5
+    }
+    ]
+  },
+  "blog": {
+    "title": "最新ブログ記事",
+    "subtitle": "最先端のAI開発技術とベストプラクティスを探索",
+    "readMore": "続きを読む",
+    "viewAllPosts": "すべての記事を見る"
+  },
+  "cta": {
+    "title": {
+      "start": "あなたの",
+      "highlight": "モダンウェブサイト",
+      "end": "を今日構築しませんか？"
+    },
+    "subtitle": "豊富なコンポーネントとモダン機能を備えた包括的なNext.jsテンプレートから始めましょう。数週間の開発時間を節約し、最も重要なこと - あなたの製品に集中してください。",
+    "buttons": {
+      "getStarted": "今すぐ始める",
+      "viewPlans": "プランを見る"
+    }
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "よくある質問",
+    "subtitle": "質問がございましたら、メールでサポートチームにお問い合わせください。できるだけ早くご返信いたします。",
+    "items": [
+      {
+        "question": "AIMakerテンプレートとは何ですか？",
+        "answer": "AIMakerテンプレートは、AI対応アプリケーションを迅速に構築するために設計された包括的なNext.js 15開発フレームワークです。事前構築された認証、決済処理、モダンUIコンポーネント、AI統合機能が含まれています。"
+      },
+      {
+        "question": "どのようなコンポーネントが含まれていますか？",
+        "answer": "テンプレートには、shadcn/uiで構築された30以上のモダンUIコンポーネント、GitHub/Google OAuthサポート付き認証コンポーネント、Stripe決済統合、AIチャットインターフェース、ダッシュボードレイアウト、フォーム、モーダル、ナビゲーションコンポーネントが含まれています。"
+      },
+      {
+        "question": "どのような技術を使用していますか？",
+        "answer": "Next.js 15、React 19、TypeScript、Tailwind CSS、shadcn/uiコンポーネント、Better Auth認証、Stripe決済、Resendメールで構築され、Vercel、Zeabur、またはCloudflareでのデプロイ用に最適化されています。"
+      },
+      {
+        "question": "テンプレートのカスタマイズ性はどの程度ですか？",
+        "answer": "非常にカスタマイズ可能です！テンプレートはテーマ設定にCSS変数を使用し、モジュラーコンポーネントアーキテクチャを採用し、モダンなReactパターンに従っています。色、フォント、レイアウトを簡単にカスタマイズし、独自のコンポーネントを追加し、AI統合を拡張できます。"
+      },
+      {
+        "question": "どのように始めればよいですか？",
+        "answer": "開始は簡単です：1）テンプレートを購入・ダウンロード、2）リポジトリをクローンして依存関係をインストール、3）環境変数を設定、4）デザインとコンポーネントをカスタマイズ、5）お好みのホスティングプラットフォームにデプロイ。"
+      }
+    ]
+  },
+  "footer": {
+    "description": "誰でもAIツールを活用できるよう支援。より高速で、よりスマートで、より効率的に構築。",
+    "sections": {
+      "product": {
+        "title": "製品",
+        "items": {
+          "home": "ホーム",
+          "pricing": "価格", 
+          "blog": "ブログ"
+        }
+      },
+      "resources": {
+        "title": "リソース",
+        "items": {
+          "documentation": "ドキュメント",
+          "community": "コミュニティ",
+          "support": "サポート"
+        }
+      },
+      "legal": {
+        "title": "法的事項",
+        "items": {
+          "privacy": "プライバシーポリシー",
+          "terms": "利用規約",
+          "cookies": "Cookieポリシー"
+        }
+      }
+    },
+    "copyright": "© 2025 AIMaker. 全著作権所有。",
+    "madeWith": "構築技術"
+  }
+} 

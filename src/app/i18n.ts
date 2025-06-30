@@ -28,19 +28,17 @@ export default async function initTranslations(
     fallbackLng: i18nConfig.defaultLocale,
     supportedLngs: i18nConfig.locales,
     defaultNS: namespaces[0],
+    fallbackNS: namespaces[0],
     ns: namespaces,
+    preload: resources ? [] : i18nConfig.locales,
     interpolation: {
       escapeValue: false
-    },
-    detection: {
-      order: ['path', 'cookie'],
-      caches: ['cookie']
     }
   })
 
   return {
     i18n: i18nInstance,
-    resources: i18nInstance.services.resourceStore.data,
+    resources: { [locale]: i18nInstance.services.resourceStore.data[locale] },
     t: i18nInstance.t
   }
 }
