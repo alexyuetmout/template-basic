@@ -94,7 +94,10 @@ const AuthButtons = () => {
           </Button>
         </Link>
         <UserDropdown 
-          user={session.user}
+          user={{
+            ...session.user,
+            createdAt: session.user.createdAt ? session.user.createdAt.toISOString() : undefined
+          }}
         />
       </div>
     )

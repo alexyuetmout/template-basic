@@ -1,7 +1,6 @@
-"use client"
-
 import { Hero } from "@/components/home/Hero/Hero"
-import { Features } from "@/components/home/Features/Features"
+import { Features1 } from "@/components/home/Features/Feature-1"
+import { Features2 } from "@/components/home/Features/Feature-2"
 import { Header } from "@/components/home/Header/Header"
 import { CTA } from "@/components/home/CTA/CTA"
 import { Footer } from "@/components/home/Footer/Footer"
@@ -25,7 +24,8 @@ export default function HomePage() {
       <main className="flex-1">
         <div className="relative">
           <Hero />
-          <Features />
+          <Features1 />
+          <Features2 />
           <TechStack />
           <ComparisonChart />
           <Blog />

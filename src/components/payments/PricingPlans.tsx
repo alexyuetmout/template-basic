@@ -13,8 +13,8 @@ interface PriceData {
   pointsReward: number;
   sortOrder: number;
   isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
 }
 
 interface Plan {
@@ -198,28 +198,35 @@ const cardContent = [
   }
 ];
 
-export function PricingPlans() {
+interface PricingPlansProps {
+  initialPrices?: PriceData[];
+}
+
+export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
   const [pricingMode, setPricingMode] = useState<PricingMode>(pricingModeConfig.defaultMode);
-  const [priceData, setPriceData] = useState<PriceData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [priceData, setPriceData] = useState<PriceData[]>(initialPrices);
+  const [loading, setLoading] = useState(false);
   const [plans, setPlans] = useState<Plan[]>([]);
 
-  // 获取价格数据
+  // 如果没有初始价格数据，从客户端获取
   useEffect(() => {
-    const fetchPrices = async () => {
-      try {
-        const response = await fetch('/api/prices');
-        const data = await response.json();
-        setPriceData(data);
-      } catch (error) {
-        console.error('Error fetching prices:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (initialPrices.length === 0) {
+      const fetchPrices = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch('/api/prices');
+          const data = await response.json();
+          setPriceData(data);
+        } catch (error) {
+          console.error('Error fetching prices:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    fetchPrices();
-  }, []);
+      fetchPrices();
+    }
+  }, [initialPrices.length]);
 
   // 根据定价模式筛选和组合数据
   useEffect(() => {
@@ -402,7 +409,7 @@ export function PricingPlans() {
                   priceId={plan.id}
                   type="payment"
                   variant={plan.buttonVariant === "primary" ? "default" : "outline"}
-                  size="xl"
+                  size="lg"
                   className={`w-full mx-auto max-w-xs rounded-2xl transition-all duration-200 ${
                     plan.buttonVariant === "primary" 
                       ? "transform hover:scale-105 shadow-lg hover:shadow-xl" 
