@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
-import { ProfileLayout } from "@/components/profile/ProfileLayout";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Coins, TrendingUp, TrendingDown, Calendar, Gift, Loader2, Clock } from "lucide-react";
@@ -33,27 +33,27 @@ interface PointsBalance {
 
 const transactionTypeConfig = {
   PURCHASE: { 
-    label: "购买获得", 
+    label: "Purchase", 
     color: "bg-green-100 text-green-800",
     icon: TrendingUp
   },
   SUBSCRIPTION: { 
-    label: "订阅获得", 
+    label: "Subscription", 
     color: "bg-blue-100 text-blue-800",
     icon: Gift
   },
   SPEND: { 
-    label: "消费使用", 
+    label: "Spent", 
     color: "bg-red-100 text-red-800",
     icon: TrendingDown
   },
   EXPIRE: { 
-    label: "过期扣除", 
+    label: "Expired", 
     color: "bg-gray-100 text-gray-800",
     icon: Clock
   },
   REFUND: { 
-    label: "退款扣除", 
+    label: "Refund", 
     color: "bg-yellow-100 text-yellow-800",
     icon: TrendingDown
   },
@@ -125,11 +125,11 @@ export default function PointsPage() {
     return (
       <div className="min-h-screen bg-white dark:bg-neutral-900">
         <Header />
-        <ProfileLayout>
+        <DashboardLayout>
           <div className="flex items-center justify-center py-12">
             <Loader2 className="w-8 h-8 animate-spin" />
           </div>
-        </ProfileLayout>
+        </DashboardLayout>
         <Footer />
       </div>
     );
@@ -139,11 +139,11 @@ export default function PointsPage() {
     <div className="min-h-screen bg-white dark:bg-neutral-900">
       <Header />
       
-      <ProfileLayout>
+      <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">积分中心</h1>
-            <p className="text-gray-600">查看您的积分余额和使用历史</p>
+            <h1 className="text-2xl font-bold text-gray-900">Points Center</h1>
+            <p className="text-gray-600">View your points balance and usage history</p>
           </div>
 
           {/* 积分概览 */}
@@ -315,7 +315,7 @@ export default function PointsPage() {
             </CardContent>
           </Card>
         </div>
-      </ProfileLayout>
+      </DashboardLayout>
       
       <Footer />
     </div>

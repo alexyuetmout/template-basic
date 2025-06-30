@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button, type ButtonProps } from "@/components/ui/button";
 
-interface PaymentButtonProps extends Omit<ButtonProps, 'onClick' | 'disabled'> {
+interface PaymentButtonProps extends Omit<ButtonProps, 'onClick' | 'disabled' | 'type'> {
   priceId: string;
   type: "payment" | "subscription";
   children: React.ReactNode;

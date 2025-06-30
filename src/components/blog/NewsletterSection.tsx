@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 export function NewsletterSection() {
   const [email, setEmail] = useState('')
@@ -41,21 +43,21 @@ export function NewsletterSection() {
         Get the latest AI development insights, tutorials, and news delivered to your inbox.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-        <input
+        <Input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           required
-          className="flex-1 px-4 py-3 rounded-xl border-0 focus:ring-2 focus:ring-white/20 bg-white/10 backdrop-blur text-white placeholder-white/70"
+          className="flex-1 border-0 focus:ring-2 focus:ring-white/20 bg-white/10 backdrop-blur text-white placeholder-white/70"
         />
-        <button 
+        <Button 
           type="submit"
           disabled={isSubmitting}
-          className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors disabled:opacity-50"
+          className="bg-white text-blue-600 font-semibold hover:bg-blue-50 disabled:opacity-50"
         >
           {isSubmitting ? 'Subscribing...' : 'Subscribe'}
-        </button>
+        </Button>
       </form>
     </div>
   )

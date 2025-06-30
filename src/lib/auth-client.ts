@@ -1,7 +1,8 @@
 "use client"
 
 import { createAuthClient } from "better-auth/react"
-import { oneTapClient } from "better-auth/client/plugins"
+import { oneTapClient, customSessionClient } from "better-auth/client/plugins"
+import type { auth } from "@/lib/auth"
 
 export const authClient = createAuthClient({
   baseURL: typeof window !== "undefined" 
@@ -18,6 +19,7 @@ export const authClient = createAuthClient({
         maxAttempts: 3
       }
     }),
+    customSessionClient<typeof auth>(),
   ],
   fetchOptions: {
     // 全局错误处理
@@ -48,4 +50,4 @@ export const authClient = createAuthClient({
   },
 })
 
-export const { signIn, signUp, signOut, useSession, oneTap, updateUser, setPassword } = authClient
+export const { signIn, signUp, signOut, useSession, oneTap, updateUser } = authClient

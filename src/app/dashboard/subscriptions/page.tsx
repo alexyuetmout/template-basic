@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
-import { ProfileLayout } from "@/components/profile/ProfileLayout";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -148,11 +148,11 @@ export default function SubscriptionsPage() {
     return (
       <div className="min-h-screen bg-white dark:bg-neutral-900">
         <Header />
-        <ProfileLayout>
+        <DashboardLayout>
           <div className="flex items-center justify-center py-12">
             <Loader2 className="w-8 h-8 animate-spin" />
           </div>
-        </ProfileLayout>
+        </DashboardLayout>
         <Footer />
       </div>
     );
@@ -165,7 +165,7 @@ export default function SubscriptionsPage() {
     <div className="min-h-screen bg-white dark:bg-neutral-900">
       <Header />
       
-      <ProfileLayout>
+      <DashboardLayout>
         <div className="space-y-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">订阅管理</h1>
@@ -363,7 +363,7 @@ export default function SubscriptionsPage() {
             </CardContent>
           </Card>
         </div>
-      </ProfileLayout>
+      </DashboardLayout>
       
       <Footer />
     </div>

@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { X } from "lucide-react"
 
-export function PromoBanner() {
+export function TopBanner() {
   const [isVisible, setIsVisible] = useState(true)
 
   if (!isVisible) return null

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
-import { ProfileLayout } from "@/components/profile/ProfileLayout";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Key, Eye, EyeOff, Loader2, AlertCircle, Plus } from "lucide-react";
@@ -244,14 +244,14 @@ export default function SecurityPage() {
     return (
       <div className="min-h-screen bg-white dark:bg-neutral-900">
         <Header />
-        <ProfileLayout>
+        <DashboardLayout>
           <div className="flex items-center justify-center py-12">
             <div className="flex items-center space-x-2">
               <Loader2 className="w-6 h-6 animate-spin" />
               <span>加载安全设置...</span>
             </div>
           </div>
-        </ProfileLayout>
+        </DashboardLayout>
         <Footer />
       </div>
     );
@@ -261,7 +261,7 @@ export default function SecurityPage() {
     <div className="min-h-screen bg-white dark:bg-neutral-900">
       <Header />
       
-      <ProfileLayout>
+      <DashboardLayout>
         <div className="space-y-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">安全设置</h1>
@@ -484,7 +484,7 @@ export default function SecurityPage() {
             </CardContent>
           </Card>
         </div>
-      </ProfileLayout>
+      </DashboardLayout>
       
       <Footer />
     </div>

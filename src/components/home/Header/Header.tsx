@@ -1,9 +1,10 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
+import { UserDropdown } from "@/components/auth/UserDropdown"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
-import { useSession, authClient } from "@/lib/auth-client"
+import { usePathname } from "next/navigation"
+import { useSession } from "@/lib/auth-client"
 
 interface NavItem {
   label: string
@@ -82,54 +83,24 @@ const Navigation = () => {
 }
 
 const AuthButtons = () => {
-  const { data: session, isPending } = useSession()
-  const router = useRouter()
-
-  if (isPending) {
-    return (
-      <div className="hidden md:block">
-        <div className="flex items-center gap-2">
-          <div className="h-9 w-16 bg-gray-200 animate-pulse rounded-lg"></div>
-        </div>
-      </div>
-    )
-  }
+  const { data: session } = useSession()
 
   if (session) {
     return (
-      <div className="hidden md:block">
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-600">
-            Hi, {session.user.name || session.user.email}
-          </span>
-          <Link href="/profile">
-            <Button variant="ghost" className="h-9 rounded-lg px-3 hover:bg-neutral-200/50">
-              个人中心
-            </Button>
-          </Link>
-          <Button 
-            variant="ghost" 
-            className="h-9 rounded-lg px-3 hover:bg-neutral-200/50"
-            onClick={async () => {
-              try {
-                await authClient.signOut()
-                // 重定向到首页并刷新路由状态
-                router.push("/")
-                router.refresh()
-              } catch (error) {
-                console.error('Sign out error:', error)
-                // 强制刷新页面
-                window.location.href = "/"
-              }
-            }}
-          >
-            Sign Out
+      <div className="hidden md:flex items-center gap-3">
+        <Link href="/dashboard">
+          <Button variant="ghost" className="h-9 rounded-lg px-3 hover:bg-neutral-200/50">
+            Dashboard
           </Button>
-        </div>
+        </Link>
+        <UserDropdown 
+          user={session.user}
+        />
       </div>
     )
   }
 
+  // 直接显示登录/注册按钮，不等待 session 验证
   return (
     <div className="hidden md:block">
       <div className="flex items-center gap-2">

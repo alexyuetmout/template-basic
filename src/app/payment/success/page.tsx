@@ -30,15 +30,15 @@ function PaymentSuccessContent() {
           
           <div className="flex flex-col gap-3 pt-4">
             <Button asChild className="w-full">
-              <Link href="/profile">
-                前往个人中心
+              <Link href="/dashboard">
+                Go to Dashboard
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
             
             <Button variant="outline" asChild className="w-full">
-              <Link href="/profile/orders">
-                查看订单历史
+              <Link href="/dashboard/orders">
+                View Order History
               </Link>
             </Button>
           </div>

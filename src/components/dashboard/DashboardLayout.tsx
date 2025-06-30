@@ -9,57 +9,50 @@ import {
   Coins, 
   CreditCard,
   Settings,
-  Bell,
   Shield,
   Loader2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSession } from "@/lib/auth-client";
 
-interface ProfileLayoutProps {
+interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 const menuItems = [
   {
-    title: "个人信息",
-    href: "/profile",
+    title: "Dashboard",
+    href: "/dashboard",
     icon: User,
-    description: "管理您的个人资料"
+    description: "Manage your profile information"
   },
   {
-    title: "安全设置",
-    href: "/profile/security",
+    title: "Security",
+    href: "/dashboard/security",
     icon: Shield,
-    description: "修改密码和安全设置"
+    description: "Password and security settings"
   },
   {
-    title: "订单管理",
-    href: "/profile/orders",
+    title: "Orders",
+    href: "/dashboard/orders",
     icon: ShoppingBag,
-    description: "查看购买历史"
+    description: "View purchase history"
   },
   {
-    title: "积分中心",
-    href: "/profile/points",
+    title: "Points",
+    href: "/dashboard/points",
     icon: Coins,
-    description: "积分使用和历史"
+    description: "Points usage and history"
   },
   {
-    title: "订阅管理",
-    href: "/profile/subscriptions",
+    title: "Subscriptions",
+    href: "/dashboard/subscriptions",
     icon: CreditCard,
-    description: "管理您的订阅"
-  },
-  {
-    title: "通知设置",
-    href: "/profile/notifications",
-    icon: Bell,
-    description: "邮件和通知偏好"
+    description: "Manage your subscriptions"
   },
 ];
 
-export function ProfileLayout({ children }: ProfileLayoutProps) {
+export function DashboardLayout({ children }: DashboardLayoutProps) {
   const { data: session, isPending } = useSession();
   const router = useRouter();
   const pathname = usePathname();
@@ -72,19 +65,19 @@ export function ProfileLayout({ children }: ProfileLayoutProps) {
     }
   }, [session, isPending, router]);
 
-  // 显示加载状态
+  // Show loading state
   if (isPending) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="flex items-center space-x-2">
           <Loader2 className="w-6 h-6 animate-spin" />
-          <span>加载中...</span>
+          <span>Loading...</span>
         </div>
       </div>
     );
   }
 
-  // 如果没有登录，不渲染内容（重定向中）
+  // If not logged in, don't render content (redirecting)
   if (!session) {
     return null;
   }
@@ -94,23 +87,23 @@ export function ProfileLayout({ children }: ProfileLayoutProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-lg shadow">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-0">
-            {/* 侧边栏 */}
+            {/* Sidebar */}
             <div className="lg:col-span-1 bg-gray-50 rounded-l-lg">
               <div className="p-6">
                 <h2 className="text-lg font-semibold text-gray-900 mb-6">
-                  个人中心
+                  Dashboard
                 </h2>
                 
-                {/* 移动端菜单按钮 */}
+                {/* Mobile menu button */}
                 <button
                   className="lg:hidden w-full mb-4 p-2 text-left text-gray-600 hover:text-gray-900 border rounded-md"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                   <Settings className="w-4 h-4 inline mr-2" />
-                  菜单
+                  Menu
                 </button>
 
-                {/* 菜单列表 */}
+                {/* Menu list */}
                 <nav className={cn(
                   "space-y-1",
                   isMobileMenuOpen ? "block" : "hidden lg:block"
@@ -148,7 +141,7 @@ export function ProfileLayout({ children }: ProfileLayoutProps) {
               </div>
             </div>
 
-            {/* 主内容区域 */}
+            {/* Main content area */}
             <div className="lg:col-span-3">
               <div className="p-6 lg:p-8">
                 {children}
