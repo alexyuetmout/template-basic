@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "blog": "ブログ",
+    "pricing": "料金",
+    "dashboard": "ダッシュボード",
+    "signIn": "ログイン",
+    "signUp": "新規登録",
+    "signOut": "ログアウト"
+  },
+  "auth": {
+    "signIn": "ログイン",
+    "signUp": "新規登録",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "alreadyHaveAccount": "既にアカウントをお持ちですか？",
+    "dontHaveAccount": "アカウントをお持ちではありませんか？",
+    "orContinueWith": "または以下で続ける"
+  },
+  "dashboard": {
+    "title": "ダッシュボード",
+    "points": "ポイント",
+    "orders": "注文",
+    "subscriptions": "サブスクリプション",
+    "security": "セキュリティ"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "update": "更新",
+    "submit": "送信",
+    "back": "戻る",
+    "next": "次へ",
+    "previous": "前へ"
+  }
+}

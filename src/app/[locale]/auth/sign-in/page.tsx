@@ -23,6 +23,7 @@ import { AuthDivider } from "@/components/auth/AuthDivider"
 import { GoogleIcon } from "@/components/icons/GoogleIcon"
 import { useRouter } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
+import { useTranslation } from "@/hooks/useTranslation"
 
 const signInSchema = z.object({
   email: z.string().email({
@@ -38,6 +39,7 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
+  const { t } = useTranslation()
   
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -102,7 +104,7 @@ export default function SignInPage() {
         <Card className="border-neutral-200 dark:border-neutral-700">
           <CardHeader className="space-y-1 pb-4">
             <CardTitle className="text-2xl text-center text-neutral-900 dark:text-neutral-100">
-              Sign In
+              {t('auth.signIn')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -114,7 +116,7 @@ export default function SignInPage() {
               disabled={isLoading}
             >
               <GoogleIcon className="w-5 h-5 mr-2" />
-              Continue with Google
+              {t('auth.orContinueWith')} Google
             </Button>
 
             {/* 分割线 */}
@@ -135,7 +137,7 @@ export default function SignInPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Email</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('auth.email')}</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
@@ -153,7 +155,7 @@ export default function SignInPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Password</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('auth.password')}</FormLabel>
                       <FormControl>
                         <PasswordInput
                           placeholder="Enter your password"
@@ -186,7 +188,7 @@ export default function SignInPage() {
                     href="/auth/forgot-password"
                     className="text-sm text-primary hover:text-primary/80"
                   >
-                    Forgot password?
+                    {t('auth.forgotPassword')}
                   </Link>
                 </div>
 
@@ -195,19 +197,19 @@ export default function SignInPage() {
                   className="w-full h-12"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Signing in..." : "Sign In"}
+                  {isLoading ? t('common.loading') : t('auth.signIn')}
                 </Button>
               </form>
             </Form>
 
             <div className="text-center">
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                Don&apos;t have an account?{" "}
+                {t('auth.dontHaveAccount')}{" "}
                 <Link
                   href="/auth/sign-up"
                   className="text-primary hover:text-primary/80 font-medium"
                 >
-                  Sign up
+                  {t('auth.signUp')}
                 </Link>
               </p>
             </div>

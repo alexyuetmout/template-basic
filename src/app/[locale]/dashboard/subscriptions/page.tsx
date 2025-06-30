@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
@@ -323,9 +324,9 @@ export default function SubscriptionsPage() {
                   您还没有任何订阅计划
                 </p>
                 <Button asChild>
-                  <a href="/pricing">
+                  <Link href="/pricing">
                     查看订阅计划
-                  </a>
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
