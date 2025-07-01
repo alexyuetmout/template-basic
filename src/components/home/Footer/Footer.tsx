@@ -10,7 +10,7 @@ export function Footer() {
   const { routes } = usePath();
 
   return (
-    <footer className="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
+    <footer className="bg-background dark:bg-background border-t border-border dark:border-neutral-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-16">
@@ -18,17 +18,17 @@ export function Footer() {
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <Image src="/logo.svg" alt="AIMaker" width={32} height={32} />
-                <span className="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+                <span className="text-xl font-bold text-foreground dark:text-foreground">
                   AIMaker
                 </span>
               </div>
-              <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+              <p className="text-muted-foreground dark:text-muted-foreground mb-6">
                 {t("footer.description")}
               </p>
               <div className="flex space-x-4">
                 <Link
                   href="https://github.com/aimaker-dev"
-                  className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                  className="text-muted-foreground hover:text-muted-foreground dark:hover:text-muted transition-colors"
                 >
                   <svg
                     className="h-5 w-5"
@@ -40,7 +40,7 @@ export function Footer() {
                 </Link>
                 <Link
                   href="https://twitter.com/aimaker_dev"
-                  className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                  className="text-muted-foreground hover:text-muted-foreground dark:hover:text-muted transition-colors"
                 >
                   <svg
                     className="h-5 w-5"
@@ -55,14 +55,14 @@ export function Footer() {
 
             {/* Products */}
             <div>
-              <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 uppercase tracking-wider mb-4">
+              <h3 className="text-sm font-semibold text-foreground dark:text-foreground uppercase tracking-wider mb-4">
                 {t("footer.sections.product.title")}
               </h3>
               <ul className="space-y-3">
                 <li>
                   <Link
                     href={routes.HOME}
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                    className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                   >
                     {t("footer.sections.product.items.home")}
                   </Link>
@@ -70,7 +70,7 @@ export function Footer() {
                 <li>
                   <Link
                     href={routes.PRICING}
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                    className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                   >
                     {t("footer.sections.product.items.pricing")}
                   </Link>
@@ -78,7 +78,7 @@ export function Footer() {
                 <li>
                   <Link
                     href={routes.BLOG}
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                    className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                   >
                     {t("footer.sections.product.items.blog")}
                   </Link>
@@ -88,14 +88,14 @@ export function Footer() {
 
             {/* Resources */}
             <div>
-              <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 uppercase tracking-wider mb-4">
+              <h3 className="text-sm font-semibold text-foreground dark:text-foreground uppercase tracking-wider mb-4">
                 {t("footer.sections.resources.title")}
               </h3>
               <ul className="space-y-3">
                 <li>
                   <Link
                     href="https://github.com/aimaker-dev/aimaker-template"
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                    className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                   >
                     {t("footer.sections.resources.items.documentation")}
                   </Link>
@@ -103,7 +103,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="https://github.com/aimaker-dev/aimaker-template/discussions"
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                    className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                   >
                     {t("footer.sections.resources.items.community")}
                   </Link>
@@ -111,7 +111,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="https://github.com/aimaker-dev/aimaker-template/issues"
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                    className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                   >
                     {t("footer.sections.resources.items.support")}
                   </Link>
@@ -121,14 +121,14 @@ export function Footer() {
 
             {/* Legal */}
             <div>
-              <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 uppercase tracking-wider mb-4">
+              <h3 className="text-sm font-semibold text-foreground dark:text-foreground uppercase tracking-wider mb-4">
                 {t("footer.sections.legal.title")}
               </h3>
               <ul className="space-y-3">
                 <li>
                   <Link
                     href={routes.PRIVACY}
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                    className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                   >
                     {t("footer.sections.legal.items.privacy")}
                   </Link>
@@ -136,7 +136,7 @@ export function Footer() {
                 <li>
                   <Link
                     href={routes.TERMS}
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                    className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                   >
                     {t("footer.sections.legal.items.terms")}
                   </Link>
@@ -144,7 +144,7 @@ export function Footer() {
                 <li>
                   <Link
                     href={routes.COOKIES}
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                    className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                   >
                     {t("footer.sections.legal.items.cookies")}
                   </Link>
@@ -155,18 +155,18 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="py-8 border-t border-neutral-200 dark:border-neutral-800">
+        <div className="py-8 border-t border-border dark:border-neutral-800">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+            <p className="text-muted-foreground dark:text-muted-foreground text-sm">
               {t("footer.copyright")}
             </p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
-              <span className="text-neutral-500 dark:text-neutral-400 text-sm">
+              <span className="text-muted-foreground dark:text-muted-foreground text-sm">
                 {t("footer.madeWith")}
               </span>
               <Link
                 href="https://nextjs.org"
-                className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                className="text-muted-foreground hover:text-muted-foreground dark:hover:text-muted transition-colors"
               >
                 <Image
                   src="/images/logos/nextjs.svg"
@@ -177,7 +177,7 @@ export function Footer() {
               </Link>
               <Link
                 href="https://tailwindcss.com"
-                className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                className="text-muted-foreground hover:text-muted-foreground dark:hover:text-muted transition-colors"
               >
                 <Image
                   src="/images/logos/tailwind.svg"
@@ -188,7 +188,7 @@ export function Footer() {
               </Link>
               <Link
                 href="https://vercel.com"
-                className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                className="text-muted-foreground hover:text-muted-foreground dark:hover:text-muted transition-colors"
               >
                 <Image
                   src="/images/logos/vercel.svg"

@@ -14,25 +14,25 @@ export default function SubscriptionCancelPage() {
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
           <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
-            <X className="w-8 h-8 text-red-600" />
+            <X className="w-8 h-8 text-destructive" />
           </div>
           <CardTitle className="text-2xl font-bold text-red-800">
             {t('subscription.cancel.title')}
           </CardTitle>
-          <CardDescription className="text-red-600">
+          <CardDescription className="text-destructive">
             {t('subscription.cancel.description')}
           </CardDescription>
         </CardHeader>
         
         <CardContent className="space-y-4">
-          <div className="text-center text-gray-600">
+          <div className="text-center text-muted-foreground">
             <p>{t('subscription.cancel.message')}</p>
             <div className="mt-4 p-3 bg-orange-50 rounded-lg">
               <div className="flex items-center justify-center gap-2 text-orange-700">
                 <Calendar className="w-4 h-4" />
                 <span className="text-sm font-medium">{t('subscription.cancel.flexiblePlans')}</span>
               </div>
-              <p className="text-xs text-orange-600 mt-1">
+              <p className="text-xs text-chart-5 mt-1">
                 {t('subscription.cancel.flexibleDescription')}
               </p>
             </div>

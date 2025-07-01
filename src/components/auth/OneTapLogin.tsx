@@ -76,7 +76,7 @@ export function OneTapLogin({ callbackURL = "/dashboard", autoTrigger = true }: 
         <button
           onClick={triggerOneTap}
           disabled={hasTriggered}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors disabled:opacity-50"
+          className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary transition-colors disabled:opacity-50"
         >
           {hasTriggered ? "Loading..." : "Login with Google One Tap"}
         </button>

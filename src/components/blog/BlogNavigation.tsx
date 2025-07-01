@@ -10,7 +10,7 @@ export function BlogNavigation() {
   return (
     <Link 
       href={routes.BLOG}
-      className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mb-8"
+      className="inline-flex items-center gap-2 text-primary dark:text-primary hover:text-primary dark:hover:text-blue-300 mb-8"
     >
       <ArrowLeft className="h-4 w-4" />
       Back to Blog

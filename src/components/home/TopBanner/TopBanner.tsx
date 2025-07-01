@@ -53,14 +53,14 @@ export function TopBanner() {
           </svg>
         </div>
         {/* Floating geometric shapes */}
-        <div className="absolute top-2 left-16 w-3 h-3 bg-gray-400/40 rounded transform rotate-45"></div>
-        <div className="absolute top-1 right-40 w-2 h-2 bg-gray-500/35 rounded-full"></div>
-        <div className="absolute bottom-2 left-1/4 w-2 h-2 bg-gray-400/45 transform rotate-45"></div>
-        <div className="absolute bottom-1 right-1/4 w-2 h-2 bg-gray-500/30 rounded-full"></div>
-        <div className="absolute top-3 left-1/3 w-1.5 h-1.5 bg-gray-400/40 rounded"></div>
-        <div className="absolute bottom-3 right-1/3 w-1.5 h-1.5 bg-gray-500/35 transform rotate-45"></div>
-        <div className="absolute top-1 left-2/3 w-2 h-2 bg-gray-400/30 rounded transform rotate-12"></div>
-        <div className="absolute bottom-2 left-3/4 w-1 h-1 bg-gray-500/50 rounded-full"></div>
+        <div className="absolute top-2 left-16 w-3 h-3 bg-muted/40 rounded transform rotate-45"></div>
+        <div className="absolute top-1 right-40 w-2 h-2 bg-muted/35 rounded-full"></div>
+        <div className="absolute bottom-2 left-1/4 w-2 h-2 bg-muted/45 transform rotate-45"></div>
+        <div className="absolute bottom-1 right-1/4 w-2 h-2 bg-muted/30 rounded-full"></div>
+        <div className="absolute top-3 left-1/3 w-1.5 h-1.5 bg-muted/40 rounded"></div>
+        <div className="absolute bottom-3 right-1/3 w-1.5 h-1.5 bg-muted/35 transform rotate-45"></div>
+        <div className="absolute top-1 left-2/3 w-2 h-2 bg-muted/30 rounded transform rotate-12"></div>
+        <div className="absolute bottom-2 left-3/4 w-1 h-1 bg-muted/50 rounded-full"></div>
       </div>
       <div className="relative mx-auto max-w-7xl px-4 py-3">
         <div className="flex items-center justify-center gap-2 text-sm font-medium">
@@ -92,7 +92,7 @@ export function TopBanner() {
             className="rounded-full p-1 hover:bg-gray-200 transition-colors flex items-center justify-center"
             aria-label="Dismiss"
           >
-            <X className="h-4 w-4 text-gray-600" />
+            <X className="h-4 w-4 text-muted-foreground" />
           </button>
         </div>
       </div>

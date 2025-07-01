@@ -92,21 +92,21 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-neutral-900 px-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-background px-4 relative">
       <AuthNavigation />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+          <h1 className="text-3xl font-bold text-foreground dark:text-foreground">
             {t('signIn.welcomeBack')}
           </h1>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-2">
+          <p className="text-muted-foreground dark:text-muted-foreground mt-2">
             {t('signIn.signInDescription')}
           </p>
         </div>
 
-        <Card className="border-neutral-200 dark:border-neutral-700">
+        <Card className="border-border dark:border-border">
           <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-2xl text-center text-neutral-900 dark:text-neutral-100">
+            <CardTitle className="text-2xl text-center text-foreground dark:text-foreground">
               {t('signIn.title')}
             </CardTitle>
           </CardHeader>
@@ -114,7 +114,7 @@ export default function SignInPage() {
             {/* Google登录按钮 */}
             <Button
               variant="outline"
-              className="w-full h-12 border-neutral-300 dark:border-neutral-600"
+              className="w-full h-12 border-border dark:border-neutral-600"
               onClick={handleGoogleSignIn}
               disabled={isLoading}
             >
@@ -127,7 +127,7 @@ export default function SignInPage() {
 
             {/* 错误信息显示 */}
             {error && (
-              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
+              <div className="bg-destructive/5 dark:bg-destructive/10/20 border border-destructive/30 dark:border-destructive/30 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
                 {error}
               </div>
             )}
@@ -140,7 +140,7 @@ export default function SignInPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('email')}</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-muted">{t('email')}</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
@@ -158,7 +158,7 @@ export default function SignInPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('password')}</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-muted">{t('password')}</FormLabel>
                       <FormControl>
                         <PasswordInput
                           placeholder={t('signIn.passwordPlaceholder')}
@@ -181,7 +181,7 @@ export default function SignInPage() {
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />
-                        <label htmlFor="remember" className="text-sm text-neutral-600 dark:text-neutral-400 cursor-pointer">
+                        <label htmlFor="remember" className="text-sm text-muted-foreground dark:text-muted-foreground cursor-pointer">
                           {t('signIn.rememberMe')}
                         </label>
                       </div>
@@ -206,7 +206,7 @@ export default function SignInPage() {
             </Form>
 
             <div className="text-center">
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              <p className="text-sm text-muted-foreground dark:text-muted-foreground">
                 {t('dontHaveAccount')}{" "}
                 <Link
                   href={routes.SIGN_UP}

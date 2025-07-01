@@ -13,13 +13,13 @@ export function VideoTutorial() {
   return (
     <div className="relative py-20 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl overflow-hidden">
+        <Card className="bg-background dark:bg-background rounded-3xl shadow-2xl overflow-hidden">
           <CardContent className="p-8 lg:p-12">
             <div className="text-center mb-8">
-              <h3 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
+              <h3 className="text-3xl font-bold text-foreground dark:text-foreground mb-4">
                 {t("videoTutorial.title")}
               </h3>
-              <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground dark:text-muted-foreground max-w-2xl mx-auto">
                 {t("videoTutorial.subtitle")}
               </p>
             </div>
@@ -38,7 +38,7 @@ export function VideoTutorial() {
                     <div className="absolute inset-0 flex items-center justify-center">
                       <button
                         onClick={() => setIsPlaying(true)}
-                        className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
+                        className="flex items-center gap-3 bg-background/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full hover:bg-background/20 transition-all duration-300 transform hover:scale-105"
                       >
                         <Play className="h-6 w-6 fill-current" />
                         <span className="font-medium">

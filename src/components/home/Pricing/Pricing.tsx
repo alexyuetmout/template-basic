@@ -40,10 +40,10 @@ function PricingCard({ plan, planIndex }: { plan: PricingPlan; planIndex: number
 
   return (
     <div
-      className={`relative rounded-3xl border bg-white p-8 shadow-sm transition-all hover:shadow-md dark:bg-neutral-900 ${
+      className={`relative rounded-3xl border bg-background p-8 shadow-sm transition-all hover:shadow-md dark:bg-background ${
         plan.isPopular
           ? "border-primary"
-          : "border-neutral-200 dark:border-neutral-800"
+          : "border-border dark:border-neutral-800"
       }`}
     >
       {plan.isPopular && (
@@ -53,10 +53,10 @@ function PricingCard({ plan, planIndex }: { plan: PricingPlan; planIndex: number
       )}
 
       <div className="mb-8">
-        <h3 className="mb-2 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+        <h3 className="mb-2 text-2xl font-bold text-foreground dark:text-foreground">
           {plan.name}
         </h3>
-        <p className="mb-6 text-neutral-600 dark:text-neutral-300">
+        <p className="mb-6 text-muted-foreground dark:text-muted">
           {plan.description}
         </p>
         <div className="flex items-baseline">
@@ -64,7 +64,7 @@ function PricingCard({ plan, planIndex }: { plan: PricingPlan; planIndex: number
             {plan.price}
           </span>
           {plan.priceUnit && (
-            <span className="text-neutral-600 dark:text-neutral-300">
+            <span className="text-muted-foreground dark:text-muted">
               {plan.priceUnit}
             </span>
           )}
@@ -77,13 +77,13 @@ function PricingCard({ plan, planIndex }: { plan: PricingPlan; planIndex: number
             {feature.included ? (
               <Check className="h-5 w-5 text-primary" />
             ) : (
-              <X className="h-5 w-5 text-neutral-400" />
+              <X className="h-5 w-5 text-muted-foreground" />
             )}
             <span
               className={
                 feature.included
-                  ? "text-neutral-600 dark:text-neutral-300"
-                  : "text-neutral-400 dark:text-neutral-500"
+                  ? "text-muted-foreground dark:text-muted"
+                  : "text-muted-foreground dark:text-muted-foreground"
               }
             >
               {feature.text}
@@ -129,17 +129,17 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="overflow-hidden bg-white dark:bg-neutral-900"
+      className="overflow-hidden bg-background dark:bg-background"
     >
       <div className="container mx-auto px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide text-primary bg-primary/10 dark:bg-primary/5 mb-6">
             {t("pricing.badge")}
           </div>
-          <HeadingH1 className="mb-4 text-neutral-900 dark:text-neutral-100">
+          <HeadingH1 className="mb-4 text-foreground dark:text-foreground">
             {t("pricing.title")}
           </HeadingH1>
-          <p className="text-lg text-neutral-600 dark:text-neutral-300">
+          <p className="text-lg text-muted-foreground dark:text-muted">
             {t("pricing.subtitle")}
           </p>
         </div>

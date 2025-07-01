@@ -17,7 +17,7 @@ import { AutoOneTap } from "@/components/auth/AutoOneTap";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-background dark:bg-background">
       <AutoOneTap callbackURL="/dashboard" delay={5000} />
       <TopBanner />
       <Header />

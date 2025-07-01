@@ -191,8 +191,8 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
       <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <p className="mt-2 text-gray-600">{t("loading")}</p>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <p className="mt-2 text-muted-foreground">{t("loading")}</p>
           </div>
         </div>
       </div>
@@ -204,10 +204,10 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+          <div className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
             {t("title")}
           </div>
-          <HeadingH1 className=" text-3xl md:text-4xl text-neutral-900 mb-2">
+          <HeadingH1 className=" text-3xl md:text-4xl text-foreground mb-2">
             {t("subtitle")}
           </HeadingH1>
           <p className="text-base text-secondary-foreground">
@@ -217,15 +217,15 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
 
         {/* Pricing Mode Selector */}
         <div className="flex justify-center mb-12">
-          <div className="bg-white rounded-lg p-1 shadow-sm border border-gray-200">
+          <div className="bg-background rounded-lg p-1 shadow-sm border border-border">
             {pricingModeConfig.modes.map((mode) => (
               <button
                 key={mode.key}
                 onClick={() => setPricingMode(mode.key as PricingMode)}
                 className={`px-6 py-3 rounded-md text-sm font-medium transition-all duration-200 ${
                   pricingMode === mode.key
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "text-gray-600 hover:text-gray-900"
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {mode.label}
@@ -239,15 +239,15 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
           {plans.map((plan) => (
             <div
               key={plan.id}
-              className={`bg-white rounded-2xl shadow-lg p-8 relative ${
+              className={`bg-background rounded-2xl shadow-lg p-8 relative ${
                 plan.popular
-                  ? "border-2 border-blue-500 transform scale-105"
-                  : "border border-gray-200"
+                  ? "border-2 border-primary transform scale-105"
+                  : "border border-border"
               }`}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-blue-500 text-white px-6 py-2 rounded-full text-sm font-medium">
+                  <span className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium">
                     {t("mostPopular")}
                   </span>
                 </div>
@@ -255,20 +255,20 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
 
               {/* Plan Header */}
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                <h3 className="text-2xl font-bold text-foreground mb-2">
                   {plan.name}
                 </h3>
-                <p className="text-gray-600 mb-6">{plan.description}</p>
+                <p className="text-muted-foreground mb-6">{plan.description}</p>
                 <div className="mb-6">
                   <span
                     className={`text-5xl font-bold ${
-                      plan.price === "Free" ? "text-blue-500" : "text-gray-900"
+                      plan.price === "Free" ? "text-primary" : "text-foreground"
                     }`}
                   >
                     {plan.price}
                   </span>
                   {plan.priceDetail && (
-                    <span className="text-gray-500 text-lg">
+                    <span className="text-muted-foreground text-lg">
                       {plan.priceDetail}
                     </span>
                   )}
@@ -293,14 +293,14 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
                               clipRule="evenodd"
                             />
                           </svg>
-                          <span className="text-gray-400">
+                          <span className="text-muted-foreground">
                             {feature.slice(1)}
                           </span>
                         </>
                       ) : (
                         <>
                           <svg
-                            className="w-5 h-5 text-green-500 mr-3 flex-shrink-0"
+                            className="w-5 h-5 text-chart-2 mr-3 flex-shrink-0"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -343,7 +343,7 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
         {/* No Data Message */}
         {plans.length === 0 && !loading && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">{t("noPricingPlans")}</p>
+            <p className="text-muted-foreground text-lg">{t("noPricingPlans")}</p>
           </div>
         )}
       </div>

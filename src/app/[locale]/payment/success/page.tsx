@@ -15,18 +15,18 @@ function PaymentSuccessContent() {
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
           <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-            <Check className="w-8 h-8 text-green-600" />
+            <Check className="w-8 h-8 text-chart-2" />
           </div>
           <CardTitle className="text-2xl font-bold text-green-800">
             {t('success.title')}
           </CardTitle>
-          <CardDescription className="text-green-600">
+          <CardDescription className="text-chart-2">
             {t('success.description')}
           </CardDescription>
         </CardHeader>
         
         <CardContent className="space-y-4">
-          <div className="text-center text-gray-600">
+          <div className="text-center text-muted-foreground">
             <p>{t('success.message')}</p>
             <p className="mt-2 text-sm">
               {t('success.emailConfirmation')}

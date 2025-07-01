@@ -22,7 +22,7 @@ export default async function PricingPage() {
   const prices = await getPrices()
   
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-background dark:bg-background">
       <TagSchema />
       <Header />
       <PricingPlans initialPrices={prices} />

@@ -15,25 +15,25 @@ function SubscriptionSuccessContent() {
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
           <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-            <Check className="w-8 h-8 text-green-600" />
+            <Check className="w-8 h-8 text-chart-2" />
           </div>
           <CardTitle className="text-2xl font-bold text-green-800">
             {t('subscription.success.title')}
           </CardTitle>
-          <CardDescription className="text-green-600">
+          <CardDescription className="text-chart-2">
             {t('subscription.success.description')}
           </CardDescription>
         </CardHeader>
         
         <CardContent className="space-y-4">
-          <div className="text-center text-gray-600">
+          <div className="text-center text-muted-foreground">
             <p>{t('subscription.success.message')}</p>
-            <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-              <div className="flex items-center justify-center gap-2 text-blue-700">
+            <div className="mt-4 p-3 bg-primary/5 rounded-lg">
+              <div className="flex items-center justify-center gap-2 text-primary">
                 <Calendar className="w-4 h-4" />
                 <span className="text-sm font-medium">{t('subscription.success.activated')}</span>
               </div>
-              <p className="text-xs text-blue-600 mt-1">
+              <p className="text-xs text-primary mt-1">
                 {t('subscription.success.billingReminder')}
               </p>
             </div>

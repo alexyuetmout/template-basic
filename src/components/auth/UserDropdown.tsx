@@ -67,13 +67,13 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={className}>
-        <button className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded-full">
+        <button className="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded-full">
           <Avatar 
             src={user.image}
             name={user.name}
             email={user.email}
             size="md"
-            className="cursor-pointer hover:ring-2 hover:ring-blue-500 hover:ring-offset-1 transition-all"
+            className="cursor-pointer hover:ring-2 hover:ring-primary hover:ring-offset-1 transition-all"
           />
         </button>
       </DropdownMenuTrigger>
@@ -93,7 +93,7 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
               size="md"
             />
             <div className="flex-1 min-w-0">
-              <p className="text-base font-medium text-gray-900 truncate">
+              <p className="text-base font-medium text-foreground truncate">
                 {user.name || user.email}
               </p>
             </div>
@@ -105,8 +105,8 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
         {/* 积分显示 */}
         <DropdownMenuLabel className="font-normal">
           <div className="flex items-center gap-2 py-1">
-            <span className="text-base text-gray-600">{t('dashboard.userDropdown.points')}</span>
-            <span className="text-base font-medium text-gray-900">
+            <span className="text-base text-muted-foreground">{t('dashboard.userDropdown.points')}</span>
+            <span className="text-base font-medium text-foreground">
               {totalPoints.toLocaleString()}
             </span>
           </div>
@@ -127,14 +127,14 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
 
         {/* 操作按钮区域 */}
         <DropdownMenuItem asChild>
-          <Link href={routes.PRICING} className="cursor-pointer text-base text-blue-600">
+          <Link href={routes.PRICING} className="cursor-pointer text-base text-primary">
             {t('dashboard.userDropdown.upgradePlan')}
           </Link>
         </DropdownMenuItem>
         
         <DropdownMenuItem 
           onClick={handleSignOut}
-          className="cursor-pointer text-base text-red-600 focus:text-red-600"
+          className="cursor-pointer text-base text-destructive focus:text-destructive"
         >
           {t('dashboard.userDropdown.signOut')}
         </DropdownMenuItem>

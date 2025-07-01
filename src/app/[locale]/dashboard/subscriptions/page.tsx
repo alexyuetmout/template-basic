@@ -152,7 +152,7 @@ export default function SubscriptionsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-900">
+      <div className="min-h-screen bg-background dark:bg-background">
         <Header />
         <DashboardLayout>
           <div className="flex items-center justify-center py-12">
@@ -168,20 +168,20 @@ export default function SubscriptionsPage() {
   const inactiveSubscriptions = subscriptions.filter(sub => sub.status !== "ACTIVE");
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-background dark:bg-background">
       <Header />
       
       <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{t('subscriptions.title')}</h1>
-            <p className="text-gray-600">{t('subscriptions.description')}</p>
+            <h1 className="text-2xl font-bold text-foreground">{t('subscriptions.title')}</h1>
+            <p className="text-muted-foreground">{t('subscriptions.description')}</p>
           </div>
 
           {/* 活跃订阅 */}
           {activeSubscriptions.length > 0 && (
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t('subscriptions.activeSubscriptions')}</h2>
+              <h2 className="text-lg font-semibold text-foreground mb-4">{t('subscriptions.activeSubscriptions')}</h2>
               <div className="space-y-4">
                 {activeSubscriptions.map((subscription) => {
                   const config = statusConfig[subscription.status as keyof typeof statusConfig];
@@ -193,8 +193,8 @@ export default function SubscriptionsPage() {
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center space-x-3 mb-3">
-                              <Icon className="w-5 h-5 text-green-600" />
-                              <h3 className="text-lg font-semibold text-gray-900">
+                              <Icon className="w-5 h-5 text-chart-2" />
+                              <h3 className="text-lg font-semibold text-foreground">
                                 {subscription.price.name}
                               </h3>
                               <Badge className={config?.color}>
@@ -202,26 +202,26 @@ export default function SubscriptionsPage() {
                               </Badge>
                             </div>
                             
-                            <p className="text-gray-600 mb-4">
+                            <p className="text-muted-foreground mb-4">
                               {subscription.price.description}
                             </p>
                             
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                               <div>
-                                <span className="text-gray-500">{t('subscriptions.price')}</span>
-                                <p className="font-medium text-gray-900">
+                                <span className="text-muted-foreground">{t('subscriptions.price')}</span>
+                                <p className="font-medium text-foreground">
                                   {formatCurrency(subscription.price.amount, subscription.price.currency)} / {getIntervalText(subscription.price.interval)}
                                 </p>
                               </div>
                               <div>
-                                <span className="text-gray-500">{t('subscriptions.currentPeriod')}</span>
-                                <p className="font-medium text-gray-900">
+                                <span className="text-muted-foreground">{t('subscriptions.currentPeriod')}</span>
+                                <p className="font-medium text-foreground">
                                   {formatDate(subscription.currentPeriodStart)} - {formatDate(subscription.currentPeriodEnd)}
                                 </p>
                               </div>
                               <div>
-                                <span className="text-gray-500">{t('subscriptions.nextBilling')}</span>
-                                <p className="font-medium text-gray-900">
+                                <span className="text-muted-foreground">{t('subscriptions.nextBilling')}</span>
+                                <p className="font-medium text-foreground">
                                   {formatDate(subscription.currentPeriodEnd)}
                                 </p>
                               </div>
@@ -260,20 +260,20 @@ export default function SubscriptionsPage() {
           {/* 历史订阅 */}
           {inactiveSubscriptions.length > 0 && (
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t('subscriptions.historySubscriptions')}</h2>
+              <h2 className="text-lg font-semibold text-foreground mb-4">{t('subscriptions.historySubscriptions')}</h2>
               <div className="space-y-4">
                 {inactiveSubscriptions.map((subscription) => {
                   const config = statusConfig[subscription.status as keyof typeof statusConfig];
                   const Icon = config?.icon || CreditCard;
                   
                   return (
-                    <Card key={subscription.id} className="border-gray-200">
+                    <Card key={subscription.id} className="border-border">
                       <CardContent className="p-6">
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center space-x-3 mb-3">
-                              <Icon className="w-5 h-5 text-gray-600" />
-                              <h3 className="text-lg font-semibold text-gray-900">
+                              <Icon className="w-5 h-5 text-muted-foreground" />
+                              <h3 className="text-lg font-semibold text-foreground">
                                 {subscription.price.name}
                               </h3>
                               <Badge className={config?.color}>
@@ -281,29 +281,29 @@ export default function SubscriptionsPage() {
                               </Badge>
                             </div>
                             
-                            <p className="text-gray-600 mb-4">
+                            <p className="text-muted-foreground mb-4">
                               {subscription.price.description}
                             </p>
                             
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                               <div>
-                                <span className="text-gray-500">{t('subscriptions.subscriptionTime')}</span>
-                                <p className="font-medium text-gray-900">
+                                <span className="text-muted-foreground">{t('subscriptions.subscriptionTime')}</span>
+                                <p className="font-medium text-foreground">
                                   {formatDate(subscription.createdAt)}
                                 </p>
                               </div>
                               {subscription.canceledAt && (
                                 <div>
-                                  <span className="text-gray-500">{t('subscriptions.cancelTime')}</span>
-                                  <p className="font-medium text-gray-900">
+                                  <span className="text-muted-foreground">{t('subscriptions.cancelTime')}</span>
+                                  <p className="font-medium text-foreground">
                                     {formatDate(subscription.canceledAt)}
                                   </p>
                                 </div>
                               )}
                               {subscription.cancellationReason && (
                                 <div>
-                                  <span className="text-gray-500">{t('subscriptions.cancelReason')}</span>
-                                  <p className="font-medium text-gray-900">
+                                  <span className="text-muted-foreground">{t('subscriptions.cancelReason')}</span>
+                                  <p className="font-medium text-foreground">
                                     {subscription.cancellationReason}
                                   </p>
                                 </div>
@@ -323,9 +323,9 @@ export default function SubscriptionsPage() {
           {subscriptions.length === 0 && (
             <Card>
               <CardContent className="p-8 text-center">
-                <CreditCard className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">{t('subscriptions.noSubscriptions')}</h3>
-                <p className="text-gray-600 mb-4">
+                <CreditCard className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-foreground mb-2">{t('subscriptions.noSubscriptions')}</h3>
+                <p className="text-muted-foreground mb-4">
                   {t('subscriptions.noSubscriptionsDesc')}
                 </p>
                 <Button asChild>
@@ -348,17 +348,17 @@ export default function SubscriptionsPage() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">{t('subscriptions.help.cancellationPolicy')}</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {t('subscriptions.help.policies', { returnObjects: true }).map((policy: string, index: number) => (
+                  <h4 className="font-medium text-foreground mb-2">{t('subscriptions.help.cancellationPolicy')}</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    {(t('subscriptions.help.policies', { returnObjects: true }) as string[]).map((policy: string, index: number) => (
                       <li key={index}>{policy}</li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">{t('subscriptions.help.billing')}</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {t('subscriptions.help.billingInfo', { returnObjects: true }).map((info: string, index: number) => (
+                  <h4 className="font-medium text-foreground mb-2">{t('subscriptions.help.billing')}</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    {(t('subscriptions.help.billingInfo', { returnObjects: true }) as string[]).map((info: string, index: number) => (
                       <li key={index}>{info}</li>
                     ))}
                   </ul>

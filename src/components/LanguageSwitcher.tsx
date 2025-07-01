@@ -56,7 +56,7 @@ export default function LanguageSwitcher() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="h-9 px-3 flex items-center gap-2 hover:bg-neutral-100 rounded-lg transition-colors"
+          className="h-9 px-3 flex items-center gap-2 hover:bg-muted rounded-lg transition-colors"
         >
           {/* Current Language */}
           <span className="text-sm font-medium text-neutral-700">
@@ -64,7 +64,7 @@ export default function LanguageSwitcher() {
           </span>
 
           {/* Dropdown Arrow */}
-          <ChevronDown className="h-4 w-4 text-neutral-500" />
+          <ChevronDown className="h-4 w-4 text-muted-foreground" />
         </Button>
       </DropdownMenuTrigger>
 
@@ -77,7 +77,7 @@ export default function LanguageSwitcher() {
               px-3 py-2 rounded-md cursor-pointer text-sm transition-colors
               ${
                 currentLocale === code
-                  ? "bg-purple-50 text-purple-700 font-medium"
+                  ? "bg-chart-4/5 text-chart-4 font-medium"
                   : "text-neutral-700 hover:bg-neutral-50"
               }
             `}

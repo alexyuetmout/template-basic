@@ -54,7 +54,7 @@ const getTransactionTypeConfig = (t: any) => ({
   },
   SUBSCRIPTION: {
     label: t("points.transactionTypes.SUBSCRIPTION"),
-    color: "bg-blue-100 text-blue-800",
+    color: "bg-primary/10 text-blue-800",
     icon: Gift,
   },
   SPEND: {
@@ -139,7 +139,7 @@ export default function PointsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-900">
+      <div className="min-h-screen bg-background dark:bg-background">
         <Header />
         <DashboardLayout>
           <div className="flex items-center justify-center py-12">
@@ -152,16 +152,16 @@ export default function PointsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-background dark:bg-background">
       <Header />
 
       <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-foreground">
               {t("points.title")}
             </h1>
-            <p className="text-gray-600">{t("points.description")}</p>
+            <p className="text-muted-foreground">{t("points.description")}</p>
           </div>
 
           {/* 积分概览 */}
@@ -171,10 +171,10 @@ export default function PointsPage() {
                 <div className="flex items-center">
                   <Coins className="w-8 h-8 text-yellow-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">
+                    <p className="text-sm font-medium text-muted-foreground">
                       {t("points.overview.totalPoints")}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold text-foreground">
                       {balance.totalPoints}
                     </p>
                   </div>
@@ -185,12 +185,12 @@ export default function PointsPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center">
-                  <TrendingUp className="w-8 h-8 text-green-600" />
+                  <TrendingUp className="w-8 h-8 text-chart-2" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">
+                    <p className="text-sm font-medium text-muted-foreground">
                       {t("points.overview.availablePoints")}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold text-foreground">
                       {balance.availablePoints}
                     </p>
                   </div>
@@ -201,15 +201,15 @@ export default function PointsPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center">
-                  <Clock className="w-8 h-8 text-orange-600" />
+                  <Clock className="w-8 h-8 text-chart-5" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">
+                    <p className="text-sm font-medium text-muted-foreground">
                       {t("points.overview.expiringSoon")}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold text-foreground">
                       {balance.expiringSoon}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-muted-foreground">
                       {t("points.overview.within30Days")}
                     </p>
                   </div>
@@ -223,7 +223,7 @@ export default function PointsPage() {
             <Card className="border-orange-200 bg-orange-50">
               <CardContent className="p-4">
                 <div className="flex items-center">
-                  <Clock className="w-5 h-5 text-orange-600 mr-2" />
+                  <Clock className="w-5 h-5 text-chart-5 mr-2" />
                   <div>
                     <p className="text-sm font-medium text-orange-800">
                       {t("points.expiryWarning.title")}
@@ -250,11 +250,11 @@ export default function PointsPage() {
             <CardContent>
               {transactions.length === 0 ? (
                 <div className="text-center py-8">
-                  <Coins className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-500">
+                  <Coins className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">
                     {t("points.history.noRecords")}
                   </p>
-                  <p className="text-sm text-gray-400 mt-1">
+                  <p className="text-sm text-muted-foreground mt-1">
                     {t("points.history.noRecordsDesc")}
                   </p>
                 </div>
@@ -274,7 +274,7 @@ export default function PointsPage() {
                     return (
                       <div
                         key={transaction.id}
-                        className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                        className="border border-border rounded-lg p-4 hover:bg-gray-50 transition-colors"
                       >
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center space-x-3">
@@ -285,15 +285,15 @@ export default function PointsPage() {
                             >
                               <Icon
                                 className={`w-4 h-4 ${
-                                  isPositive ? "text-green-600" : "text-red-600"
+                                  isPositive ? "text-chart-2" : "text-destructive"
                                 }`}
                               />
                             </div>
                             <div>
-                              <h3 className="font-medium text-gray-900">
+                              <h3 className="font-medium text-foreground">
                                 {transaction.reason}
                               </h3>
-                              <p className="text-sm text-gray-500">
+                              <p className="text-sm text-muted-foreground">
                                 {transaction.description}
                               </p>
                             </div>
@@ -301,7 +301,7 @@ export default function PointsPage() {
                           <div className="text-right">
                             <div
                               className={`text-lg font-bold ${
-                                isPositive ? "text-green-600" : "text-red-600"
+                                isPositive ? "text-chart-2" : "text-destructive"
                               }`}
                             >
                               {isPositive ? "+" : "-"}
@@ -317,7 +317,7 @@ export default function PointsPage() {
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between text-sm text-gray-500">
+                        <div className="flex items-center justify-between text-sm text-muted-foreground">
                           <div className="flex items-center space-x-4">
                             <div className="flex items-center">
                               <Calendar className="w-4 h-4 mr-1" />
@@ -357,10 +357,10 @@ export default function PointsPage() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">
+                  <h4 className="font-medium text-foreground mb-2">
                     {t("points.information.howToEarn.title")}
                   </h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
+                  <ul className="text-sm text-muted-foreground space-y-1">
                     {(
                       t("points.information.howToEarn.items", {
                         returnObjects: true,
@@ -371,10 +371,10 @@ export default function PointsPage() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">
+                  <h4 className="font-medium text-foreground mb-2">
                     {t("points.information.usageRules.title")}
                   </h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
+                  <ul className="text-sm text-muted-foreground space-y-1">
                     {(
                       t("points.information.usageRules.items", {
                         returnObjects: true,

@@ -79,7 +79,7 @@ export function Hero() {
           </div>
 
           {/* Main Title */}
-          <HeadingH1 className="text-gray-900 dark:text-white">
+          <HeadingH1 className="text-foreground dark:text-white">
             <span className="block bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
               {t("hero.title.main")}
             </span>
@@ -87,7 +87,7 @@ export function Hero() {
           </HeadingH1>
 
           {/* Subtitle */}
-          <p className="mt-6 max-w-2xl mx-auto text-base text-gray-600 dark:text-gray-300">
+          <p className="mt-6 max-w-2xl mx-auto text-base text-muted-foreground dark:text-gray-300">
             {t("hero.subtitle")}
           </p>
 
@@ -116,7 +116,7 @@ export function Hero() {
             </Link>
             <Link
               href={path("/demo")}
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm disabled:pointer-events-none disabled:opacity-50 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive font-bold bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-white border dark:border-0 border-gray-200 shadow-xs hover:bg-gray-200/80 dark:hover:bg-white/20 transition-all duration-200 h-12 rounded-xl px-6"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm disabled:pointer-events-none disabled:opacity-50 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive font-bold bg-gray-100 dark:bg-background/10 text-foreground dark:text-white border dark:border-0 border-border shadow-xs hover:bg-gray-200/80 dark:hover:bg-background/20 transition-all duration-200 h-12 rounded-xl px-6"
             >
               {t("hero.buttons.viewComponents")}
               <svg
@@ -139,7 +139,7 @@ export function Hero() {
 
         {/* Tech Stack */}
         <div className="mt-20">
-          <p className="text-center text-base text-gray-600 dark:text-gray-400">
+          <p className="text-center text-base text-muted-foreground dark:text-muted-foreground">
             {t("hero.techStack")}
           </p>
           <div className="relative mt-8 overflow-hidden">
@@ -153,7 +153,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Next.js
                   </span>
                 </div>
@@ -165,7 +165,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Tailwind CSS
                   </span>
                 </div>
@@ -177,7 +177,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Shadcn UI
                   </span>
                 </div>
@@ -189,7 +189,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Better Auth
                   </span>
                 </div>
@@ -201,7 +201,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Stripe
                   </span>
                 </div>
@@ -213,7 +213,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Resend
                   </span>
                 </div>
@@ -225,7 +225,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Cursor
                   </span>
                 </div>
@@ -237,7 +237,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     GitHub
                   </span>
                 </div>
@@ -249,7 +249,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Figma
                   </span>
                 </div>
@@ -261,7 +261,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Vercel
                   </span>
                 </div>
@@ -273,7 +273,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Cloudflare
                   </span>
                 </div>
@@ -285,7 +285,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Zeabur
                   </span>
                 </div>
@@ -299,7 +299,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Next.js
                   </span>
                 </div>
@@ -311,7 +311,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Tailwind CSS
                   </span>
                 </div>
@@ -323,7 +323,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Shadcn UI
                   </span>
                 </div>
@@ -335,7 +335,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Better Auth
                   </span>
                 </div>
@@ -347,7 +347,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Stripe
                   </span>
                 </div>
@@ -359,7 +359,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Resend
                   </span>
                 </div>
@@ -371,7 +371,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Cursor
                   </span>
                 </div>
@@ -383,7 +383,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     GitHub
                   </span>
                 </div>
@@ -395,7 +395,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Figma
                   </span>
                 </div>
@@ -407,7 +407,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Vercel
                   </span>
                 </div>
@@ -419,7 +419,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Cloudflare
                   </span>
                 </div>
@@ -431,7 +431,7 @@ export function Hero() {
                     height={24}
                     className="h-6 w-6"
                   />
-                  <span className="text-md text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-md text-muted-foreground dark:text-muted-foreground font-medium">
                     Zeabur
                   </span>
                 </div>

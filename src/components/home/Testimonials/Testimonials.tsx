@@ -25,7 +25,7 @@ function StarRating({ rating }: { rating: number }) {
           key={i}
           className={`w-5 h-5 ${
             i < rating
-              ? "fill-yellow-400 text-yellow-400"
+              ? "fill-chart-3 text-chart-3"
               : "fill-gray-200 text-gray-200"
           }`}
         />
@@ -40,6 +40,8 @@ interface Testimonial {
   name: string;
   title: string;
   content: string;
+  avatar?: string;
+  rating?: number;
 }
 
 // 单个评价卡片组件
@@ -48,13 +50,19 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
     <Card className="h-full group relative rounded-2xl border border-border/50 bg-card hover:shadow-lg transition-all duration-300">
       <CardContent className="p-6 h-full flex flex-col">
         <div className="flex items-center gap-4 mb-4">
-          <div className="relative h-12 w-12 rounded-full overflow-hidden">
-            <Image
-              src={testimonial.avatar}
-              alt={testimonial.name}
-              fill
-              className="object-cover"
-            />
+          <div className="relative h-12 w-12 rounded-full overflow-hidden bg-primary/10 flex items-center justify-center">
+            {testimonial.avatar ? (
+              <Image
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <span className="text-lg font-semibold text-primary">
+                {testimonial.name.charAt(0)}
+              </span>
+            )}
           </div>
           <div>
             <h4 className="font-semibold text-foreground">
@@ -66,7 +74,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         <p className="text-muted-foreground leading-relaxed flex-grow">
           &ldquo;{testimonial.content}&rdquo;
         </p>
-        <StarRating rating={testimonial.rating} />
+        <StarRating rating={testimonial.rating || 5} />
       </CardContent>
     </Card>
   );
@@ -138,7 +146,7 @@ export function Testimonials() {
     <section className="py-24 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-block bg-blue-100 dark:bg-blue-500/20 bg-opacity-20 px-4 py-1.5 rounded-full text-blue-700 dark:text-blue-300 text-sm font-medium mb-4">
+          <div className="inline-block bg-primary/10 dark:bg-primary/20 bg-opacity-20 px-4 py-1.5 rounded-full text-primary dark:text-primary text-sm font-medium mb-4">
             {t("testimonials.badge")}
           </div>
           <HeadingH2 className="text-foreground mb-6">
@@ -159,7 +167,7 @@ export function Testimonials() {
                   : "opacity-100 transform scale-100"
               }`}
             >
-              <Card className="bg-white dark:bg-neutral-800 border-0 shadow-2xl">
+              <Card className="bg-background dark:bg-card border-0 shadow-2xl">
                 <CardContent className="p-8 md:p-12">
                   <div className="flex flex-col md:flex-row items-center gap-8">
                     {/* 头像 */}
@@ -180,15 +188,15 @@ export function Testimonials() {
                     <div className="flex-1 text-center md:text-left">
                       <StarRating rating={5} />
 
-                      <blockquote className="text-lg md:text-xl text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">
+                      <blockquote className="text-lg md:text-xl text-neutral-700 dark:text-muted mb-6 leading-relaxed">
                         &ldquo;{testimonials[currentIndex]?.content}&rdquo;
                       </blockquote>
 
                       <div>
-                        <div className="font-semibold text-lg text-neutral-900 dark:text-neutral-100">
+                        <div className="font-semibold text-lg text-foreground dark:text-foreground">
                           {testimonials[currentIndex]?.name}
                         </div>
-                        <div className="text-sm text-neutral-600 dark:text-neutral-400">
+                        <div className="text-sm text-muted-foreground dark:text-muted-foreground">
                           {testimonials[currentIndex]?.title}
                         </div>
                       </div>

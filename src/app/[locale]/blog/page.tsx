@@ -5,7 +5,7 @@ import { NewsletterSection } from "@/components/blog/NewsletterSection"
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-background dark:bg-background">
       <BlogHero 
         title="AI Development Blog"
         subtitle="Discover the latest insights, tutorials, and best practices in AI development. From beginner guides to advanced techniques."

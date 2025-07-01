@@ -13,7 +13,7 @@ export function Stats() {
       value: t("stats.items.0.value"),
       icon: (
         <svg
-          className="h-8 w-8 text-blue-600 dark:text-blue-400"
+          className="h-8 w-8 text-primary dark:text-primary"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -32,7 +32,7 @@ export function Stats() {
       value: t("stats.items.1.value"),
       icon: (
         <svg
-          className="h-8 w-8 text-green-600 dark:text-green-400"
+          className="h-8 w-8 text-chart-2 dark:text-chart-2"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -51,7 +51,7 @@ export function Stats() {
       value: t("stats.items.2.value"),
       icon: (
         <svg
-          className="h-8 w-8 text-purple-600 dark:text-purple-400"
+          className="h-8 w-8 text-chart-4 dark:text-chart-4"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -70,7 +70,7 @@ export function Stats() {
       value: t("stats.items.3.value"),
       icon: (
         <svg
-          className="h-8 w-8 text-orange-600 dark:text-orange-400"
+          className="h-8 w-8 text-chart-5 dark:text-chart-5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -87,13 +87,13 @@ export function Stats() {
   ];
 
   return (
-    <div className="relative py-20 bg-white dark:bg-neutral-900">
+    <div className="relative py-20 bg-background dark:bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <HeadingH2 className="text-neutral-900 dark:text-neutral-100 mb-4">
+          <HeadingH2 className="text-foreground dark:text-foreground mb-4">
             {t("stats.title")}
           </HeadingH2>
-          <p className="max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-400">
+          <p className="max-w-2xl mx-auto text-lg text-muted-foreground dark:text-muted-foreground">
             {t("stats.subtitle")}
           </p>
         </div>
@@ -106,10 +106,10 @@ export function Stats() {
             >
               <CardContent className="p-0">
                 <div className="flex justify-center mb-4">{stat.icon}</div>
-                <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
+                <div className="text-3xl font-bold text-foreground dark:text-foreground mb-2">
                   {stat.value}
                 </div>
-                <div className="text-neutral-600 dark:text-neutral-400 font-medium">
+                <div className="text-muted-foreground dark:text-muted-foreground font-medium">
                   {stat.label}
                 </div>
               </CardContent>

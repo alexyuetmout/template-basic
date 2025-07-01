@@ -55,7 +55,7 @@ export default function DashboardPage() {
 
   if (isPending) {
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-900">
+      <div className="min-h-screen bg-background dark:bg-background">
         <Header />
         <DashboardLayout>
           <div className="flex items-center justify-center py-12">
@@ -68,14 +68,14 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-background dark:bg-background">
       <Header />
       
       <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{t('profile.title')}</h1>
-            <p className="text-gray-600">{t('profile.description')}</p>
+            <h1 className="text-2xl font-bold text-foreground">{t('profile.title')}</h1>
+            <p className="text-muted-foreground">{t('profile.description')}</p>
           </div>
 
           {/* Basic Information Card */}
@@ -100,7 +100,7 @@ export default function DashboardPage() {
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder={t('profile.enterUsername')}
                   />
                 </div>
@@ -114,9 +114,9 @@ export default function DashboardPage() {
                     id="email"
                     value={session?.user?.email || ""}
                     disabled
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-muted-foreground cursor-not-allowed"
                   />
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     {t('profile.emailCannotChange')}
                   </p>
                 </div>
@@ -125,7 +125,7 @@ export default function DashboardPage() {
                   <div className={`p-3 rounded-md text-sm ${
                     message.includes(t('profile.updateSuccess')) 
                       ? "bg-green-50 text-green-700 border border-green-200" 
-                      : "bg-red-50 text-red-700 border border-red-200"
+                      : "bg-destructive/5 text-red-700 border border-destructive/30"
                   }`}>
                     {message}
                   </div>
@@ -166,19 +166,19 @@ export default function DashboardPage() {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-2 border-b border-gray-100">
-                  <span className="text-sm font-medium text-gray-600">{t('profile.userId')}</span>
-                  <span className="text-sm text-gray-900 font-mono">{session?.user?.id}</span>
+                  <span className="text-sm font-medium text-muted-foreground">{t('profile.userId')}</span>
+                  <span className="text-sm text-foreground font-mono">{session?.user?.id}</span>
                 </div>
                 
                 <div className="flex items-center justify-between py-2 border-b border-gray-100">
-                  <span className="text-sm font-medium text-gray-600">{t('profile.registrationDate')}</span>
-                  <span className="text-sm text-gray-900">
+                  <span className="text-sm font-medium text-muted-foreground">{t('profile.registrationDate')}</span>
+                  <span className="text-sm text-foreground">
                     {session?.user?.createdAt ? new Date(session.user.createdAt).toLocaleDateString("en-US") : "-"}
                   </span>
                 </div>
                 
                 <div className="flex items-center justify-between py-2">
-                  <span className="text-sm font-medium text-gray-600">{t('profile.accountStatus')}</span>
+                  <span className="text-sm font-medium text-muted-foreground">{t('profile.accountStatus')}</span>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                     {t('profile.active')}
                   </span>

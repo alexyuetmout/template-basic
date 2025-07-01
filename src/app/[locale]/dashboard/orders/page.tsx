@@ -91,7 +91,7 @@ export default function DashboardOrdersPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-900">
+      <div className="min-h-screen bg-background dark:bg-background">
         <Header />
         <DashboardLayout>
           <div className="flex items-center justify-center py-12">
@@ -104,14 +104,14 @@ export default function DashboardOrdersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-background dark:bg-background">
       <Header />
       
       <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{t('dashboard:orders.title')}</h1>
-            <p className="text-gray-600">{t('dashboard:orders.description')}</p>
+            <h1 className="text-2xl font-bold text-foreground">{t('dashboard:orders.title')}</h1>
+            <p className="text-muted-foreground">{t('dashboard:orders.description')}</p>
           </div>
 
           {/* Statistics Cards */}
@@ -119,10 +119,10 @@ export default function DashboardOrdersPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center">
-                  <ShoppingBag className="w-8 h-8 text-blue-600" />
+                  <ShoppingBag className="w-8 h-8 text-primary" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">{t('dashboard:orders.stats.totalOrders')}</p>
-                    <p className="text-2xl font-bold text-gray-900">{stats.totalOrders}</p>
+                    <p className="text-sm font-medium text-muted-foreground">{t('dashboard:orders.stats.totalOrders')}</p>
+                    <p className="text-2xl font-bold text-foreground">{stats.totalOrders}</p>
                   </div>
                 </div>
               </CardContent>
@@ -131,10 +131,10 @@ export default function DashboardOrdersPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center">
-                  <DollarSign className="w-8 h-8 text-green-600" />
+                  <DollarSign className="w-8 h-8 text-chart-2" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">{t('dashboard:orders.stats.totalSpent')}</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-sm font-medium text-muted-foreground">{t('dashboard:orders.stats.totalSpent')}</p>
+                    <p className="text-2xl font-bold text-foreground">
                       {formatCurrency(stats.totalSpent)}
                     </p>
                   </div>
@@ -145,10 +145,10 @@ export default function DashboardOrdersPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center">
-                  <Package className="w-8 h-8 text-purple-600" />
+                  <Package className="w-8 h-8 text-chart-4" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">{t('dashboard:orders.stats.pointsEarned')}</p>
-                    <p className="text-2xl font-bold text-gray-900">{stats.totalPoints}</p>
+                    <p className="text-sm font-medium text-muted-foreground">{t('dashboard:orders.stats.pointsEarned')}</p>
+                    <p className="text-2xl font-bold text-foreground">{stats.totalPoints}</p>
                   </div>
                 </div>
               </CardContent>
@@ -166,9 +166,9 @@ export default function DashboardOrdersPage() {
             <CardContent>
               {orders.length === 0 ? (
                 <div className="text-center py-8">
-                  <ShoppingBag className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-500">{t('dashboard:orders.empty.noOrders')}</p>
-                  <p className="text-sm text-gray-400 mt-1">
+                  <ShoppingBag className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">{t('dashboard:orders.empty.noOrders')}</p>
+                  <p className="text-sm text-muted-foreground mt-1">
                     {t('dashboard:orders.empty.purchaseProducts')}
                   </p>
                 </div>
@@ -177,15 +177,15 @@ export default function DashboardOrdersPage() {
                   {orders.map((order) => (
                     <div 
                       key={order.id}
-                      className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                      className="border border-border rounded-lg p-4 hover:bg-gray-50 transition-colors"
                     >
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center space-x-3">
                           <div>
-                            <h3 className="font-medium text-gray-900">
+                            <h3 className="font-medium text-foreground">
                               {order.price.name}
                             </h3>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-muted-foreground">
                               {t('dashboard:orders.orderHistory.orderNumber', { orderNumber: order.orderNumber })}
                             </p>
                           </div>
@@ -200,12 +200,12 @@ export default function DashboardOrdersPage() {
                         </Badge>
                       </div>
 
-                      <p className="text-sm text-gray-600 mb-3">
+                      <p className="text-sm text-muted-foreground mb-3">
                         {order.price.description}
                       </p>
 
                       <div className="flex items-center justify-between text-sm">
-                        <div className="flex items-center space-x-4 text-gray-500">
+                        <div className="flex items-center space-x-4 text-muted-foreground">
                           <div className="flex items-center">
                             <Calendar className="w-4 h-4 mr-1" />
                             {formatDate(order.createdAt)}
@@ -217,7 +217,7 @@ export default function DashboardOrdersPage() {
                             </div>
                           )}
                         </div>
-                        <div className="font-medium text-gray-900">
+                        <div className="font-medium text-foreground">
                           {formatCurrency(order.amount)}
                         </div>
                       </div>

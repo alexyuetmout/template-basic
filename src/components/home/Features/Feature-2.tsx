@@ -58,16 +58,16 @@ export function Features2() {
   ];
 
   return (
-    <div className="relative py-20 bg-gray-50 dark:bg-neutral-800">
+    <div className="relative py-20 bg-gray-50 dark:bg-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide text-primary bg-primary/10 dark:bg-primary/5 mb-6">
             {t("features2.badge")}
           </div>
-          <HeadingH2 className="text-neutral-900 dark:text-neutral-100 mb-4">
+          <HeadingH2 className="text-foreground dark:text-foreground mb-4">
             {t("features2.title")}
           </HeadingH2>
-          <p className="max-w-2xl mx-auto text-base text-neutral-600 dark:text-neutral-400">
+          <p className="max-w-2xl mx-auto text-base text-muted-foreground dark:text-muted-foreground">
             {t("features2.subtitle")}
           </p>
         </div>
@@ -86,17 +86,17 @@ export function Features2() {
                 className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
               >
                 <div className="group h-full">
-                  <div className="h-full flex flex-col bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-700 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                  <div className="h-full flex flex-col bg-background dark:bg-background rounded-2xl border border-border dark:border-border shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
                     <div className="p-6 flex-1">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/5 flex items-center justify-center flex-shrink-0">
                           <div className="w-6 h-6 rounded-lg bg-primary/20"></div>
                         </div>
-                        <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+                        <h3 className="text-lg font-semibold text-foreground dark:text-foreground">
                           {feature.title}
                         </h3>
                       </div>
-                      <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      <p className="text-sm text-muted-foreground dark:text-muted-foreground leading-relaxed">
                         {feature.description}
                       </p>
                     </div>

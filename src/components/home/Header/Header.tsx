@@ -54,10 +54,10 @@ export function Header() {
 
   const Logo = () => (
     <Link className="flex items-center gap-2" href={path("/")}>
-      <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
+      <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
         <span className="text-white font-bold text-sm">AI</span>
       </div>
-      <span className="text-xl font-bold tracking-tight text-neutral-900">
+      <span className="text-xl font-bold tracking-tight text-foreground">
         AIMaker
       </span>
     </Link>
@@ -74,10 +74,10 @@ export function Header() {
   }) => (
     <li className="h-full">
       <Link
-        className={`h-full px-4 flex items-center text-sm transition-colors hover:text-neutral-900 hover:bg-neutral-100 rounded-xl ${
+        className={`h-full px-4 flex items-center text-sm transition-colors hover:text-foreground hover:bg-muted rounded-xl ${
           isActive
-            ? "text-neutral-900 font-semibold"
-            : "text-neutral-500 font-medium"
+            ? "text-foreground font-semibold"
+            : "text-muted-foreground font-medium"
         }`}
         href={path(item.href)}
       >

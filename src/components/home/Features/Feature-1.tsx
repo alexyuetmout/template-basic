@@ -71,16 +71,16 @@ export function Features1() {
   ];
 
   return (
-    <div className="relative py-20 bg-white dark:bg-neutral-900" id="features">
+    <div className="relative py-20 bg-background dark:bg-background" id="features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide text-primary bg-primary/10 dark:text-primary dark:bg-primary/20">
             {t("features1.badge")}
           </div>
-          <HeadingH2 className="mt-6 text-neutral-900 dark:text-neutral-100">
+          <HeadingH2 className="mt-6 text-foreground dark:text-foreground">
             {t("features1.title")}
           </HeadingH2>
-          <p className="mt-4 max-w-2xl mx-auto text-base text-neutral-600 dark:text-neutral-400">
+          <p className="mt-4 max-w-2xl mx-auto text-base text-muted-foreground dark:text-muted-foreground">
             {t("features1.subtitle")}
           </p>
         </div>
@@ -89,15 +89,15 @@ export function Features1() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {features1.map((feature, index) => (
               <div key={index} className="h-full">
-                <Card className="h-full p-8 bg-white dark:bg-neutral-800 rounded-2xl border-0 shadow-sm">
+                <Card className="h-full p-8 bg-background dark:bg-card rounded-2xl border-0 shadow-sm">
                   <CardContent className="p-0">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-primary to-secondary">
                       {feature.icon}
                     </div>
-                    <h3 className="mt-6 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                    <h3 className="mt-6 text-xl font-semibold text-foreground dark:text-foreground">
                       {feature.title}
                     </h3>
-                    <p className="mt-2 text-neutral-600 dark:text-neutral-400">
+                    <p className="mt-2 text-muted-foreground dark:text-muted-foreground">
                       {feature.description}
                     </p>
                   </CardContent>

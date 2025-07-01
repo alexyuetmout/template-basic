@@ -52,25 +52,25 @@ export default function ForgotPasswordPage() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-neutral-900 px-4 relative">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-background px-4 relative">
         <AuthNavigation />
         <div className="w-full max-w-md">
-          <Card className="border-neutral-200 dark:border-neutral-700">
+          <Card className="border-border dark:border-border">
             <CardContent className="pt-6 text-center space-y-4">
               <div className="w-16 h-16 mx-auto bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center">
-                <Mail className="w-8 h-8 text-green-600 dark:text-green-400" />
+                <Mail className="w-8 h-8 text-chart-2 dark:text-chart-2" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
+                <h1 className="text-2xl font-bold text-foreground dark:text-foreground mb-2">
                   Check your email
                 </h1>
-                <p className="text-neutral-600 dark:text-neutral-400">
+                <p className="text-muted-foreground dark:text-muted-foreground">
                   We&apos;ve sent a password reset link to{" "}
                   <span className="font-medium">{form.getValues("email")}</span>
                 </p>
               </div>
               <div className="space-y-4">
-                <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground">
                   Didn&apos;t receive the email? Check your spam folder or try again.
                 </p>
                 <Button
@@ -95,21 +95,21 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-neutral-900 px-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-background px-4 relative">
       <AuthNavigation />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+          <h1 className="text-3xl font-bold text-foreground dark:text-foreground">
             Forgot Password?
           </h1>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-2">
+          <p className="text-muted-foreground dark:text-muted-foreground mt-2">
             Enter your email address and we&apos;ll send you a link to reset your password
           </p>
         </div>
 
-        <Card className="border-neutral-200 dark:border-neutral-700">
+        <Card className="border-border dark:border-border">
           <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-2xl text-center text-neutral-900 dark:text-neutral-100">
+            <CardTitle className="text-2xl text-center text-foreground dark:text-foreground">
               Reset Password
             </CardTitle>
           </CardHeader>
@@ -121,7 +121,7 @@ export default function ForgotPasswordPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Email</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-muted">Email</FormLabel>
                       <FormControl>
                         <Input
                           type="email"

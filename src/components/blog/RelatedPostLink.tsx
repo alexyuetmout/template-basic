@@ -36,10 +36,10 @@ export function RelatedPostLink({ post }: RelatedPostLinkProps) {
           />
         </div>
         <div className="flex-1 min-w-0">
-          <h4 className="font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+          <h4 className="font-medium text-foreground dark:text-foreground group-hover:text-primary dark:group-hover:text-primary transition-colors line-clamp-2">
             {post.title}
           </h4>
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1">
             {post.date}
           </p>
         </div>

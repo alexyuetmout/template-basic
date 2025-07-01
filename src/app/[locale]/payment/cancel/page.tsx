@@ -14,18 +14,18 @@ export default function PaymentCancelPage() {
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
           <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
-            <X className="w-8 h-8 text-red-600" />
+            <X className="w-8 h-8 text-destructive" />
           </div>
           <CardTitle className="text-2xl font-bold text-red-800">
             {t('cancel.title')}
           </CardTitle>
-          <CardDescription className="text-red-600">
+          <CardDescription className="text-destructive">
             {t('cancel.description')}
           </CardDescription>
         </CardHeader>
         
         <CardContent className="space-y-4">
-          <div className="text-center text-gray-600">
+          <div className="text-center text-muted-foreground">
             <p>{t('cancel.message')}</p>
             <p className="mt-2 text-sm">
               {t('cancel.support')}

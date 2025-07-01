@@ -36,7 +36,7 @@ const PasswordInput = ({
         type={show ? "text" : "password"}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+        className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
           error ? "border-red-300" : "border-gray-300"
         }`}
         placeholder={placeholder}
@@ -47,14 +47,14 @@ const PasswordInput = ({
         className="absolute inset-y-0 right-0 pr-3 flex items-center"
       >
         {show ? (
-          <EyeOff className="w-4 h-4 text-gray-400" />
+          <EyeOff className="w-4 h-4 text-muted-foreground" />
         ) : (
-          <Eye className="w-4 h-4 text-gray-400" />
+          <Eye className="w-4 h-4 text-muted-foreground" />
         )}
       </button>
     </div>
     {error && (
-      <p className="mt-1 text-sm text-red-600">{error}</p>
+      <p className="mt-1 text-sm text-destructive">{error}</p>
     )}
   </div>
 );
@@ -244,7 +244,7 @@ export default function SecurityPage() {
   // 如果还在检查密码状态，显示加载
   if (hasPassword === null) {
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-900">
+      <div className="min-h-screen bg-background dark:bg-background">
         <Header />
         <DashboardLayout>
           <div className="flex items-center justify-center py-12">
@@ -260,14 +260,14 @@ export default function SecurityPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-background dark:bg-background">
       <Header />
       
       <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{t('security.title')}</h1>
-            <p className="text-gray-600">{t('security.description')}</p>
+            <h1 className="text-2xl font-bold text-foreground">{t('security.title')}</h1>
+            <p className="text-muted-foreground">{t('security.description')}</p>
           </div>
 
           {/* 设置密码 / 修改密码 */}
@@ -318,9 +318,9 @@ export default function SecurityPage() {
                   />
 
                   {/* 密码强度提示 */}
-                  <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
+                  <div className="bg-primary/5 border border-blue-200 rounded-md p-3">
                     <div className="flex items-start">
-                      <AlertCircle className="w-4 h-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
+                      <AlertCircle className="w-4 h-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
                       <div className="text-sm text-blue-800">
                         <p className="font-medium mb-1">{t('security.requirements.title')}</p>
                         <ul className="list-disc list-inside space-y-1 text-xs">
@@ -336,7 +336,7 @@ export default function SecurityPage() {
                     <div className={`p-3 rounded-md text-sm ${
                       message.includes("成功") 
                         ? "bg-green-50 text-green-700 border border-green-200" 
-                        : "bg-red-50 text-red-700 border border-red-200"
+                        : "bg-destructive/5 text-red-700 border border-destructive/30"
                     }`}>
                       {message}
                     </div>
@@ -394,9 +394,9 @@ export default function SecurityPage() {
                   />
 
                   {/* 密码强度提示 */}
-                  <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
+                  <div className="bg-primary/5 border border-blue-200 rounded-md p-3">
                     <div className="flex items-start">
-                      <AlertCircle className="w-4 h-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
+                      <AlertCircle className="w-4 h-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
                       <div className="text-sm text-blue-800">
                         <p className="font-medium mb-1">{t('security.requirements.title')}</p>
                         <ul className="list-disc list-inside space-y-1 text-xs">
@@ -412,7 +412,7 @@ export default function SecurityPage() {
                     <div className={`p-3 rounded-md text-sm ${
                       setPasswordMessage.includes("成功") 
                         ? "bg-green-50 text-green-700 border border-green-200" 
-                        : "bg-red-50 text-red-700 border border-red-200"
+                        : "bg-destructive/5 text-red-700 border border-destructive/30"
                     }`}>
                       {setPasswordMessage}
                     </div>
@@ -455,8 +455,8 @@ export default function SecurityPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-2 border-b border-gray-100">
                   <div>
-                    <span className="text-sm font-medium text-gray-900">{t('security.emailVerification')}</span>
-                    <p className="text-xs text-gray-500">{t('security.emailVerificationDesc')}</p>
+                    <span className="text-sm font-medium text-foreground">{t('security.emailVerification')}</span>
+                    <p className="text-xs text-muted-foreground">{t('security.emailVerificationDesc')}</p>
                   </div>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                     {t('security.verified')}
@@ -465,8 +465,8 @@ export default function SecurityPage() {
                 
                 <div className="flex items-center justify-between py-2 border-b border-gray-100">
                   <div>
-                    <span className="text-sm font-medium text-gray-900">{t('security.passwordStrength')}</span>
-                    <p className="text-xs text-gray-500">{t('security.passwordStrengthDesc')}</p>
+                    <span className="text-sm font-medium text-foreground">{t('security.passwordStrength')}</span>
+                    <p className="text-xs text-muted-foreground">{t('security.passwordStrengthDesc')}</p>
                   </div>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                     {t('security.medium')}
@@ -475,8 +475,8 @@ export default function SecurityPage() {
                 
                 <div className="flex items-center justify-between py-2">
                   <div>
-                    <span className="text-sm font-medium text-gray-900">{t('security.loginProtection')}</span>
-                    <p className="text-xs text-gray-500">{t('security.loginProtectionDesc')}</p>
+                    <span className="text-sm font-medium text-foreground">{t('security.loginProtection')}</span>
+                    <p className="text-xs text-muted-foreground">{t('security.loginProtectionDesc')}</p>
                   </div>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                     {t('security.enabled')}

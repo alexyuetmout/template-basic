@@ -27,7 +27,7 @@ export function NewsletterSection() {
         <h2 className="text-3xl font-bold text-white mb-4">
           Thank You for Subscribing!
         </h2>
-        <p className="text-green-100">
+        <p className="text-chart-2/80">
           You&apos;ll receive the latest AI development insights in your inbox soon.
         </p>
       </div>
@@ -49,12 +49,12 @@ export function NewsletterSection() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           required
-          className="flex-1 border-0 focus:ring-2 focus:ring-white/20 bg-white/10 backdrop-blur text-white placeholder-white/70"
+          className="flex-1 border-0 focus:ring-2 focus:ring-white/20 bg-background/10 backdrop-blur text-white placeholder-white/70"
         />
         <Button 
           type="submit"
           disabled={isSubmitting}
-          className="bg-white text-blue-600 font-semibold hover:bg-blue-50 disabled:opacity-50"
+          className="bg-background text-primary font-semibold hover:bg-primary/5 disabled:opacity-50"
         >
           {isSubmitting ? 'Subscribing...' : 'Subscribe'}
         </Button>

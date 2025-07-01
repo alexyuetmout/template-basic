@@ -2,7 +2,7 @@
 export const i18nConfig = {
   locales: ['en', 'zh', 'ja'] as const,
   defaultLocale: 'en' as const,
-  namespaces: ['common', 'auth', 'home', 'dashboard', 'pricing'] as const,
+  namespaces: ['common', 'auth', 'home', 'dashboard', 'pricing', 'payment'] as const,
   prefixDefault: false
 } as const
 

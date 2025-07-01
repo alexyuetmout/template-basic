@@ -100,21 +100,21 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-neutral-900 px-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-background px-4 relative">
       <AuthNavigation />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+          <h1 className="text-3xl font-bold text-foreground dark:text-foreground">
             {t('signUp.createAccount')}
           </h1>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-2">
+          <p className="text-muted-foreground dark:text-muted-foreground mt-2">
             {t('signUp.signUpDescription')}
           </p>
         </div>
 
-        <Card className="border-neutral-200 dark:border-neutral-700">
+        <Card className="border-border dark:border-border">
           <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-2xl text-center text-neutral-900 dark:text-neutral-100">
+            <CardTitle className="text-2xl text-center text-foreground dark:text-foreground">
               {t('signUp.title')}
             </CardTitle>
           </CardHeader>
@@ -122,7 +122,7 @@ export default function SignUpPage() {
             {/* Google注册按钮 */}
             <Button
               variant="outline"
-              className="w-full h-12 border-neutral-300 dark:border-neutral-600"
+              className="w-full h-12 border-border dark:border-neutral-600"
               onClick={handleGoogleSignUp}
               disabled={isLoading}
             >
@@ -135,7 +135,7 @@ export default function SignUpPage() {
 
             {/* 错误信息显示 */}
             {error && (
-              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
+              <div className="bg-destructive/5 dark:bg-destructive/10/20 border border-destructive/30 dark:border-destructive/30 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
                 {error}
               </div>
             )}
@@ -148,7 +148,7 @@ export default function SignUpPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('email')}</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-muted">{t('email')}</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
@@ -166,7 +166,7 @@ export default function SignUpPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('password')}</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-muted">{t('password')}</FormLabel>
                       <FormControl>
                         <PasswordInput
                           placeholder={t('signUp.passwordPlaceholder')}
@@ -183,7 +183,7 @@ export default function SignUpPage() {
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('confirmPassword')}</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-muted">{t('confirmPassword')}</FormLabel>
                       <FormControl>
                         <PasswordInput
                           placeholder={t('signUp.confirmPasswordPlaceholder')}
@@ -209,13 +209,13 @@ export default function SignUpPage() {
                           />
                         </FormControl>
                         <div className="text-sm">
-                          <label className="text-neutral-600 dark:text-neutral-400 cursor-pointer">
+                          <label className="text-muted-foreground dark:text-muted-foreground cursor-pointer">
                             {t('signUp.agreeToTerms')}{" "}
-                            <Link href={routes.TERMS} className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
+                            <Link href={routes.TERMS} className="text-primary dark:text-primary hover:text-primary dark:hover:text-blue-300 underline">
                               {t('signUp.termsOfService')}
                             </Link>{" "}
                             {t('signUp.and')}{" "}
-                            <Link href={routes.PRIVACY} className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
+                            <Link href={routes.PRIVACY} className="text-primary dark:text-primary hover:text-primary dark:hover:text-blue-300 underline">
                               {t('signUp.privacyPolicy')}
                             </Link>
                           </label>
@@ -237,7 +237,7 @@ export default function SignUpPage() {
             </Form>
 
             <div className="text-center">
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              <p className="text-sm text-muted-foreground dark:text-muted-foreground">
                 {t('alreadyHaveAccount')}{" "}
                 <Link
                   href={routes.SIGN_IN}

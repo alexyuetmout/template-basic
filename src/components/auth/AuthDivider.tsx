@@ -11,7 +11,7 @@ export function AuthDivider({ text = "Or continue with" }: AuthDividerProps) {
         <Separator />
       </div>
       <div className="relative flex justify-center text-xs uppercase">
-        <span className="bg-white dark:bg-neutral-900 px-2 text-neutral-500 dark:text-neutral-400">
+        <span className="bg-background dark:bg-background px-2 text-muted-foreground dark:text-muted-foreground">
           {text}
         </span>
       </div>

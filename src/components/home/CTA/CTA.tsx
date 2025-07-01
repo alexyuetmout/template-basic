@@ -12,7 +12,7 @@ export function CTA() {
   const { routes } = usePath();
 
   return (
-    <section className="overflow-hidden bg-white dark:bg-neutral-900">
+    <section className="overflow-hidden bg-background dark:bg-background">
       <div className="container mx-auto px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col items-center gap-12 text-center">
           <div className="max-w-3xl">
@@ -23,7 +23,7 @@ export function CTA() {
               </span>{" "}
               {t("cta.title.end")}
             </HeadingH2>
-            <p className="mb-8 text-xl text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+            <p className="mb-8 text-xl text-muted-foreground dark:text-muted max-w-2xl mx-auto">
               {t("cta.subtitle")}
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -35,7 +35,7 @@ export function CTA() {
               <Link href={routes.PRICING}>
                 <Button
                   variant="outline"
-                  className="h-14 rounded-xl px-8 text-lg font-medium border-2 hover:bg-gray-50 dark:hover:bg-neutral-800 transition-all duration-300"
+                  className="h-14 rounded-xl px-8 text-lg font-medium border-2 hover:bg-gray-50 dark:hover:bg-card transition-all duration-300"
                 >
                   {t("cta.buttons.viewPlans")}
                 </Button>
