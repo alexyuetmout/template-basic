@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { apiSuccess, apiError } from "@/lib/api-response";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { db } from "@/lib/db";
@@ -32,7 +33,7 @@ export async function GET() {
     });
 
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
     // 查找用户的通知设置
@@ -41,22 +42,19 @@ export async function GET() {
     });
 
     if (!userSettings || !userSettings.notificationSettings) {
-      return NextResponse.json(defaultSettings);
+      return apiSuccess(defaultSettings);
     }
 
     // 解析通知设置，如果格式不正确则返回默认设置
     try {
       const settings = JSON.parse(userSettings.notificationSettings as string);
-      return NextResponse.json({ ...defaultSettings, ...settings });
+      return apiSuccess({ ...defaultSettings, ...settings });
     } catch {
-      return NextResponse.json(defaultSettings);
+      return apiSuccess(defaultSettings);
     }
   } catch (error) {
     console.error("Error fetching notification settings:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return apiError("Internal server error", 500);
   }
 }
 
@@ -67,7 +65,7 @@ export async function PUT(req: NextRequest) {
     });
 
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
     const body = await req.json();
@@ -97,15 +95,12 @@ export async function PUT(req: NextRequest) {
       },
     });
 
-    return NextResponse.json({ 
+    return apiSuccess({ 
       message: "Notification settings updated successfully",
       settings: { ...defaultSettings, ...settings }
     });
   } catch (error) {
     console.error("Error updating notification settings:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return apiError("Internal server error", 500);
   }
 }

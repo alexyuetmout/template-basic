@@ -1,6 +1,6 @@
 {
-  "title": "料金プラン",
-  "subtitle": "学習プランを選択",
+  "badge": "料金プラン",
+  "title": "学習プランを選択",
   "description": "完璧なプランでAI開発の旅を始めましょう",
   "loading": "料金プランを読み込み中...",
   "getStarted": "開始する",

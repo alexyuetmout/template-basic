@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useApiClient } from "@/lib/api-client";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
@@ -76,6 +77,7 @@ const getTransactionTypeConfig = (t: any) => ({
 
 export default function PointsPage() {
   const { t } = useTranslation("dashboard");
+  const { apiGet } = useApiClient();
   const [transactions, setTransactions] = useState<PointTransaction[]>([]);
   const [balance, setBalance] = useState<PointsBalance>({
     totalPoints: 0,
@@ -84,31 +86,25 @@ export default function PointsPage() {
   });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchPointsData();
-  }, []);
-
-  const fetchPointsData = async () => {
+  const fetchPointsData = useCallback(async () => {
     try {
       // 获取积分余额
-      const balanceResponse = await fetch("/api/points/balance");
-      if (balanceResponse.ok) {
-        const balanceData = await balanceResponse.json();
-        setBalance(balanceData);
-      }
+      const balanceData = await apiGet("/api/points/balance");
+      setBalance(balanceData);
 
       // 获取积分交易记录
-      const transactionsResponse = await fetch("/api/points/transactions");
-      if (transactionsResponse.ok) {
-        const transactionsData = await transactionsResponse.json();
-        setTransactions(transactionsData);
-      }
+      const transactionsData = await apiGet("/api/points/transactions");
+      setTransactions(transactionsData);
     } catch (error) {
       console.error("Error fetching points data:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiGet]);
+
+  useEffect(() => {
+    fetchPointsData();
+  }, [fetchPointsData]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString(undefined, {

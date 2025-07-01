@@ -5,6 +5,7 @@ import { PaymentButton } from "./PaymentButton";
 import { PRICE_INTERVAL } from "@/lib/constants/enums";
 import { useTranslation } from "@/hooks/useTranslation";
 import { HeadingH1 } from "@/components/ui/headings";
+import { useApiClient } from "@/lib/api-client";
 
 interface PriceData {
   id: string;
@@ -85,6 +86,7 @@ interface PricingPlansProps {
 
 export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
   const { t } = useTranslation("pricing");
+  const { apiGet } = useApiClient();
   const pricingModeConfig = getPricingModeConfig(t);
   const cardContent = getCardContent(t);
 
@@ -101,8 +103,7 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
       const fetchPrices = async () => {
         setLoading(true);
         try {
-          const response = await fetch("/api/prices");
-          const data = await response.json();
+          const data = await apiGet("/api/prices");
           setPriceData(data);
         } catch (error) {
           console.error("Error fetching prices:", error);
@@ -113,7 +114,7 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
 
       fetchPrices();
     }
-  }, [initialPrices.length]);
+  }, [initialPrices.length, apiGet]);
 
   // 根据定价模式筛选和组合数据
   useEffect(() => {
@@ -205,14 +206,12 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-            {t("title")}
+            {t("badge")}
           </div>
           <HeadingH1 className=" text-3xl md:text-4xl text-foreground mb-2">
-            {t("subtitle")}
+            {t("title")}
           </HeadingH1>
-          <p className="text-base text-secondary-foreground">
-            {t("description")}
-          </p>
+          <p className="text-base ">{t("description")}</p>
         </div>
 
         {/* Pricing Mode Selector */}
@@ -343,7 +342,9 @@ export function PricingPlans({ initialPrices = [] }: PricingPlansProps) {
         {/* No Data Message */}
         {plans.length === 0 && !loading && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">{t("noPricingPlans")}</p>
+            <p className="text-muted-foreground text-lg">
+              {t("noPricingPlans")}
+            </p>
           </div>
         )}
       </div>

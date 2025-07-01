@@ -47,21 +47,31 @@ export function FAQ() {
             >
               <AccordionTrigger className="text-left hover:no-underline py-0 text-lg font-semibold text-foreground dark:text-white [&>svg:last-child]:hidden [&[data-state=open]>.plus-icon]:hidden [&[data-state=open]>.chevron-icon]:block">
                 <span className="flex-1">{faq.question}</span>
-                <svg 
-                  className="plus-icon w-5 h-5 text-primary dark:text-primary flex-shrink-0" 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="plus-icon w-5 h-5 text-primary dark:text-primary flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
                 </svg>
-                <svg 
-                  className="chevron-icon w-5 h-5 text-primary dark:text-primary flex-shrink-0 hidden" 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="chevron-icon w-5 h-5 text-primary dark:text-primary flex-shrink-0 hidden"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </AccordionTrigger>
               <AccordionContent className="pt-4 pb-0">

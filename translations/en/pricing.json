@@ -1,6 +1,6 @@
 {
-  "title": "Pricing Plans",
-  "subtitle": "Choose Your Learning Plan",
+  "badge": "Pricing Plans",
+  "title": "Choose Your Learning Plan",
   "description": "Start your AI development journey with the perfect plan for you",
   "loading": "Loading pricing plans...",
   "getStarted": "Get Started",

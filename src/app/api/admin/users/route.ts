@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { apiSuccess, apiError } from "@/lib/api-response"
 import { requireAdmin } from "@/lib/auth-middleware"
 import { db } from "@/lib/db"
 
@@ -25,5 +26,5 @@ export async function GET(request: NextRequest) {
     }
   })
 
-  return NextResponse.json(users)
+  return apiSuccess(users)
 }

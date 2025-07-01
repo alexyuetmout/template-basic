@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { apiSuccess, apiError } from "@/lib/api-response";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { stripe } from "@/lib/stripe";
@@ -8,10 +9,7 @@ export async function POST(req: NextRequest) {
   try {
     // 检查 Stripe 是否配置
     if (!stripe) {
-      return NextResponse.json(
-        { error: "Payment service not configured" },
-        { status: 503 }
-      );
+      return apiError("Payment service not configured", 500);
     }
 
     const session = await auth.api.getSession({
@@ -19,17 +17,14 @@ export async function POST(req: NextRequest) {
     });
 
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
     const body = await req.json();
     const { priceId, successUrl, cancelUrl, trialDays } = body;
 
     if (!priceId) {
-      return NextResponse.json(
-        { error: "Price ID is required" },
-        { status: 400 }
-      );
+      return apiError("Price ID is required", 400);
     }
 
     // 获取价格信息
@@ -38,10 +33,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!price) {
-      return NextResponse.json(
-        { error: "Price not found" },
-        { status: 404 }
-      );
+      return apiError("Price not found", 404);
     }
 
     // 获取用户信息
@@ -50,10 +42,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
+      return apiError("User not found", 404);
     }
 
     // 确保用户有 Stripe 客户 ID
@@ -107,16 +96,13 @@ export async function POST(req: NextRequest) {
       allow_promotion_codes: true, // 允许使用促销码
     });
 
-    return NextResponse.json({
+    return apiSuccess({
       sessionId: checkoutSession.id,
       url: checkoutSession.url,
     });
   } catch (error) {
     console.error("Error creating subscription session:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return apiError("Internal server error", 500);
   }
 }
 
@@ -128,7 +114,7 @@ export async function GET() {
     });
 
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
     const subscriptions = await db.subscription.findMany({
@@ -141,12 +127,9 @@ export async function GET() {
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json(subscriptions);
+    return apiSuccess(subscriptions);
   } catch (error) {
     console.error("Error fetching subscriptions:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return apiError("Internal server error", 500);
   }
 }

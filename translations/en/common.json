@@ -23,5 +23,10 @@
   },
   "payment": {
     "checkoutError": "Failed to start checkout. Please try again."
+  },
+  "error": {
+    "serviceError": "Service error, please try again later",
+    "unauthorized": "Please login to continue",
+    "notFound": "Resource not found"
   }
 }

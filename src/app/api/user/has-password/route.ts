@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { apiSuccess, apiError } from "@/lib/api-response";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { db } from "@/lib/db";
@@ -10,7 +10,7 @@ export async function GET() {
     });
 
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
     // 查询用户的账户信息，检查是否有 credential 类型的账户（邮箱密码登录）
@@ -24,14 +24,11 @@ export async function GET() {
     // 如果有 credential 账户且有密码字段，则用户有密码
     const hasPassword = userAccount && userAccount.password;
 
-    return NextResponse.json({ 
+    return apiSuccess({ 
       hasPassword: !!hasPassword 
     });
   } catch (error) {
     console.error("Error checking user password status:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return apiError("Internal server error", 500);
   }
 }

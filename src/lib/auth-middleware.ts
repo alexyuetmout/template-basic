@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
+import { apiError } from "@/lib/api-response"
 import { NextResponse } from "next/server"
 
 export async function requireAuth() {
@@ -8,7 +9,7 @@ export async function requireAuth() {
   })
 
   if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    return apiError("Unauthorized", 401)
   }
 
   return { session, user: session.user }
@@ -17,14 +18,14 @@ export async function requireAuth() {
 export async function requireAdmin() {
   const authResult = await requireAuth()
   
-  if (authResult instanceof NextResponse) {
+  if (authResult && typeof (authResult as any).status === 'number') {
     return authResult // Return the error response
   }
 
-  const { user } = authResult
+  const { user } = authResult as { session: any; user: any }
   
-  if (!(user as any).isAdmin) {
-    return NextResponse.json({ error: "Forbidden - Admin access required" }, { status: 403 })
+  if (!user.isAdmin) {
+    return apiError("Forbidden - Admin access required", 403)
   }
 
   return authResult

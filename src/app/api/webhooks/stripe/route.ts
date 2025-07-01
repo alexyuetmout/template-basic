@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { apiSuccess, apiError } from "@/lib/api-response";
 import { stripe } from "@/lib/stripe";
 import { OrderService } from "@/lib/services/orders";
 import { SubscriptionService } from "@/lib/services/subscriptions";
@@ -68,20 +69,14 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
 export async function POST(req: NextRequest) {
   // 检查 Stripe 是否配置
   if (!stripe) {
-    return NextResponse.json(
-      { error: "Payment service not configured" },
-      { status: 503 }
-    );
+    return apiError("Payment service not configured", 503);
   }
 
   const body = await req.text();
   const signature = (await headers()).get("stripe-signature");
 
   if (!signature) {
-    return NextResponse.json(
-      { error: "Missing stripe-signature header" },
-      { status: 400 }
-    );
+    return apiError("Missing stripe-signature header", 400);
   }
 
   let event: Stripe.Event;
@@ -94,10 +89,7 @@ export async function POST(req: NextRequest) {
     );
   } catch (err) {
     console.error("Webhook signature verification failed:", err);
-    return NextResponse.json(
-      { error: "Invalid signature" },
-      { status: 400 }
-    );
+    return apiError("Invalid signature", 400);
   }
 
   try {
@@ -190,12 +182,9 @@ export async function POST(req: NextRequest) {
         console.log(`Unhandled event type: ${event.type}`);
     }
 
-    return NextResponse.json({ received: true });
+    return apiSuccess({ received: true });
   } catch (error) {
     console.error("Error processing webhook:", error);
-    return NextResponse.json(
-      { error: "Webhook processing failed" },
-      { status: 500 }
-    );
+    return apiError("Webhook processing failed", 500);
   }
 }

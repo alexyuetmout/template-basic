@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { apiSuccess, apiError } from "@/lib/api-response";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
@@ -8,25 +9,16 @@ export async function POST(req: NextRequest) {
     const { currentPassword, newPassword } = body;
 
     if (!currentPassword || !newPassword) {
-      return NextResponse.json(
-        { error: "Current password and new password are required" },
-        { status: 400 }
-      );
+      return apiError("Current password and new password are required", 400);
     }
 
     // 验证新密码强度
     if (newPassword.length < 8) {
-      return NextResponse.json(
-        { error: "New password must be at least 8 characters long" },
-        { status: 400 }
-      );
+      return apiError("New password must be at least 8 characters long", 400);
     }
 
     if (!/[A-Z]/.test(newPassword) || !/[a-z]/.test(newPassword) || !/\d/.test(newPassword)) {
-      return NextResponse.json(
-        { error: "New password must contain uppercase, lowercase and numeric characters" },
-        { status: 400 }
-      );
+      return apiError("New password must contain uppercase, lowercase and numeric characters", 400);
     }
 
     // 使用 Better Auth 的内置 changePassword API
@@ -40,18 +32,12 @@ export async function POST(req: NextRequest) {
         headers: await headers(),
       });
 
-      return NextResponse.json({ message: "Password updated successfully" });
+      return apiSuccess({ message: "Password updated successfully" });
     } catch (authError: any) {
-      return NextResponse.json(
-        { error: authError.message || "Failed to change password" },
-        { status: 400 }
-      );
+      return apiError(authError.message || "Failed to change password", 400);
     }
   } catch (error) {
     console.error("Error changing password:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return apiError("Internal server error", 500);
   }
 }

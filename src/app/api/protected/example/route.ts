@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { apiSuccess } from "@/lib/api-response"
 import { requireAuth } from "@/lib/auth-middleware"
 
 export async function GET(request: NextRequest) {
@@ -11,7 +12,7 @@ export async function GET(request: NextRequest) {
 
   const { user } = authResult
 
-  return NextResponse.json({
+  return apiSuccess({
     message: "This is a protected endpoint",
     user: {
       id: user.id,
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json()
 
   // Your protected logic here
-  return NextResponse.json({
+  return apiSuccess({
     message: "Data processed successfully",
     userId: user.id,
     data: body,

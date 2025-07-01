@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { usePath } from "@/hooks/usePath";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useApiClient } from "@/lib/api-client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -71,28 +72,26 @@ const getStatusConfig = (t: any) => ({
 export default function SubscriptionsPage() {
   const { routes } = usePath();
   const { t } = useTranslation('dashboard');
+  const { apiGet, apiPost } = useApiClient();
   const statusConfig = getStatusConfig(t);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
   const [cancelingId, setCancelingId] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchSubscriptions();
-  }, []);
-
-  const fetchSubscriptions = async () => {
+  const fetchSubscriptions = useCallback(async () => {
     try {
-      const response = await fetch("/api/checkout/subscription");
-      if (response.ok) {
-        const data = await response.json();
-        setSubscriptions(data);
-      }
+      const data = await apiGet("/api/checkout/subscription");
+      setSubscriptions(data);
     } catch (error) {
       console.error("Error fetching subscriptions:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiGet]);
+
+  useEffect(() => {
+    fetchSubscriptions();
+  }, [fetchSubscriptions]);
 
   const handleCancelSubscription = async (subscriptionId: string) => {
     if (!confirm(t('subscriptions.confirmCancel'))) {
@@ -102,24 +101,11 @@ export default function SubscriptionsPage() {
     setCancelingId(subscriptionId);
     
     try {
-      const response = await fetch("/api/subscriptions/cancel", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ subscriptionId }),
-      });
-
-      if (response.ok) {
-        // 刷新订阅列表
-        await fetchSubscriptions();
-        alert(t('subscriptions.cancelSuccess'));
-      } else {
-        const errorData = await response.json();
-        alert(errorData.error || t('subscriptions.cancelFailed'));
-      }
+      await apiPost("/api/subscriptions/cancel", { subscriptionId });
+      // 刷新订阅列表
+      await fetchSubscriptions();
     } catch (error) {
-      alert(t('subscriptions.cancelFailed'));
+      console.error("Error cancelling subscription:", error);
     } finally {
       setCancelingId(null);
     }

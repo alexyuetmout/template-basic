@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { apiSuccess, apiError } from "@/lib/api-response";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { PointsService } from "@/lib/services/points";
@@ -10,7 +11,7 @@ export async function GET(req: NextRequest) {
     });
 
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
     const { searchParams } = new URL(req.url);
@@ -23,12 +24,9 @@ export async function GET(req: NextRequest) {
       offset
     );
 
-    return NextResponse.json(transactions);
+    return apiSuccess(transactions);
   } catch (error) {
     console.error("Error fetching point transactions:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return apiError("Internal server error", 500);
   }
 }

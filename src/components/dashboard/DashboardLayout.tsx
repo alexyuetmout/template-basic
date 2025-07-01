@@ -3,14 +3,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { 
-  User, 
-  ShoppingBag, 
-  Coins, 
+import {
+  User,
+  ShoppingBag,
+  Coins,
   CreditCard,
   Settings,
   Shield,
-  Loader2
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSession } from "@/lib/auth-client";
@@ -23,34 +23,34 @@ interface DashboardLayoutProps {
 
 const createMenuItems = (t: any, routes: any) => [
   {
-    title: t('dashboard.navigation.dashboard'),
+    title: t("dashboard.navigation.dashboard"),
     href: routes.DASHBOARD,
     icon: User,
-    description: t('dashboard.navigation.dashboardDesc')
+    description: t("dashboard.navigation.dashboardDesc"),
   },
   {
-    title: t('dashboard.navigation.security'),
+    title: t("dashboard.navigation.security"),
     href: routes.DASHBOARD_SECURITY,
     icon: Shield,
-    description: t('dashboard.navigation.securityDesc')
+    description: t("dashboard.navigation.securityDesc"),
   },
   {
-    title: t('dashboard.navigation.orders'),
+    title: t("dashboard.navigation.orders"),
     href: routes.DASHBOARD_ORDERS,
     icon: ShoppingBag,
-    description: t('dashboard.navigation.ordersDesc')
+    description: t("dashboard.navigation.ordersDesc"),
   },
   {
-    title: t('dashboard.navigation.points'),
+    title: t("dashboard.navigation.points"),
     href: routes.DASHBOARD_POINTS,
     icon: Coins,
-    description: t('dashboard.navigation.pointsDesc')
+    description: t("dashboard.navigation.pointsDesc"),
   },
   {
-    title: t('dashboard.navigation.subscriptions'),
+    title: t("dashboard.navigation.subscriptions"),
     href: routes.DASHBOARD_SUBSCRIPTIONS,
     icon: CreditCard,
-    description: t('dashboard.navigation.subscriptionsDesc')
+    description: t("dashboard.navigation.subscriptionsDesc"),
   },
 ];
 
@@ -61,7 +61,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const { t } = useTranslation();
   const { routes } = usePath();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
+
   const menuItems = createMenuItems(t, routes);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="flex items-center space-x-2">
           <Loader2 className="w-6 h-6 animate-spin" />
-          <span>{t('common.loading')}</span>
+          <span>{t("common.loading")}</span>
         </div>
       </div>
     );
@@ -97,27 +97,29 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             <div className="lg:col-span-1 bg-gray-50 rounded-l-lg">
               <div className="p-6">
                 <h2 className="text-lg font-semibold text-foreground mb-6">
-                  {t('dashboard.title')}
+                  {t("dashboard.title")}
                 </h2>
-                
+
                 {/* Mobile menu button */}
                 <button
                   className="lg:hidden w-full mb-4 p-2 text-left text-muted-foreground hover:text-foreground border rounded-md"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                   <Settings className="w-4 h-4 inline mr-2" />
-                  {t('dashboard.menu')}
+                  {t("dashboard.menu")}
                 </button>
 
                 {/* Menu list */}
-                <nav className={cn(
-                  "space-y-1",
-                  isMobileMenuOpen ? "block" : "hidden lg:block"
-                )}>
+                <nav
+                  className={cn(
+                    "space-y-1",
+                    isMobileMenuOpen ? "block" : "hidden lg:block"
+                  )}
+                >
                   {menuItems.map((item) => {
                     const Icon = item.icon;
                     const isActive = pathname === item.href;
-                    
+
                     return (
                       <Link
                         key={item.href}
@@ -130,10 +132,12 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        <Icon className={cn(
-                          "w-5 h-5 mr-3 flex-shrink-0 mt-0.5",
-                          isActive ? "text-primary" : "text-muted-foreground"
-                        )} />
+                        <Icon
+                          className={cn(
+                            "w-5 h-5 mr-3 flex-shrink-0 mt-0.5",
+                            isActive ? "text-primary" : "text-muted-foreground"
+                          )}
+                        />
                         <div>
                           <div className="font-medium">{item.title}</div>
                           <div className="text-xs text-muted-foreground mt-1">
@@ -149,9 +153,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
             {/* Main content area */}
             <div className="lg:col-span-3">
-              <div className="p-6 lg:p-8">
-                {children}
-              </div>
+              <div className="p-6 lg:p-8">{children}</div>
             </div>
           </div>
         </div>

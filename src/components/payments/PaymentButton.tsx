@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Button, type ButtonProps } from "@/components/ui/button";
+import { useApiClient } from "@/lib/api-client";
 
-interface PaymentButtonProps extends Omit<ButtonProps, 'onClick' | 'disabled' | 'type'> {
+interface PaymentButtonProps
+  extends Omit<ButtonProps, "onClick" | "disabled" | "type"> {
   priceId: string;
   type: "payment" | "subscription";
   children: React.ReactNode;
@@ -27,6 +29,7 @@ export function PaymentButton({
   ...props
 }: PaymentButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const { apiPost } = useApiClient();
 
   const handleClick = async () => {
     if (!priceId) {
@@ -37,9 +40,10 @@ export function PaymentButton({
     setIsLoading(true);
 
     try {
-      const endpoint = type === "payment" 
-        ? "/api/checkout/payment" 
-        : "/api/checkout/subscription";
+      const endpoint =
+        type === "payment"
+          ? "/api/checkout/payment"
+          : "/api/checkout/subscription";
 
       const body: any = {
         priceId,
@@ -52,25 +56,15 @@ export function PaymentButton({
         body.trialDays = trialDays;
       }
 
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to create checkout session");
+      const data = await apiPost(endpoint, body);
+      
+      // 成功，重定向到 Stripe Checkout
+      if (data?.url) {
+        window.location.href = data.url;
       }
-
-      // 重定向到 Stripe Checkout
-      window.location.href = data.url;
     } catch (error) {
       console.error("Error creating checkout session:", error);
-      alert("Failed to start checkout. Please try again.");
+      // 错误已经在 apiClient 中处理并显示 toast
     } finally {
       setIsLoading(false);
     }

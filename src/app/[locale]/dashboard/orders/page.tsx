@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useApiClient } from "@/lib/api-client";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
@@ -31,6 +32,7 @@ const getStatusConfig = (t: any) => ({
 
 export default function DashboardOrdersPage() {
   const { t } = useTranslation();
+  const { apiGet } = useApiClient();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
@@ -41,35 +43,32 @@ export default function DashboardOrdersPage() {
 
   const statusConfig = getStatusConfig(t);
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     try {
-      const response = await fetch("/api/orders");
-      if (response.ok) {
-        const data = await response.json();
-        setOrders(data);
-        
-        // Calculate statistics
-        const stats = data.reduce((acc: any, order: Order) => {
-          acc.totalOrders += 1;
-          if (order.status === "SUCCEEDED") {
-            acc.totalSpent += order.amount;
-            acc.totalPoints += order.pointsAdded;
-          }
-          return acc;
-        }, { totalOrders: 0, totalSpent: 0, totalPoints: 0 });
-        
-        setStats(stats);
-      }
+      const data = await apiGet("/api/orders");
+      setOrders(data);
+      
+      // Calculate statistics
+      const stats = data.reduce((acc: any, order: Order) => {
+        acc.totalOrders += 1;
+        if (order.status === "SUCCEEDED") {
+          acc.totalSpent += order.amount;
+          acc.totalPoints += order.pointsAdded;
+        }
+        return acc;
+      }, { totalOrders: 0, totalSpent: 0, totalPoints: 0 });
+      
+      setStats(stats);
     } catch (error) {
       console.error("Error fetching orders:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiGet]);
+
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {

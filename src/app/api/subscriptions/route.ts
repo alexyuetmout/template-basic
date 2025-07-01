@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { apiSuccess, apiError } from "@/lib/api-response";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { SubscriptionService } from "@/lib/services/subscriptions";
@@ -10,19 +10,16 @@ export async function GET() {
     });
 
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
     const subscriptions = await SubscriptionService.getUserActiveSubscriptions(
       (session.user as any).id
     );
 
-    return NextResponse.json(subscriptions);
+    return apiSuccess(subscriptions);
   } catch (error) {
     console.error("Error fetching subscriptions:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return apiError("Internal server error", 500);
   }
 }

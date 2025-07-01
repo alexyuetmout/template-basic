@@ -24,17 +24,27 @@ interface PricingPlan {
   ctaVariant?: "default" | "outline";
 }
 
-function PricingCard({ plan, planIndex }: { plan: PricingPlan; planIndex: number }) {
+function PricingCard({
+  plan,
+  planIndex,
+}: {
+  plan: PricingPlan;
+  planIndex: number;
+}) {
   const { t } = useTranslation("home");
   const path = usePath();
-  
+
   // 根据计划索引获取对应的路由
   const getCtaHref = (index: number): string => {
     switch (index) {
-      case 0: return PRICING_CTA_ROUTES.BASIC;      // Basic plan
-      case 1: return PRICING_CTA_ROUTES.COMPLETE;   // Complete Course plan  
-      case 2: return PRICING_CTA_ROUTES.ADVANCED;   // Advanced plan
-      default: return PRICING_CTA_ROUTES.BASIC;     // 默认回退到注册页面
+      case 0:
+        return PRICING_CTA_ROUTES.BASIC; // Basic plan
+      case 1:
+        return PRICING_CTA_ROUTES.COMPLETE; // Complete Course plan
+      case 2:
+        return PRICING_CTA_ROUTES.ADVANCED; // Advanced plan
+      default:
+        return PRICING_CTA_ROUTES.BASIC; // 默认回退到注册页面
     }
   };
 
@@ -107,9 +117,9 @@ function PricingCard({ plan, planIndex }: { plan: PricingPlan; planIndex: number
 }
 
 export function Pricing() {
-  const { t } = useTranslation("home");
+  const { t } = useTranslation("pricing");
 
-  const pricingPlans: PricingPlan[] = t("pricing.plans", {
+  const pricingPlans: PricingPlan[] = t("planConfigs", {
     returnObjects: true,
   }) as PricingPlan[];
 
@@ -134,13 +144,13 @@ export function Pricing() {
       <div className="container mx-auto px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide text-primary bg-primary/10 dark:bg-primary/5 mb-6">
-            {t("pricing.badge")}
+            {t("badge")}
           </div>
           <HeadingH1 className="mb-4 text-foreground dark:text-foreground">
-            {t("pricing.title")}
+            {t("title")}
           </HeadingH1>
-          <p className="text-lg text-muted-foreground dark:text-muted">
-            {t("pricing.subtitle")}
+          <p className="text-base text-muted-foreground dark:text-muted">
+            {t("description")}
           </p>
         </div>
 

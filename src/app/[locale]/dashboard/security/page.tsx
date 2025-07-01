@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Shield, Key, Eye, EyeOff, Loader2, AlertCircle, Plus } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useApiClient } from "@/lib/api-client";
 
 const PasswordInput = ({ 
   label, 
@@ -62,6 +63,7 @@ const PasswordInput = ({
 export default function SecurityPage() {
   const { data: session } = useSession();
   const { t } = useTranslation('dashboard');
+  const { apiGet, apiPost } = useApiClient();
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -82,15 +84,8 @@ export default function SecurityPage() {
       if (!session?.user) return;
       
       try {
-        const response = await fetch('/api/user/has-password');
-        if (response.ok) {
-          const data = await response.json();
-          setHasPassword(data.hasPassword);
-        } else {
-          // 如果 API 不存在，fallback 到检查 accounts
-          // 邮箱注册的用户通常有 credential account
-          setHasPassword(true); // 默认假设有密码，因为用户已经登录了
-        }
+        const data = await apiGet('/api/user/has-password');
+        setHasPassword(data.hasPassword);
       } catch (error) {
         console.error('Error checking password status:', error);
         // 出错时默认显示修改密码界面
@@ -99,7 +94,7 @@ export default function SecurityPage() {
     };
 
     checkUserPassword();
-  }, [session]);
+  }, [session, apiGet]);
 
   const validatePassword = (password: string) => {
     const errors = [];
@@ -153,27 +148,14 @@ export default function SecurityPage() {
     }
 
     try {
-      const response = await fetch("/api/user/change-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          currentPassword,
-          newPassword,
-        }),
+      await apiPost("/api/user/change-password", {
+        currentPassword,
+        newPassword,
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage(t('security.success'));
-        setCurrentPassword("");
-        setNewPassword("");
-        setConfirmPassword("");
-      } else {
-        setMessage(data.error || t('security.failed'));
-      }
+      setMessage(t('security.success'));
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
     } catch (error) {
       setMessage(t('security.failed'));
     } finally {
@@ -213,26 +195,13 @@ export default function SecurityPage() {
 
     try {
       // 直接使用 API 路由来设置密码
-      const response = await fetch('/api/user/set-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password: newPassword }),
-      });
-
-      const result = await response.json();
+      await apiPost('/api/user/set-password', { password: newPassword });
+      setSetPasswordMessage(t('security.setPasswordSuccess'));
+      setNewPassword("");
+      setConfirmPassword("");
       
-      if (response.ok) {
-        setSetPasswordMessage(t('security.setPasswordSuccess'));
-        setNewPassword("");
-        setConfirmPassword("");
-        
-        // 更新 hasPassword 状态，因为用户现在有密码了
-        setHasPassword(true);
-      } else {
-        setSetPasswordMessage(result.error || t('security.setPasswordFailed'));
-      }
+      // 更新 hasPassword 状态，因为用户现在有密码了
+      setHasPassword(true);
     } catch (error) {
       console.error('Set password error:', error);
       setSetPasswordMessage(t('security.setPasswordFailed'));

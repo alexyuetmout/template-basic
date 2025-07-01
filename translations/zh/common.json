@@ -42,6 +42,11 @@
   "payment": {
     "checkoutError": "启动支付失败，请重试。"
   },
+  "error": {
+    "serviceError": "服务错误，请稍后重试",
+    "unauthorized": "请登录后继续",
+    "notFound": "资源未找到"
+  },
   "pricing": {
     "title": "价格方案",
     "subtitle": "选择您的学习计划",
