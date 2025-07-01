@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { usePath } from "@/hooks/usePath";
+import { useTranslation } from "@/hooks/useTranslation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -38,35 +40,38 @@ interface Subscription {
   };
 }
 
-const statusConfig = {
+const getStatusConfig = (t: any) => ({
   ACTIVE: { 
-    label: "活跃", 
+    label: t('subscriptions.status.active'), 
     color: "bg-green-100 text-green-800",
     icon: CheckCircle
   },
   CANCELED: { 
-    label: "已取消", 
+    label: t('subscriptions.status.cancelled'), 
     color: "bg-gray-100 text-gray-800",
     icon: X
   },
   PAST_DUE: { 
-    label: "逾期", 
+    label: t('subscriptions.status.expired'), 
     color: "bg-red-100 text-red-800",
     icon: AlertCircle
   },
   INCOMPLETE: { 
-    label: "未完成", 
+    label: t('subscriptions.status.expired'), 
     color: "bg-yellow-100 text-yellow-800",
     icon: Clock
   },
   UNPAID: { 
-    label: "未支付", 
+    label: t('subscriptions.status.expired'), 
     color: "bg-red-100 text-red-800",
     icon: AlertCircle
   },
-};
+});
 
 export default function SubscriptionsPage() {
+  const { routes } = usePath();
+  const { t } = useTranslation('dashboard');
+  const statusConfig = getStatusConfig(t);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
   const [cancelingId, setCancelingId] = useState<string | null>(null);
@@ -90,7 +95,7 @@ export default function SubscriptionsPage() {
   };
 
   const handleCancelSubscription = async (subscriptionId: string) => {
-    if (!confirm("确定要取消这个订阅吗？取消后将在当前计费周期结束时停止服务。")) {
+    if (!confirm(t('subscriptions.confirmCancel'))) {
       return;
     }
 
@@ -108,13 +113,13 @@ export default function SubscriptionsPage() {
       if (response.ok) {
         // 刷新订阅列表
         await fetchSubscriptions();
-        alert("订阅取消成功！服务将在当前计费周期结束时停止。");
+        alert(t('subscriptions.cancelSuccess'));
       } else {
         const errorData = await response.json();
-        alert(errorData.error || "取消订阅失败，请稍后重试");
+        alert(errorData.error || t('subscriptions.cancelFailed'));
       }
     } catch (error) {
-      alert("取消订阅失败，请稍后重试");
+      alert(t('subscriptions.cancelFailed'));
     } finally {
       setCancelingId(null);
     }
@@ -169,14 +174,14 @@ export default function SubscriptionsPage() {
       <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">订阅管理</h1>
-            <p className="text-gray-600">管理您的订阅计划和计费信息</p>
+            <h1 className="text-2xl font-bold text-gray-900">{t('subscriptions.title')}</h1>
+            <p className="text-gray-600">{t('subscriptions.description')}</p>
           </div>
 
           {/* 活跃订阅 */}
           {activeSubscriptions.length > 0 && (
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">活跃订阅</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t('subscriptions.activeSubscriptions')}</h2>
               <div className="space-y-4">
                 {activeSubscriptions.map((subscription) => {
                   const config = statusConfig[subscription.status as keyof typeof statusConfig];
@@ -203,19 +208,19 @@ export default function SubscriptionsPage() {
                             
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                               <div>
-                                <span className="text-gray-500">价格</span>
+                                <span className="text-gray-500">{t('subscriptions.price')}</span>
                                 <p className="font-medium text-gray-900">
                                   {formatCurrency(subscription.price.amount, subscription.price.currency)} / {getIntervalText(subscription.price.interval)}
                                 </p>
                               </div>
                               <div>
-                                <span className="text-gray-500">当前周期</span>
+                                <span className="text-gray-500">{t('subscriptions.currentPeriod')}</span>
                                 <p className="font-medium text-gray-900">
                                   {formatDate(subscription.currentPeriodStart)} - {formatDate(subscription.currentPeriodEnd)}
                                 </p>
                               </div>
                               <div>
-                                <span className="text-gray-500">下次扣费</span>
+                                <span className="text-gray-500">{t('subscriptions.nextBilling')}</span>
                                 <p className="font-medium text-gray-900">
                                   {formatDate(subscription.currentPeriodEnd)}
                                 </p>
@@ -233,12 +238,12 @@ export default function SubscriptionsPage() {
                               {cancelingId === subscription.id ? (
                                 <>
                                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                  取消中...
+                                  {t('subscriptions.cancelling')}
                                 </>
                               ) : (
                                 <>
                                   <X className="w-4 h-4 mr-2" />
-                                  取消订阅
+                                  {t('subscriptions.cancelSubscription')}
                                 </>
                               )}
                             </Button>
@@ -255,7 +260,7 @@ export default function SubscriptionsPage() {
           {/* 历史订阅 */}
           {inactiveSubscriptions.length > 0 && (
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">历史订阅</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t('subscriptions.historySubscriptions')}</h2>
               <div className="space-y-4">
                 {inactiveSubscriptions.map((subscription) => {
                   const config = statusConfig[subscription.status as keyof typeof statusConfig];
@@ -282,14 +287,14 @@ export default function SubscriptionsPage() {
                             
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                               <div>
-                                <span className="text-gray-500">订阅时间</span>
+                                <span className="text-gray-500">{t('subscriptions.subscriptionTime')}</span>
                                 <p className="font-medium text-gray-900">
                                   {formatDate(subscription.createdAt)}
                                 </p>
                               </div>
                               {subscription.canceledAt && (
                                 <div>
-                                  <span className="text-gray-500">取消时间</span>
+                                  <span className="text-gray-500">{t('subscriptions.cancelTime')}</span>
                                   <p className="font-medium text-gray-900">
                                     {formatDate(subscription.canceledAt)}
                                   </p>
@@ -297,7 +302,7 @@ export default function SubscriptionsPage() {
                               )}
                               {subscription.cancellationReason && (
                                 <div>
-                                  <span className="text-gray-500">取消原因</span>
+                                  <span className="text-gray-500">{t('subscriptions.cancelReason')}</span>
                                   <p className="font-medium text-gray-900">
                                     {subscription.cancellationReason}
                                   </p>
@@ -319,13 +324,13 @@ export default function SubscriptionsPage() {
             <Card>
               <CardContent className="p-8 text-center">
                 <CreditCard className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">暂无订阅</h3>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">{t('subscriptions.noSubscriptions')}</h3>
                 <p className="text-gray-600 mb-4">
-                  您还没有任何订阅计划
+                  {t('subscriptions.noSubscriptionsDesc')}
                 </p>
                 <Button asChild>
-                  <Link href="/pricing">
-                    查看订阅计划
+                  <Link href={routes.PRICING}>
+                    {t('subscriptions.viewPlans')}
                   </Link>
                 </Button>
               </CardContent>
@@ -335,29 +340,27 @@ export default function SubscriptionsPage() {
           {/* 订阅说明 */}
           <Card>
             <CardHeader>
-              <CardTitle>订阅说明</CardTitle>
+              <CardTitle>{t('subscriptions.help.title')}</CardTitle>
               <CardDescription>
-                关于订阅管理的重要信息
+                {t('subscriptions.help.description')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">取消政策</h4>
+                  <h4 className="font-medium text-gray-900 mb-2">{t('subscriptions.help.cancellationPolicy')}</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• 可随时取消订阅</li>
-                    <li>• 取消后服务持续到周期结束</li>
-                    <li>• 不会产生额外费用</li>
-                    <li>• 可重新订阅恢复服务</li>
+                    {t('subscriptions.help.policies', { returnObjects: true }).map((policy: string, index: number) => (
+                      <li key={index}>{policy}</li>
+                    ))}
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">计费说明</h4>
+                  <h4 className="font-medium text-gray-900 mb-2">{t('subscriptions.help.billing')}</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• 自动续费扣款</li>
-                    <li>• 扣费失败会暂停服务</li>
-                    <li>• 支持更换支付方式</li>
-                    <li>• 可升级或降级计划</li>
+                    {t('subscriptions.help.billingInfo', { returnObjects: true }).map((info: string, index: number) => (
+                      <li key={index}>{info}</li>
+                    ))}
                   </ul>
                 </div>
               </div>

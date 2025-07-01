@@ -118,7 +118,6 @@
         "description": "体验Cursor教程和AI编程基础",
         "price": "免费",
         "ctaText": "开始学习",
-        "ctaHref": "/sign-up",
         "ctaVariant": "outline",
         "features": [
           {
@@ -161,7 +160,6 @@
         "price": "¥699",
         "priceUnit": "/月",
         "ctaText": "限时优惠",
-        "ctaHref": "/pricing",
         "ctaVariant": "default",
         "isPopular": true,
         "features": [
@@ -213,7 +211,6 @@
         "price": "¥1399",
         "priceUnit": "/月",
         "ctaText": "查看演示",
-        "ctaHref": "/demo",
         "ctaVariant": "outline",
         "features": [
           {
@@ -269,41 +266,31 @@
       "id": 1,
       "name": "陈莎拉",
       "title": "全栈开发工程师",
-      "avatar": "/images/avatar/avatar-1.webp",
-      "content": "这个模板为我节省了数周的开发时间。AI集成无缝衔接，代码质量卓越。强烈推荐给任何AI项目。",
-      "rating": 5
+      "content": "这个模板为我节省了数周的开发时间。AI集成无缝衔接，代码质量卓越。强烈推荐给任何AI项目。"
     },
     {
       "id": 2,
       "name": "马库斯·罗德里格斯",
       "title": "AI工程师",
-      "avatar": "/images/avatar/avatar-2.webp",
-      "content": "身份验证系统和支付集成运行完美。是任何具有AI功能的SaaS应用的完美起点。",
-      "rating": 5
+      "content": "身份验证系统和支付集成运行完美。是任何具有AI功能的SaaS应用的完美起点。"
     },
     {
       "id": 3,
       "name": "艾米丽·沃森",
       "title": "产品经理",
-      "avatar": "/images/avatar/avatar-3.webp",
-      "content": "从设计角度来看，这个模板非常出色。组件库全面，动画流畅，整体美学现代而专业。",
-      "rating": 5
+      "content": "从设计角度来看，这个模板非常出色。组件库全面，动画流畅，整体美学现代而专业。"
     },
     {
       "id": 4,
       "name": "金大卫",
       "title": "创业公司创始人",
-      "avatar": "/images/avatar/avatar-1.webp",
-      "content": "使用这个模板在创纪录的时间内构建了我们的MVP。文档清晰，代码结构良好，支持非常棒。",
-      "rating": 5
+      "content": "使用这个模板在创纪录的时间内构建了我们的MVP。文档清晰，代码结构良好，支持非常棒。"
     },
     {
       "id": 5,
       "name": "张丽莎",
       "title": "DevOps工程师",
-      "avatar": "/images/avatar/avatar-2.webp",
-      "content": "部署非常顺利。CI/CD设置完美，性能优化已经内置。节省了很多时间！",
-      "rating": 5
+      "content": "部署非常顺利。CI/CD设置完美，性能优化已经内置。节省了很多时间！"
     }
     ]
   },
@@ -311,7 +298,24 @@
     "title": "最新博客文章",
     "subtitle": "探索前沿AI开发技术和最佳实践",
     "readMore": "阅读更多",
-    "viewAllPosts": "查看所有文章"
+    "viewAllPosts": "查看所有文章",
+    "posts": [
+      {
+        "title": "构建您的第一个AI聊天机器人",
+        "date": "2024年4月3日",
+        "description": "使用Next.js和OpenAI API构建智能聊天机器人的综合指南"
+      },
+      {
+        "title": "AI开发入门",
+        "date": "2024年4月2日",
+        "description": "学习AI开发基础知识，开始构建您的第一个AI应用程序"
+      },
+      {
+        "title": "欢迎来到AImaker",
+        "date": "2024年4月1日",
+        "description": "开始您的AI之旅，探索AI开发中的无限可能"
+      }
+    ]
   },
   "cta": {
     "title": {
@@ -329,6 +333,8 @@
     "badge": "常见问题",
     "title": "常见问题解答",
     "subtitle": "如有任何未解答的问题，请通过邮件联系我们的支持团队。我们会尽快回复为您提供帮助。",
+    "contactText": "还有其他问题？",
+    "contactButton": "联系我们",
     "items": [
       {
         "question": "什么是AIMaker模板？",

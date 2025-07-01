@@ -18,6 +18,8 @@ import Link from "next/link"
 import React, { useState } from "react"
 import { Mail, ArrowLeft } from "lucide-react"
 import { AuthNavigation } from "@/components/auth/AuthNavigation"
+import { useTranslation } from "@/hooks/useTranslation"
+import { usePath } from "@/hooks/usePath"
 
 const forgotPasswordSchema = z.object({
   email: z.string().email({
@@ -28,6 +30,8 @@ const forgotPasswordSchema = z.object({
 export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const { t } = useTranslation('auth')
+  const { routes } = usePath()
   
   const form = useForm<z.infer<typeof forgotPasswordSchema>>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -76,7 +80,7 @@ export default function ForgotPasswordPage() {
                 >
                   Try again
                 </Button>
-                <Link href="/auth/sign-in">
+                <Link href={routes.SIGN_IN}>
                   <Button variant="ghost" className="w-full">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to sign in
@@ -142,7 +146,7 @@ export default function ForgotPasswordPage() {
 
             <div className="text-center">
               <Link
-                href="/auth/sign-in"
+                href={routes.SIGN_IN}
                 className="inline-flex items-center text-sm text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />

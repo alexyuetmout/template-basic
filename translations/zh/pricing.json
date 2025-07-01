@@ -1,0 +1,158 @@
+{
+  "title": "价格方案",
+  "subtitle": "选择您的学习计划",
+  "description": "选择完美的计划开启您的AI开发之旅",
+  "loading": "正在加载价格方案...",
+  "getStarted": "立即开始",
+  "unknown": "未知",
+  "descriptionNotAvailable": "计划描述不可用",
+  "month": "月",
+  "year": "年",
+  "mostPopular": "最受欢迎",
+  "noPricingPlans": "所选选项没有可用的价格方案。",
+  "modes": {
+    "onetime": "一次性",
+    "monthly": "月订阅",
+    "yearly": "年订阅"
+  },
+  "planConfigs": {
+    "onetime_basic": {
+      "name": "基础版",
+      "description": "体验Cursor教程和AI编程基础",
+      "features": [
+        "基础Cursor教程",
+        "AI编程环境搭建",
+        "基础开发工具",
+        "公开社区访问",
+        "×完整Cursor教程",
+        "×AI编程问答服务",
+        "×VIP社区群组",
+        "×AI应用模板"
+      ]
+    },
+    "onetime_pro": {
+      "name": "专业版",
+      "description": "系统掌握Cursor和AI编程",
+      "features": [
+        "完整Cursor教程",
+        "AI编程项目",
+        "一对一支持",
+        "VIP社区访问",
+        "终身课程更新",
+        "×优先技术支持",
+        "×AI应用模板",
+        "×登录系统源码",
+        "×支付系统集成",
+        "×商业许可"
+      ]
+    },
+    "onetime_premium": {
+      "name": "高级版",
+      "description": "掌握专业AI编程技能",
+      "features": [
+        "完整Cursor教程",
+        "AI编程项目",
+        "一对一支持",
+        "VIP社区访问",
+        "终身课程更新",
+        "优先技术支持",
+        "AI应用模板",
+        "登录系统源码",
+        "支付系统集成",
+        "商业许可"
+      ]
+    },
+    "subscribe_basic": {
+      "name": "基础版",
+      "description": "体验Cursor教程和AI编程基础",
+      "features": [
+        "基础Cursor教程",
+        "AI编程环境搭建",
+        "基础开发工具",
+        "公开社区访问",
+        "×完整Cursor教程",
+        "×AI编程问答服务",
+        "×VIP社区群组",
+        "×AI应用模板"
+      ]
+    },
+    "subscribe_pro": {
+      "name": "专业版",
+      "description": "系统掌握Cursor和AI编程",
+      "features": [
+        "完整Cursor教程",
+        "AI编程项目",
+        "一对一支持",
+        "VIP社区访问",
+        "终身课程更新",
+        "×优先技术支持",
+        "×AI应用模板",
+        "×登录系统源码",
+        "×支付系统集成",
+        "×商业许可"
+      ]
+    },
+    "subscribe_premium": {
+      "name": "高级版",
+      "description": "掌握专业AI编程技能",
+      "features": [
+        "完整Cursor教程",
+        "AI编程项目",
+        "一对一支持",
+        "VIP社区访问",
+        "终身课程更新",
+        "优先技术支持",
+        "AI应用模板",
+        "登录系统源码",
+        "支付系统集成",
+        "商业许可"
+      ]
+    },
+    "subscribe_basic_year": {
+      "name": "基础版",
+      "description": "体验Cursor教程和AI编程基础",
+      "features": [
+        "基础Cursor教程",
+        "AI编程环境搭建",
+        "基础开发工具",
+        "公开社区访问",
+        "×完整Cursor教程",
+        "×AI编程问答服务",
+        "×VIP社区群组",
+        "×AI应用模板"
+      ]
+    },
+    "subscribe_pro_year": {
+      "name": "专业版",
+      "description": "系统掌握Cursor和AI编程",
+      "features": [
+        "完整Cursor教程",
+        "AI编程项目",
+        "一对一支持",
+        "VIP社区访问",
+        "终身课程更新",
+        "×优先技术支持",
+        "×AI应用模板",
+        "×登录系统源码",
+        "×支付系统集成",
+        "×商业许可"
+      ]
+    },
+    "subscribe_pre_year": {
+      "name": "高级版",
+      "description": "掌握专业AI编程技能",
+      "features": [
+        "完整Cursor教程",
+        "AI编程项目",
+        "一对一支持",
+        "VIP社区访问",
+        "终身课程更新",
+        "优先技术支持",
+        "AI应用模板",
+        "登录系统源码",
+        "支付系统集成",
+        "商业许可"
+      ]
+    }
+  }
+}

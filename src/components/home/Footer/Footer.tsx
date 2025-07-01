@@ -3,9 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslation } from "@/hooks/useTranslation";
+import { usePath } from "@/hooks/usePath";
 
 export function Footer() {
   const { t } = useTranslation("home");
+  const { routes } = usePath();
 
   return (
     <footer className="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
@@ -59,7 +61,7 @@ export function Footer() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/"
+                    href={routes.HOME}
                     className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                   >
                     {t("footer.sections.product.items.home")}
@@ -67,7 +69,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/pricing"
+                    href={routes.PRICING}
                     className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                   >
                     {t("footer.sections.product.items.pricing")}
@@ -75,7 +77,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/blog"
+                    href={routes.BLOG}
                     className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                   >
                     {t("footer.sections.product.items.blog")}
@@ -125,7 +127,7 @@ export function Footer() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/privacy"
+                    href={routes.PRIVACY}
                     className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                   >
                     {t("footer.sections.legal.items.privacy")}
@@ -133,7 +135,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/terms"
+                    href={routes.TERMS}
                     className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                   >
                     {t("footer.sections.legal.items.terms")}
@@ -141,7 +143,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/cookies"
+                    href={routes.COOKIES}
                     className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                   >
                     {t("footer.sections.legal.items.cookies")}

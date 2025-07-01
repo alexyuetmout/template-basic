@@ -23,20 +23,22 @@ import { AuthDivider } from "@/components/auth/AuthDivider"
 import { GoogleIcon } from "@/components/icons/GoogleIcon"
 import { useRouter } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
+import { useTranslation } from "@/hooks/useTranslation"
+import { usePath } from "@/hooks/usePath"
 
-const signUpSchema = z.object({
+const createSignUpSchema = (t: any) => z.object({
   email: z.string().email({
-    message: "Please enter a valid email address.",
+    message: t('signUp.errors.invalidEmail'),
   }),
   password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
+    message: t('signUp.errors.passwordMinLength'),
   }),
   confirmPassword: z.string(),
   agreedToTerms: z.boolean().refine(val => val === true, {
-    message: "You must agree to the Terms of Service and Privacy Policy.",
+    message: t('signUp.errors.termsRequired'),
   }),
 }).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
+  message: t('signUp.errors.passwordsDontMatch'),
   path: ["confirmPassword"],
 })
 
@@ -44,7 +46,10 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
+  const { routes } = usePath()
+  const { t } = useTranslation('auth')
   
+  const signUpSchema = createSignUpSchema(t)
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -67,13 +72,13 @@ export default function SignUpPage() {
       })
 
       if (result.error) {
-        setError(result.error.message || "Registration failed")
+        setError(result.error.message || t('signUp.errors.registrationFailed'))
       } else {
         // Registration successful, redirect to home
-        router.push("/")
+        router.push(routes.HOME)
       }
     } catch (err) {
-      setError("An unexpected error occurred. Please try again.")
+      setError(t('signUp.errors.unexpectedError'))
     } finally {
       setIsLoading(false)
     }
@@ -89,7 +94,7 @@ export default function SignUpPage() {
         callbackURL: "/", // 成功后重定向到首页
       })
     } catch (err) {
-      setError("Google sign up failed. Please try again.")
+      setError(t('signUp.errors.googleSignUpFailed'))
       setIsLoading(false)
     }
   }
@@ -100,17 +105,17 @@ export default function SignUpPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            Create Account
+            {t('signUp.createAccount')}
           </h1>
           <p className="text-neutral-600 dark:text-neutral-400 mt-2">
-            Join us today with just your email and password
+            {t('signUp.signUpDescription')}
           </p>
         </div>
 
         <Card className="border-neutral-200 dark:border-neutral-700">
           <CardHeader className="space-y-1 pb-4">
             <CardTitle className="text-2xl text-center text-neutral-900 dark:text-neutral-100">
-              Sign Up
+              {t('signUp.title')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -122,7 +127,7 @@ export default function SignUpPage() {
               disabled={isLoading}
             >
               <GoogleIcon className="w-5 h-5 mr-2" />
-              Continue with Google
+              {t('signUp.continueWithGoogle')}
             </Button>
 
             {/* 分割线 */}
@@ -143,11 +148,11 @@ export default function SignUpPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Email</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('email')}</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="Enter your email"
+                          placeholder={t('signUp.emailPlaceholder')}
                           {...field}
                         />
                       </FormControl>
@@ -161,10 +166,10 @@ export default function SignUpPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Password</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('password')}</FormLabel>
                       <FormControl>
                         <PasswordInput
-                          placeholder="Create a password"
+                          placeholder={t('signUp.passwordPlaceholder')}
                           {...field}
                         />
                       </FormControl>
@@ -178,10 +183,10 @@ export default function SignUpPage() {
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Confirm Password</FormLabel>
+                      <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t('confirmPassword')}</FormLabel>
                       <FormControl>
                         <PasswordInput
-                          placeholder="Confirm your password"
+                          placeholder={t('signUp.confirmPasswordPlaceholder')}
                           {...field}
                         />
                       </FormControl>
@@ -205,13 +210,13 @@ export default function SignUpPage() {
                         </FormControl>
                         <div className="text-sm">
                           <label className="text-neutral-600 dark:text-neutral-400 cursor-pointer">
-                            I agree to the{" "}
-                            <Link href="/terms" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
-                              Terms of Service
+                            {t('signUp.agreeToTerms')}{" "}
+                            <Link href={routes.TERMS} className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
+                              {t('signUp.termsOfService')}
                             </Link>{" "}
-                            and{" "}
-                            <Link href="/privacy" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
-                              Privacy Policy
+                            {t('signUp.and')}{" "}
+                            <Link href={routes.PRIVACY} className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
+                              {t('signUp.privacyPolicy')}
                             </Link>
                           </label>
                           <FormMessage />
@@ -226,19 +231,19 @@ export default function SignUpPage() {
                   className="w-full h-12"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Creating account..." : "Create Account"}
+                  {isLoading ? t('signUp.creatingAccount') : t('signUp.createAccount')}
                 </Button>
               </form>
             </Form>
 
             <div className="text-center">
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                Already have an account?{" "}
+                {t('alreadyHaveAccount')}{" "}
                 <Link
-                  href="/auth/sign-in"
+                  href={routes.SIGN_IN}
                   className="text-primary hover:text-primary/80 font-medium"
                 >
-                  Sign in
+                  {t('signIn.title')}
                 </Link>
               </p>
             </div>

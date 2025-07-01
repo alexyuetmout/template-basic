@@ -1,0 +1,38 @@
+{
+  "cancel": {
+    "title": "Payment Cancelled",
+    "description": "Your payment has been cancelled",
+    "message": "No worries, you can restart the purchase process at any time.",
+    "support": "If you encounter any issues, please feel free to contact our customer service team.",
+    "backToPricing": "Back to Pricing",
+    "backToHome": "Back to Home"
+  },
+  "success": {
+    "title": "Payment Successful!",
+    "description": "Your purchase has been completed successfully",
+    "message": "Thank you for your purchase! We have received your payment and the related services will be activated soon.",
+    "emailConfirmation": "You will receive a confirmation email with your purchase details.",
+    "goToDashboard": "Go to Dashboard",
+    "viewOrderHistory": "View Order History"
+  },
+  "subscription": {
+    "cancel": {
+      "title": "Subscription Cancelled",
+      "description": "Your subscription process has been cancelled",
+      "message": "No worries, you can resubscribe to our services at any time.",
+      "flexiblePlans": "Anytime Resubscribe",
+      "flexibleDescription": "We offer flexible subscription options to meet your different needs",
+      "viewPlans": "View Subscription Plans",
+      "backToHome": "Back to Home"
+    },
+    "success": {
+      "title": "Subscription Successful!",
+      "description": "Welcome to our subscription service",
+      "message": "Thank you for subscribing to our service! Your subscription has been activated and you can start using it immediately.",
+      "activated": "Subscription Activated",
+      "billingReminder": "You will receive a reminder email before the next billing cycle",
+      "goToDashboard": "Go to Dashboard",
+      "manageSubscriptions": "Manage Subscriptions"
+    }
+  }
+}

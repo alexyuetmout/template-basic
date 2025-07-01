@@ -118,7 +118,6 @@
         "description": "Cursorチュートリアルとプログラミング基礎を体験",
         "price": "無料",
         "ctaText": "学習開始",
-        "ctaHref": "/sign-up",
         "ctaVariant": "outline",
         "features": [
           {
@@ -161,7 +160,6 @@
         "price": "¥9,900",
         "priceUnit": "/月",
         "ctaText": "期間限定オファー",
-        "ctaHref": "/pricing",
         "ctaVariant": "default",
         "isPopular": true,
         "features": [
@@ -213,7 +211,6 @@
         "price": "¥19,900",
         "priceUnit": "/月",
         "ctaText": "デモを見る",
-        "ctaHref": "/demo",
         "ctaVariant": "outline",
         "features": [
           {
@@ -269,41 +266,31 @@
       "id": 1,
       "name": "サラ・チェン",
       "title": "フルスタック開発者",
-      "avatar": "/images/avatar/avatar-1.webp",
-      "content": "このテンプレートにより数週間の開発時間を節約できました。AI統合はシームレスで、コード品質は卓越しています。AIプロジェクトに強く推奨します。",
-      "rating": 5
+      "content": "このテンプレートにより数週間の開発時間を節約できました。AI統合はシームレスで、コード品質は卓越しています。AIプロジェクトに強く推奨します。"
     },
     {
       "id": 2,
       "name": "マーカス・ロドリゲス",
       "title": "AIエンジニア",
-      "avatar": "/images/avatar/avatar-2.webp",
-      "content": "認証システムと決済統合が完璧に動作します。AI機能を持つSaaSアプリケーションの完璧なスタートポイントです。",
-      "rating": 5
+      "content": "認証システムと決済統合が完璧に動作します。AI機能を持つSaaSアプリケーションの完璧なスタートポイントです。"
     },
     {
       "id": 3,
       "name": "エミリー・ワトソン",
       "title": "プロダクトマネージャー",
-      "avatar": "/images/avatar/avatar-3.webp",
-      "content": "デザインの観点から、このテンプレートは素晴らしいです。コンポーネントライブラリは包括的で、アニメーションは滑らかで、全体的な美学はモダンでプロフェッショナルです。",
-      "rating": 5
+      "content": "デザインの観点から、このテンプレートは素晴らしいです。コンポーネントライブラリは包括的で、アニメーションは滑らかで、全体的な美学はモダンでプロフェッショナルです。"
     },
     {
       "id": 4,
       "name": "デイビッド・キム",
       "title": "スタートアップ創設者",
-      "avatar": "/images/avatar/avatar-1.webp",
-      "content": "このテンプレートを使用して記録的な時間でMVPを構築しました。ドキュメントは明確で、コードは適切に構造化されており、サポートは素晴らしいです。",
-      "rating": 5
+      "content": "このテンプレートを使用して記録的な時間でMVPを構築しました。ドキュメントは明確で、コードは適切に構造化されており、サポートは素晴らしいです。"
     },
     {
       "id": 5,
       "name": "リサ・チャン",
       "title": "DevOpsエンジニア",
-      "avatar": "/images/avatar/avatar-2.webp",
-      "content": "デプロイは簡単でした。CI/CDセットアップは完璧で、パフォーマンス最適化はすでに組み込まれています。多くの時間を節約できます！",
-      "rating": 5
+      "content": "デプロイは簡単でした。CI/CDセットアップは完璧で、パフォーマンス最適化はすでに組み込まれています。多くの時間を節約できます！"
     }
     ]
   },
@@ -311,7 +298,24 @@
     "title": "最新ブログ記事",
     "subtitle": "最先端のAI開発技術とベストプラクティスを探索",
     "readMore": "続きを読む",
-    "viewAllPosts": "すべての記事を見る"
+    "viewAllPosts": "すべての記事を見る",
+    "posts": [
+      {
+        "title": "初めてのAIチャットボット構築",
+        "date": "2024年4月3日",
+        "description": "Next.jsとOpenAI APIを使用してインテリジェントなチャットボットを構築する包括的なガイド"
+      },
+      {
+        "title": "AI開発入門",
+        "date": "2024年4月2日",
+        "description": "AI開発の基礎を学び、初めてのAIアプリケーション構築を始めましょう"
+      },
+      {
+        "title": "AIMakerへようこそ",
+        "date": "2024年4月1日",
+        "description": "AIの旅を始めて、AI開発における無限の可能性を探索しましょう"
+      }
+    ]
   },
   "cta": {
     "title": {
@@ -329,6 +333,8 @@
     "badge": "FAQ",
     "title": "よくある質問",
     "subtitle": "質問がございましたら、メールでサポートチームにお問い合わせください。できるだけ早くご返信いたします。",
+    "contactText": "他にご質問はありますか？",
+    "contactButton": "お問い合わせ",
     "items": [
       {
         "question": "AIMakerテンプレートとは何ですか？",

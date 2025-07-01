@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
+import { HeadingH2 } from "@/components/ui/headings";
 
 export function Features1() {
   const { t } = useTranslation("home");
@@ -73,12 +74,12 @@ export function Features1() {
     <div className="relative py-20 bg-white dark:bg-neutral-900" id="features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide text-primary bg-primary/10 dark:text-primary dark:bg-primary/20">
+          <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide text-primary bg-primary/10 dark:text-primary dark:bg-primary/20">
             {t("features1.badge")}
-          </h2>
-          <p className="mt-6 text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+          </div>
+          <HeadingH2 className="mt-6 text-neutral-900 dark:text-neutral-100">
             {t("features1.title")}
-          </p>
+          </HeadingH2>
           <p className="mt-4 max-w-2xl mx-auto text-base text-neutral-600 dark:text-neutral-400">
             {t("features1.subtitle")}
           </p>

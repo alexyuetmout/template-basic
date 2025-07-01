@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -14,6 +14,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
+import { HeadingH2 } from "@/components/ui/headings";
 
 // 星级评分组件
 function StarRating({ rating }: { rating: number }) {
@@ -38,9 +39,7 @@ interface Testimonial {
   id: number;
   name: string;
   title: string;
-  avatar: string;
   content: string;
-  rating: number;
 }
 
 // 单个评价卡片组件
@@ -78,32 +77,46 @@ export function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // 从翻译中获取评价数据
+  // 头像路径映射
+  const avatarMap: Record<number, string> = {
+    1: "/images/avatar/avatar-1.webp",
+    2: "/images/avatar/avatar-2.webp",
+    3: "/images/avatar/avatar-3.webp",
+    4: "/images/avatar/avatar-1.webp",
+    5: "/images/avatar/avatar-2.webp",
+  };
+
+  // 从翻译中获取评价文本数据
   const testimonialsData = t("testimonials", {
     returnObjects: true,
   }) as { items: Testimonial[] };
+  
   const testimonials: Testimonial[] = testimonialsData?.items || [];
 
-  // 防止空数据导致的错误
-  if (!testimonials || testimonials.length === 0) {
-    return null;
-  }
+  const nextTestimonial = useCallback(() => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setTimeout(() => setIsAnimating(false), 300);
+  }, [isAnimating, testimonials.length]);
 
   // 自动轮播
   useEffect(() => {
+    if (!testimonials || testimonials.length === 0) {
+      return;
+    }
+
     const timer = setInterval(() => {
       nextTestimonial();
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex, testimonials.length, nextTestimonial]);
 
-  const nextTestimonial = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    setTimeout(() => setIsAnimating(false), 300);
-  };
+  // 防止空数据导致的错误
+  if (!testimonials || testimonials.length === 0) {
+    return null;
+  }
 
   const prevTestimonial = () => {
     if (isAnimating) return;
@@ -128,9 +141,9 @@ export function Testimonials() {
           <div className="inline-block bg-blue-100 dark:bg-blue-500/20 bg-opacity-20 px-4 py-1.5 rounded-full text-blue-700 dark:text-blue-300 text-sm font-medium mb-4">
             {t("testimonials.badge")}
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-6">
+          <HeadingH2 className="text-foreground mb-6">
             {t("testimonials.title")}
-          </h2>
+          </HeadingH2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             {t("testimonials.subtitle")}
           </p>
@@ -151,9 +164,9 @@ export function Testimonials() {
                   <div className="flex flex-col md:flex-row items-center gap-8">
                     {/* 头像 */}
                     <div className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
-                      {testimonials[currentIndex]?.avatar && (
+                      {testimonials[currentIndex]?.id && (
                         <Image
-                          src={testimonials[currentIndex].avatar}
+                          src={avatarMap[testimonials[currentIndex].id] || avatarMap[1]}
                           alt={
                             testimonials[currentIndex]?.name || "User avatar"
                           }
@@ -165,10 +178,10 @@ export function Testimonials() {
 
                     {/* 评价内容 */}
                     <div className="flex-1 text-center md:text-left">
-                      <StarRating rating={testimonials[currentIndex]?.rating} />
+                      <StarRating rating={5} />
 
                       <blockquote className="text-lg md:text-xl text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">
-                        "{testimonials[currentIndex]?.content}"
+                        &ldquo;{testimonials[currentIndex]?.content}&rdquo;
                       </blockquote>
 
                       <div>
@@ -238,14 +251,12 @@ export function Testimonials() {
                     : "opacity-60 hover:opacity-80 hover:scale-105"
                 }`}
               >
-                {testimonial.avatar && (
-                  <Image
-                    src={testimonial.avatar}
-                    alt={testimonial.name || "User avatar"}
-                    fill
-                    className="object-cover rounded-full"
-                  />
-                )}
+                <Image
+                  src={avatarMap[testimonial.id] || avatarMap[1]}
+                  alt={testimonial.name || "User avatar"}
+                  fill
+                  className="object-cover rounded-full"
+                />
               </button>
             ))}
           </div>

@@ -1,0 +1,216 @@
+{
+  "subscriptions": {
+    "title": "サブスクリプション管理",
+    "description": "サブスクリプションプランと請求情報を管理",
+    "activeSubscriptions": "アクティブなサブスクリプション",
+    "historySubscriptions": "サブスクリプション履歴",
+    "noSubscriptions": "サブスクリプションなし",
+    "noSubscriptionsDesc": "まだサブスクリプションプランがありません",
+    "viewPlans": "サブスクリプションプランを表示",
+    "price": "価格",
+    "currentPeriod": "現在のサイクル",
+    "nextBilling": "次回請求",
+    "subscriptionTime": "サブスクリプション開始時間",
+    "cancelTime": "キャンセル時間",
+    "cancelReason": "キャンセル理由",
+    "cancelling": "キャンセル中...",
+    "cancelSubscription": "サブスクリプションをキャンセル",
+    "confirmCancel": "このサブスクリプションをキャンセルしてもよろしいですか？現在の請求サイクル終了時にサービスが停止されます。",
+    "cancelSuccess": "サブスクリプションのキャンセルが成功しました！現在の請求サイクル終了時にサービスが停止されます。",
+    "cancelFailed": "サブスクリプションのキャンセルに失敗しました。後でもう一度お試しください",
+    "status": {
+      "active": "アクティブ",
+      "cancelled": "キャンセル済み",
+      "expired": "期限切れ"
+    },
+    "help": {
+      "title": "サブスクリプション情報",
+      "description": "サブスクリプション管理に関する重要な情報",
+      "cancellationPolicy": "キャンセルポリシー",
+      "policies": [
+        "• いつでもサブスクリプションをキャンセル可能",
+        "• キャンセル後もサイクル終了まで継続",
+        "• 一部期間の返金なし",
+        "• 再購読でサービス復旧可能"
+      ],
+      "billing": "請求情報",
+      "billingInfo": [
+        "• 期限前の自動更新",
+        "• プランのアップグレード・ダウングレード可能",
+        "• 請求履歴は注文セクションで確認可能",
+        "• 請求に関する問題はサポートまで"
+      ]
+    }
+  },
+  "security": {
+    "title": "セキュリティ設定",
+    "description": "アカウントのセキュリティとパスワードを管理",
+    "changePassword": "パスワード変更",
+    "currentPassword": "現在のパスワード",
+    "newPassword": "新しいパスワード",
+    "confirmPassword": "新しいパスワード確認",
+    "saveChanges": "変更を保存",
+    "saving": "保存中...",
+    "errors": {
+      "currentPasswordRequired": "現在のパスワードを入力してください",
+      "newPasswordRequired": "新しいパスワードを入力してください",
+      "newPasswordShort": "新しいパスワードは少なくとも6文字必要です",
+      "confirmPasswordRequired": "新しいパスワードを確認してください",
+      "passwordMismatch": "パスワードが一致しません"
+    },
+    "success": "パスワードの変更が成功しました！",
+    "failed": "パスワードの変更に失敗しました。後でもう一度お試しください",
+    "setPassword": "パスワード設定",
+    "setPasswordSuccess": "パスワードの設定が成功しました！",
+    "setPasswordFailed": "パスワードの設定に失敗しました。後でもう一度お試しください",
+    "setPasswordDesc": "アカウントのセキュリティを強化するためにパスワードを設定",
+    "changePasswordDesc": "定期的なパスワード変更でアカウントセキュリティを向上",
+    "loading": "セキュリティ設定を読み込み中...",
+    "setting": "設定中...",
+    "accountSecurityStatus": "アカウントセキュリティ状態",
+    "checkSecuritySettings": "アカウントのセキュリティ設定を確認",
+    "placeholders": {
+      "currentPassword": "現在のパスワードを入力してください",
+      "newPassword": "新しいパスワードを入力してください",
+      "confirmPassword": "新しいパスワードを再入力してください",
+      "password": "パスワードを入力してください"
+    },
+    "validation": {
+      "minLength": "最低8文字",
+      "uppercase": "大文字を1文字以上",
+      "lowercase": "小文字を1文字以上",
+      "number": "数字を1文字以上"
+    },
+    "requirements": {
+      "title": "パスワードセキュリティ要件：",
+      "items": [
+        "最低8文字",
+        "大文字、小文字、数字を含む",
+        "個人情報をパスワードに使用しない"
+      ]
+    },
+    "hint": {
+      "title": "お知らせ：",
+      "description": "現在サードパーティログインでアカウントパスワードが設定されていません。パスワード設定後はメールとパスワードで直接ログインできます。"
+    },
+    "status": {
+      "emailVerification": "メール認証",
+      "emailVerificationDesc": "アカウント復旧用の認証済みメールアドレス",
+      "verified": "認証済み",
+      "passwordStrength": "パスワード強度",
+      "passwordStrengthDesc": "強いパスワードでアカウントを保護",
+      "medium": "中程度",
+      "loginProtection": "ログイン保護",
+      "loginProtectionDesc": "異常ログイン時のメール通知",
+      "enabled": "有効"
+    },
+    "errors": {
+      "currentPasswordRequired": "現在のパスワードを入力してください",
+      "newPasswordRequired": "新しいパスワードを入力してください",
+      "confirmPasswordRequired": "新しいパスワードを確認してください",
+      "passwordRequired": "パスワードを入力してください",
+      "passwordMismatch": "パスワードが一致しません"
+    }
+  },
+  "profile": {
+    "title": "ダッシュボード",
+    "description": "プロフィールとアカウント情報を管理",
+    "basicInformation": "基本情報",
+    "updateProfileInfo": "プロフィール情報を更新",
+    "username": "ユーザー名",
+    "enterUsername": "ユーザー名を入力してください",
+    "emailAddress": "メールアドレス",
+    "emailCannotChange": "メールアドレスは変更できません。必要に応じてサポートにお問い合わせください",
+    "saving": "保存中...",
+    "saveChanges": "変更を保存",
+    "updateSuccess": "プロフィールの更新が成功しました！",
+    "updateFailed": "更新に失敗しました。後でもう一度お試しください",
+    "accountInformation": "アカウント情報",
+    "accountBasicInfo": "アカウントの基本情報",
+    "userId": "ユーザーID",
+    "registrationDate": "登録日",
+    "accountStatus": "アカウント状態",
+    "active": "アクティブ"
+  },
+  "points": {
+    "title": "ポイントセンター",
+    "description": "ポイント残高と使用履歴を確認",
+    "overview": {
+      "totalPoints": "総ポイント",
+      "availablePoints": "利用可能ポイント",
+      "expiringSoon": "まもなく期限切れ",
+      "within30Days": "30日以内"
+    },
+    "expiryWarning": {
+      "title": "ポイント期限切れ通知",
+      "message": "{{count}}ポイントが30日以内に期限切れになります。お早めにご利用ください"
+    },
+    "history": {
+      "title": "ポイント履歴",
+      "description": "ポイントの獲得と使用履歴",
+      "noRecords": "ポイント履歴なし",
+      "noRecordsDesc": "商品購入やサービス購読でポイントを獲得できます",
+      "orderNumber": "注文: {{orderNumber}}"
+    },
+    "transactionTypes": {
+      "PURCHASE": "購入",
+      "SUBSCRIPTION": "サブスクリプション",
+      "SPEND": "使用",
+      "EXPIRE": "期限切れ",
+      "REFUND": "返金"
+    },
+    "expiry": {
+      "neverExpires": "無期限",
+      "expired": "期限切れ",
+      "daysLeft": "あと{{days}}日",
+      "expiresIn": "{{days}}日後に期限切れ"
+    },
+    "information": {
+      "title": "ポイント情報",
+      "description": "ポイントの獲得と利用ルールについて",
+      "howToEarn": {
+        "title": "ポイント獲得方法",
+        "items": [
+          "• 商品やサービスの購入",
+          "• 月間または年間プランの購読",
+          "• キャンペーンやプロモーションへの参加",
+          "• 友達招待"
+        ]
+      },
+      "usageRules": {
+        "title": "ポイント利用ルール",
+        "items": [
+          "• ポイントは商品購入に利用可能",
+          "• 1ポイント = $0.01",
+          "• ポイント有効期限は1年",
+          "• 期限切れポイントは自動削除"
+        ]
+      }
+    }
+  },
+  "orders": {
+    "title": "注文管理",
+    "description": "購入履歴と注文詳細を確認",
+    "stats": {
+      "totalOrders": "総注文数",
+      "totalSpent": "総支出", 
+      "pointsEarned": "獲得ポイント"
+    },
+    "status": {
+      "pending": "支払い待ち",
+      "succeeded": "完了",
+      "failed": "失敗",
+      "refunded": "返金済み"
+    },
+    "orderHistory": {
+      "title": "注文履歴",
+      "description": "最近の購入記録",
+      "orderNumber": "注文: {{orderNumber}}",
+      "pointsAdded": "+{{points}} ポイント"
+    },
+    "empty": {
+      "noOrders": "まだ注文がありません",
+      "purchaseProducts": "商品を購入してみましょう！"
+    }
+  }
+}

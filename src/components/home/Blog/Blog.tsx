@@ -4,32 +4,32 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useTranslation } from "@/hooks/useTranslation";
+import { HeadingH2 } from "@/components/ui/headings";
+import { usePath } from "@/hooks/usePath";
 
 export function Blog() {
   const { t } = useTranslation("home");
+  const { routes } = usePath();
 
   const blogPosts = [
     {
-      title: "Building Your First AI Chatbot",
-      date: "April 3, 2024",
-      description:
-        "A comprehensive guide to building an intelligent chatbot using Next.js and OpenAI API",
+      title: t('blog.posts.0.title'),
+      date: t('blog.posts.0.date'),
+      description: t('blog.posts.0.description'),
       image: "/images/blog/ai-chatbot.jpg",
       slug: "building-ai-chatbot",
     },
     {
-      title: "Getting Started with AI Development",
-      date: "April 2, 2024",
-      description:
-        "Learn the basics of AI development and start building your first AI application",
+      title: t('blog.posts.1.title'),
+      date: t('blog.posts.1.date'),
+      description: t('blog.posts.1.description'),
       image: "/images/blog/ai-development.jpg",
       slug: "getting-started-with-ai-development",
     },
     {
-      title: "Welcome to AImaker",
-      date: "April 1, 2024",
-      description:
-        "Start your AI journey and explore unlimited possibilities in AI development",
+      title: t('blog.posts.2.title'),
+      date: t('blog.posts.2.date'),
+      description: t('blog.posts.2.description'),
       image: "/images/blog/welcome.jpg",
       slug: "welcome-to-aimaker",
     },
@@ -39,9 +39,9 @@ export function Blog() {
     <div className="relative py-20 bg-gray-50 dark:bg-neutral-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4">
+          <HeadingH2 className="text-neutral-900 dark:text-neutral-100 mb-4">
             {t("blog.title")}
-          </h2>
+          </HeadingH2>
           <p className="max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-400">
             {t("blog.subtitle")}
           </p>
@@ -84,7 +84,7 @@ export function Blog() {
 
         <div className="text-center">
           <Link
-            href="/blog"
+            href={routes.BLOG}
             className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl transition-colors duration-200"
           >
             {t("blog.viewAllPosts")}

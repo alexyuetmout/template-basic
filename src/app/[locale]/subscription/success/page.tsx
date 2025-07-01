@@ -3,8 +3,13 @@ import { Check, ArrowRight, Calendar } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { usePath } from "@/hooks/usePath";
+import { useTranslation } from "@/hooks/useTranslation";
 
 function SubscriptionSuccessContent() {
+  const { routes } = usePath();
+  const { t } = useTranslation('payment');
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50 p-4">
       <Card className="max-w-md w-full">
@@ -13,38 +18,38 @@ function SubscriptionSuccessContent() {
             <Check className="w-8 h-8 text-green-600" />
           </div>
           <CardTitle className="text-2xl font-bold text-green-800">
-            订阅成功！
+            {t('subscription.success.title')}
           </CardTitle>
           <CardDescription className="text-green-600">
-            欢迎加入我们的订阅服务
+            {t('subscription.success.description')}
           </CardDescription>
         </CardHeader>
         
         <CardContent className="space-y-4">
           <div className="text-center text-gray-600">
-            <p>感谢您订阅我们的服务！您的订阅已激活，可以立即开始使用。</p>
+            <p>{t('subscription.success.message')}</p>
             <div className="mt-4 p-3 bg-blue-50 rounded-lg">
               <div className="flex items-center justify-center gap-2 text-blue-700">
                 <Calendar className="w-4 h-4" />
-                <span className="text-sm font-medium">订阅已激活</span>
+                <span className="text-sm font-medium">{t('subscription.success.activated')}</span>
               </div>
               <p className="text-xs text-blue-600 mt-1">
-                您将在下一个计费周期前收到提醒邮件
+                {t('subscription.success.billingReminder')}
               </p>
             </div>
           </div>
           
           <div className="flex flex-col gap-3 pt-4">
             <Button asChild className="w-full">
-              <Link href="/dashboard">
-                Go to Dashboard
+              <Link href={routes.DASHBOARD}>
+                {t('subscription.success.goToDashboard')}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
             
             <Button variant="outline" asChild className="w-full">
-              <Link href="/dashboard/subscriptions">
-                Manage Subscriptions
+              <Link href={routes.DASHBOARD_SUBSCRIPTIONS}>
+                {t('subscription.success.manageSubscriptions')}
               </Link>
             </Button>
           </div>

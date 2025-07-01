@@ -36,6 +36,64 @@
     "submit": "送信",
     "back": "戻る",
     "next": "次へ",
-    "previous": "前へ"
+    "previous": "前へ",
+    "backToHome": "ホームに戻る"
+  },
+  "payment": {
+    "checkoutError": "チェックアウトの開始に失敗しました。もう一度お試しください。"
+  },
+  "pricing": {
+    "title": "料金プラン",
+    "subtitle": "学習プランを選択",
+    "description": "完璧なプランでAI開発の旅を始めましょう",
+    "loading": "料金プランを読み込み中...",
+    "getStarted": "開始する",
+    "unknown": "不明",
+    "descriptionNotAvailable": "プラン説明が利用できません",
+    "month": "月",
+    "year": "年",
+    "modes": {
+      "onetime": "一回限り",
+      "monthly": "月間",
+      "yearly": "年間"
+    },
+    "plans": {
+      "basic": {
+        "name": "ベーシック",
+        "description": "Cursorチュートリアルとプログラミング基礎を体験"
+      },
+      "pro": {
+        "name": "プロ",
+        "description": "CursorとAIプログラミングを体系的にマスター"
+      },
+      "premium": {
+        "name": "プレミアム",
+        "description": "プロフェッショナルなAIプログラミングスキルをマスター"
+      }
+    },
+    "features": {
+      "basicTutorials": "基本Cursorチュートリアル",
+      "envSetup": "AIプログラミング環境セットアップ",
+      "basicTools": "基本開発ツール",
+      "publicCommunity": "パブリックコミュニティアクセス",
+      "noCompleteTutorials": "×完全なCursorチュートリアル",
+      "noQAService": "×AIプログラミングQ&Aサービス",
+      "noVIPCommunity": "×VIPコミュニティグループ",
+      "noAppTemplates": "×AIアプリケーションテンプレート",
+      "completeTutorials": "完全なCursorチュートリアル",
+      "programmingProjects": "AIプログラミングプロジェクト",
+      "oneOnOneSupport": "1対1サポート",
+      "vipCommunity": "VIPコミュニティアクセス",
+      "lifetimeUpdates": "生涯コース更新",
+      "noPrioritySupport": "×優先技術サポート",
+      "noSourceCode": "×ログインシステムソースコード",
+      "noPaymentIntegration": "×決済システム統合",
+      "noCommercialLicense": "×商用ライセンス",
+      "prioritySupport": "優先技術サポート",
+      "appTemplates": "AIアプリケーションテンプレート",
+      "sourceCode": "ログインシステムソースコード",
+      "paymentIntegration": "決済システム統合",
+      "commercialLicense": "商用ライセンス"
+    }
   }
 }

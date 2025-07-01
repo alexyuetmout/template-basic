@@ -1,0 +1,38 @@
+{
+  "cancel": {
+    "title": "支払いキャンセル",
+    "description": "お支払いがキャンセルされました",
+    "message": "問題ありません。いつでも購入プロセスを再開できます。",
+    "support": "何か問題がございましたら、お気軽にカスタマーサービスチームまでお問い合わせください。",
+    "backToPricing": "料金プランに戻る",
+    "backToHome": "ホームに戻る"
+  },
+  "success": {
+    "title": "支払い成功！",
+    "description": "ご購入が正常に完了しました",
+    "message": "ご購入いただきありがとうございます！お支払いを受け取り、関連サービスはまもなく有効化されます。",
+    "emailConfirmation": "購入詳細を含む確認メールが送信されます。",
+    "goToDashboard": "ダッシュボードへ",
+    "viewOrderHistory": "注文履歴を表示"
+  },
+  "subscription": {
+    "cancel": {
+      "title": "サブスクリプションキャンセル",
+      "description": "サブスクリプションプロセスがキャンセルされました",
+      "message": "問題ありません。いつでもサービスを再購読できます。",
+      "flexiblePlans": "いつでも再購読可能",
+      "flexibleDescription": "さまざまなニーズに対応する柔軟なサブスクリプションオプションを提供しています",
+      "viewPlans": "サブスクリプションプランを表示",
+      "backToHome": "ホームに戻る"
+    },
+    "success": {
+      "title": "サブスクリプション成功！",
+      "description": "サブスクリプションサービスへようこそ",
+      "message": "サービスをご購読いただきありがとうございます！サブスクリプションが有効化され、すぐにご利用いただけます。",
+      "activated": "サブスクリプション有効化",
+      "billingReminder": "次回請求サイクル前にリマインダーメールが送信されます",
+      "goToDashboard": "ダッシュボードへ",
+      "manageSubscriptions": "サブスクリプション管理"
+    }
+  }
+}

@@ -8,24 +8,6 @@
     "signUp": "Sign Up",
     "signOut": "Sign Out"
   },
-  "auth": {
-    "signIn": "Sign In",
-    "signUp": "Sign Up",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "forgotPassword": "Forgot Password?",
-    "alreadyHaveAccount": "Already have an account?",
-    "dontHaveAccount": "Don't have an account?",
-    "orContinueWith": "Or continue with"
-  },
-  "dashboard": {
-    "title": "Dashboard",
-    "points": "Points",
-    "orders": "Orders",
-    "subscriptions": "Subscriptions",
-    "security": "Security"
-  },
   "common": {
     "loading": "Loading...",
     "save": "Save",
@@ -36,6 +18,10 @@
     "submit": "Submit",
     "back": "Back",
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "backToHome": "Back to Home"
+  },
+  "payment": {
+    "checkoutError": "Failed to start checkout. Please try again."
   }
 }

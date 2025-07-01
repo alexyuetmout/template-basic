@@ -118,7 +118,6 @@
         "description": "Experience Cursor tutorials and AI programming basics",
         "price": "Free",
         "ctaText": "Start Learning",
-        "ctaHref": "/sign-up",
         "ctaVariant": "outline",
         "features": [
           {
@@ -161,7 +160,6 @@
         "price": "$99",
         "priceUnit": "/month",
         "ctaText": "Limited Time Offer",
-        "ctaHref": "/pricing",
         "ctaVariant": "default",
         "isPopular": true,
         "features": [
@@ -213,7 +211,6 @@
         "price": "$199",
         "priceUnit": "/month",
         "ctaText": "View Demo",
-        "ctaHref": "/demo",
         "ctaVariant": "outline",
         "features": [
           {
@@ -269,41 +266,31 @@
       "id": 1,
       "name": "Sarah Chen",
       "title": "Full Stack Developer",
-      "avatar": "/images/avatar/avatar-1.webp",
-      "content": "This template saved me weeks of development time. The AI integration is seamless and the code quality is exceptional. Highly recommended for any AI project.",
-      "rating": 5
+      "content": "This template saved me weeks of development time. The AI integration is seamless and the code quality is exceptional. Highly recommended for any AI project."
     },
     {
       "id": 2,
       "name": "Marcus Rodriguez",
       "title": "AI Engineer",
-      "avatar": "/images/avatar/avatar-2.webp",
-      "content": "The authentication system and payment integration work flawlessly. Perfect starting point for any SaaS application with AI capabilities.",
-      "rating": 5
+      "content": "The authentication system and payment integration work flawlessly. Perfect starting point for any SaaS application with AI capabilities."
     },
     {
       "id": 3,
       "name": "Emily Watson",
       "title": "Product Manager",
-      "avatar": "/images/avatar/avatar-3.webp",
-      "content": "From a design perspective, this template is outstanding. The component library is comprehensive, animations are smooth, and the overall aesthetic is modern and professional.",
-      "rating": 5
+      "content": "From a design perspective, this template is outstanding. The component library is comprehensive, animations are smooth, and the overall aesthetic is modern and professional."
     },
     {
       "id": 4,
       "name": "David Kim",
       "title": "Startup Founder",
-      "avatar": "/images/avatar/avatar-1.webp",
-      "content": "Built our MVP in record time using this template. The documentation is clear, the code is well-structured, and support is excellent.",
-      "rating": 5
+      "content": "Built our MVP in record time using this template. The documentation is clear, the code is well-structured, and support is excellent."
     },
     {
       "id": 5,
       "name": "Lisa Zhang",
       "title": "DevOps Engineer",
-      "avatar": "/images/avatar/avatar-2.webp",
-      "content": "Deployment was a breeze. The CI/CD setup is perfect and the performance optimizations are already built-in. Saves so much time!",
-      "rating": 5
+      "content": "Deployment was a breeze. The CI/CD setup is perfect and the performance optimizations are already built-in. Saves so much time!"
     }
     ]
   },
@@ -311,7 +298,24 @@
     "title": "Latest Blog Posts",
     "subtitle": "Explore cutting-edge AI development techniques and best practices",
     "readMore": "Read More",
-    "viewAllPosts": "View All Posts"
+    "viewAllPosts": "View All Posts",
+    "posts": [
+      {
+        "title": "Building Your First AI Chatbot",
+        "date": "April 3, 2024",
+        "description": "A comprehensive guide to building an intelligent chatbot using Next.js and OpenAI API"
+      },
+      {
+        "title": "Getting Started with AI Development",
+        "date": "April 2, 2024",
+        "description": "Learn the basics of AI development and start building your first AI application"
+      },
+      {
+        "title": "Welcome to AImaker",
+        "date": "April 1, 2024",
+        "description": "Start your AI journey and explore unlimited possibilities in AI development"
+      }
+    ]
   },
   "cta": {
     "title": {
@@ -329,6 +333,8 @@
     "badge": "FAQ",
     "title": "Frequently asked questions",
     "subtitle": "For any unanswered questions, reach out to our support team via email. We'll respond as soon as possible to assist you.",
+    "contactText": "Have another question?",
+    "contactButton": "Contact Us",
     "items": [
       {
         "question": "What is AIMaker Template?",

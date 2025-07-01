@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
@@ -21,14 +22,15 @@ interface Order {
   };
 }
 
-const statusConfig = {
-  PENDING: { label: "Pending", color: "bg-yellow-100 text-yellow-800" },
-  SUCCEEDED: { label: "Completed", color: "bg-green-100 text-green-800" },
-  FAILED: { label: "Failed", color: "bg-red-100 text-red-800" },
-  REFUNDED: { label: "Refunded", color: "bg-gray-100 text-gray-800" },
-};
+const getStatusConfig = (t: any) => ({
+  PENDING: { label: t('dashboard:orders.status.pending'), color: "bg-yellow-100 text-yellow-800" },
+  SUCCEEDED: { label: t('dashboard:orders.status.succeeded'), color: "bg-green-100 text-green-800" },
+  FAILED: { label: t('dashboard:orders.status.failed'), color: "bg-red-100 text-red-800" },
+  REFUNDED: { label: t('dashboard:orders.status.refunded'), color: "bg-gray-100 text-gray-800" },
+});
 
 export default function DashboardOrdersPage() {
+  const { t } = useTranslation();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
@@ -36,6 +38,8 @@ export default function DashboardOrdersPage() {
     totalSpent: 0,
     totalPoints: 0,
   });
+
+  const statusConfig = getStatusConfig(t);
 
   useEffect(() => {
     fetchOrders();
@@ -106,8 +110,8 @@ export default function DashboardOrdersPage() {
       <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Orders</h1>
-            <p className="text-gray-600">View your purchase history and order details</p>
+            <h1 className="text-2xl font-bold text-gray-900">{t('dashboard:orders.title')}</h1>
+            <p className="text-gray-600">{t('dashboard:orders.description')}</p>
           </div>
 
           {/* Statistics Cards */}
@@ -117,7 +121,7 @@ export default function DashboardOrdersPage() {
                 <div className="flex items-center">
                   <ShoppingBag className="w-8 h-8 text-blue-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Total Orders</p>
+                    <p className="text-sm font-medium text-gray-600">{t('dashboard:orders.stats.totalOrders')}</p>
                     <p className="text-2xl font-bold text-gray-900">{stats.totalOrders}</p>
                   </div>
                 </div>
@@ -129,7 +133,7 @@ export default function DashboardOrdersPage() {
                 <div className="flex items-center">
                   <DollarSign className="w-8 h-8 text-green-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Total Spent</p>
+                    <p className="text-sm font-medium text-gray-600">{t('dashboard:orders.stats.totalSpent')}</p>
                     <p className="text-2xl font-bold text-gray-900">
                       {formatCurrency(stats.totalSpent)}
                     </p>
@@ -143,7 +147,7 @@ export default function DashboardOrdersPage() {
                 <div className="flex items-center">
                   <Package className="w-8 h-8 text-purple-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Points Earned</p>
+                    <p className="text-sm font-medium text-gray-600">{t('dashboard:orders.stats.pointsEarned')}</p>
                     <p className="text-2xl font-bold text-gray-900">{stats.totalPoints}</p>
                   </div>
                 </div>
@@ -154,18 +158,18 @@ export default function DashboardOrdersPage() {
           {/* Order List */}
           <Card>
             <CardHeader>
-              <CardTitle>Order History</CardTitle>
+              <CardTitle>{t('dashboard:orders.orderHistory.title')}</CardTitle>
               <CardDescription>
-                Your recent purchase records
+                {t('dashboard:orders.orderHistory.description')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               {orders.length === 0 ? (
                 <div className="text-center py-8">
                   <ShoppingBag className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-500">No orders yet</p>
+                  <p className="text-gray-500">{t('dashboard:orders.empty.noOrders')}</p>
                   <p className="text-sm text-gray-400 mt-1">
-                    Go purchase some products!
+                    {t('dashboard:orders.empty.purchaseProducts')}
                   </p>
                 </div>
               ) : (
@@ -182,7 +186,7 @@ export default function DashboardOrdersPage() {
                               {order.price.name}
                             </h3>
                             <p className="text-sm text-gray-500">
-                              Order: {order.orderNumber}
+                              {t('dashboard:orders.orderHistory.orderNumber', { orderNumber: order.orderNumber })}
                             </p>
                           </div>
                         </div>
@@ -209,7 +213,7 @@ export default function DashboardOrdersPage() {
                           {order.pointsAdded > 0 && (
                             <div className="flex items-center">
                               <Package className="w-4 h-4 mr-1" />
-                              +{order.pointsAdded} points
+                              {t('dashboard:orders.orderHistory.pointsAdded', { points: order.pointsAdded })}
                             </div>
                           )}
                         </div>

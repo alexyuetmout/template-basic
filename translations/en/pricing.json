@@ -1,0 +1,158 @@
+{
+  "title": "Pricing Plans",
+  "subtitle": "Choose Your Learning Plan",
+  "description": "Start your AI development journey with the perfect plan for you",
+  "loading": "Loading pricing plans...",
+  "getStarted": "Get Started",
+  "unknown": "Unknown",
+  "descriptionNotAvailable": "Plan description not available",
+  "month": "month",
+  "year": "year",
+  "mostPopular": "Most Popular",
+  "noPricingPlans": "No pricing plans available for the selected option.",
+  "modes": {
+    "onetime": "One-time",
+    "monthly": "Monthly",
+    "yearly": "Yearly"
+  },
+  "planConfigs": {
+    "onetime_basic": {
+      "name": "Basic",
+      "description": "Experience Cursor tutorials and AI programming basics",
+      "features": [
+        "Basic Cursor tutorials",
+        "AI programming environment setup",
+        "Basic development tools",
+        "Public community access",
+        "×Complete Cursor tutorials",
+        "×AI programming Q&A service",
+        "×VIP community group",
+        "×AI application templates"
+      ]
+    },
+    "onetime_pro": {
+      "name": "Pro",
+      "description": "Master Cursor and AI programming systematically",
+      "features": [
+        "Complete Cursor tutorials",
+        "AI programming projects",
+        "One-on-one support",
+        "VIP community access",
+        "Lifetime course updates",
+        "×Priority technical support",
+        "×AI application templates",
+        "×Login system source code",
+        "×Payment system integration",
+        "×Commercial license"
+      ]
+    },
+    "onetime_premium": {
+      "name": "Premium",
+      "description": "Master professional AI programming skills",
+      "features": [
+        "Complete Cursor tutorials",
+        "AI programming projects",
+        "One-on-one support",
+        "VIP community access",
+        "Lifetime course updates",
+        "Priority technical support",
+        "AI application templates",
+        "Login system source code",
+        "Payment system integration",
+        "Commercial license"
+      ]
+    },
+    "subscribe_basic": {
+      "name": "Basic",
+      "description": "Experience Cursor tutorials and AI programming basics",
+      "features": [
+        "Basic Cursor tutorials",
+        "AI programming environment setup",
+        "Basic development tools",
+        "Public community access",
+        "×Complete Cursor tutorials",
+        "×AI programming Q&A service",
+        "×VIP community group",
+        "×AI application templates"
+      ]
+    },
+    "subscribe_pro": {
+      "name": "Pro",
+      "description": "Master Cursor and AI programming systematically",
+      "features": [
+        "Complete Cursor tutorials",
+        "AI programming projects",
+        "One-on-one support",
+        "VIP community access",
+        "Lifetime course updates",
+        "×Priority technical support",
+        "×AI application templates",
+        "×Login system source code",
+        "×Payment system integration",
+        "×Commercial license"
+      ]
+    },
+    "subscribe_premium": {
+      "name": "Premium",
+      "description": "Master professional AI programming skills",
+      "features": [
+        "Complete Cursor tutorials",
+        "AI programming projects",
+        "One-on-one support",
+        "VIP community access",
+        "Lifetime course updates",
+        "Priority technical support",
+        "AI application templates",
+        "Login system source code",
+        "Payment system integration",
+        "Commercial license"
+      ]
+    },
+    "subscribe_basic_year": {
+      "name": "Basic",
+      "description": "Experience Cursor tutorials and AI programming basics",
+      "features": [
+        "Basic Cursor tutorials",
+        "AI programming environment setup",
+        "Basic development tools",
+        "Public community access",
+        "×Complete Cursor tutorials",
+        "×AI programming Q&A service",
+        "×VIP community group",
+        "×AI application templates"
+      ]
+    },
+    "subscribe_pro_year": {
+      "name": "Pro",
+      "description": "Master Cursor and AI programming systematically",
+      "features": [
+        "Complete Cursor tutorials",
+        "AI programming projects",
+        "One-on-one support",
+        "VIP community access",
+        "Lifetime course updates",
+        "×Priority technical support",
+        "×AI application templates",
+        "×Login system source code",
+        "×Payment system integration",
+        "×Commercial license"
+      ]
+    },
+    "subscribe_pre_year": {
+      "name": "Premium",
+      "description": "Master professional AI programming skills",
+      "features": [
+        "Complete Cursor tutorials",
+        "AI programming projects",
+        "One-on-one support",
+        "VIP community access",
+        "Lifetime course updates",
+        "Priority technical support",
+        "AI application templates",
+        "Login system source code",
+        "Payment system integration",
+        "Commercial license"
+      ]
+    }
+  }
+}

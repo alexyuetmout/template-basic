@@ -1,0 +1,216 @@
+{
+  "subscriptions": {
+    "title": "订阅管理",
+    "description": "管理您的订阅计划和计费信息",
+    "activeSubscriptions": "活跃订阅",
+    "historySubscriptions": "历史订阅",
+    "noSubscriptions": "暂无订阅",
+    "noSubscriptionsDesc": "您还没有任何订阅计划",
+    "viewPlans": "查看订阅计划",
+    "price": "价格",
+    "currentPeriod": "当前周期",
+    "nextBilling": "下次扣费",
+    "subscriptionTime": "订阅时间",
+    "cancelTime": "取消时间",
+    "cancelReason": "取消原因",
+    "cancelling": "取消中...",
+    "cancelSubscription": "取消订阅",
+    "confirmCancel": "确定要取消这个订阅吗？取消后将在当前计费周期结束时停止服务。",
+    "cancelSuccess": "订阅取消成功！服务将在当前计费周期结束时停止。",
+    "cancelFailed": "取消订阅失败，请稍后重试",
+    "status": {
+      "active": "活跃",
+      "cancelled": "已取消",
+      "expired": "已过期"
+    },
+    "help": {
+      "title": "订阅说明",
+      "description": "关于订阅管理的重要信息",
+      "cancellationPolicy": "取消政策",
+      "policies": [
+        "• 可随时取消订阅",
+        "• 取消后服务持续到周期结束",
+        "• 部分周期不予退款",
+        "• 可重新订阅恢复服务"
+      ],
+      "billing": "计费信息",
+      "billingInfo": [
+        "• 到期前自动续费",
+        "• 可升级或降级计划",
+        "• 计费历史可在订单中查看",
+        "• 计费问题请联系客服"
+      ]
+    }
+  },
+  "security": {
+    "title": "安全设置",
+    "description": "管理您的账户安全和密码",
+    "changePassword": "修改密码",
+    "currentPassword": "当前密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认新密码",
+    "saveChanges": "保存修改",
+    "saving": "保存中...",
+    "errors": {
+      "currentPasswordRequired": "请输入当前密码",
+      "newPasswordRequired": "请输入新密码",
+      "newPasswordShort": "新密码至少需要6个字符",
+      "confirmPasswordRequired": "请确认新密码",
+      "passwordMismatch": "两次输入的密码不一致"
+    },
+    "success": "密码修改成功！",
+    "failed": "密码修改失败，请稍后重试",
+    "setPassword": "设置密码",
+    "setPasswordSuccess": "密码设置成功！",
+    "setPasswordFailed": "设置密码失败，请稍后重试",
+    "setPasswordDesc": "为您的账户设置密码，增强安全性",
+    "changePasswordDesc": "定期更换密码可以提高账户安全性",
+    "loading": "加载安全设置...",
+    "setting": "设置中...",
+    "accountSecurityStatus": "账户安全状态",
+    "checkSecuritySettings": "检查您的账户安全设置",
+    "placeholders": {
+      "currentPassword": "请输入当前密码",
+      "newPassword": "请输入新密码",
+      "confirmPassword": "请再次输入新密码",
+      "password": "请输入密码"
+    },
+    "validation": {
+      "minLength": "至少8个字符",
+      "uppercase": "至少包含1个大写字母",
+      "lowercase": "至少包含1个小写字母",
+      "number": "至少包含1个数字"
+    },
+    "requirements": {
+      "title": "密码安全要求：",
+      "items": [
+        "至少8个字符",
+        "包含大写字母、小写字母和数字",
+        "避免使用个人信息作为密码"
+      ]
+    },
+    "hint": {
+      "title": "提示：",
+      "description": "您目前通过第三方登录，未设置账户密码。设置密码后可以使用邮箱密码直接登录。"
+    },
+    "status": {
+      "emailVerification": "邮箱验证",
+      "emailVerificationDesc": "已验证的邮箱地址用于账户恢复",
+      "verified": "已验证",
+      "passwordStrength": "密码强度",
+      "passwordStrengthDesc": "强密码可以保护您的账户安全",
+      "medium": "中等",
+      "loginProtection": "登录保护",
+      "loginProtectionDesc": "异常登录时会发送邮件通知",
+      "enabled": "已启用"
+    },
+    "errors": {
+      "currentPasswordRequired": "请输入当前密码",
+      "newPasswordRequired": "请输入新密码",
+      "confirmPasswordRequired": "请确认新密码",
+      "passwordRequired": "请输入密码",
+      "passwordMismatch": "两次输入的密码不一致"
+    }
+  },
+  "profile": {
+    "title": "个人中心",
+    "description": "管理您的个人资料和账户信息",
+    "basicInformation": "基本信息",
+    "updateProfileInfo": "更新您的个人资料",
+    "username": "用户名",
+    "enterUsername": "请输入您的用户名",
+    "emailAddress": "邮箱地址",
+    "emailCannotChange": "邮箱地址无法更改，如有需要请联系客服",
+    "saving": "保存中...",
+    "saveChanges": "保存更改",
+    "updateSuccess": "个人资料更新成功！",
+    "updateFailed": "更新失败，请稍后重试",
+    "accountInformation": "账户信息",
+    "accountBasicInfo": "您的账户基本信息",
+    "userId": "用户ID",
+    "registrationDate": "注册日期",
+    "accountStatus": "账户状态",
+    "active": "活跃"
+  },
+  "points": {
+    "title": "积分中心",
+    "description": "查看您的积分余额和使用历史",
+    "overview": {
+      "totalPoints": "总积分",
+      "availablePoints": "可用积分",
+      "expiringSoon": "即将过期",
+      "within30Days": "30天内"
+    },
+    "expiryWarning": {
+      "title": "积分过期提醒",
+      "message": "您有 {{count}} 积分将在30天内过期，请及时使用"
+    },
+    "history": {
+      "title": "积分记录",
+      "description": "您的积分获得和使用历史",
+      "noRecords": "暂无积分记录",
+      "noRecordsDesc": "购买产品或订阅服务即可获得积分",
+      "orderNumber": "订单: {{orderNumber}}"
+    },
+    "transactionTypes": {
+      "PURCHASE": "购买",
+      "SUBSCRIPTION": "订阅",
+      "SPEND": "消费",
+      "EXPIRE": "过期",
+      "REFUND": "退款"
+    },
+    "expiry": {
+      "neverExpires": "永不过期",
+      "expired": "已过期",
+      "daysLeft": "{{days}}天后过期",
+      "expiresIn": "{{days}}天后过期"
+    },
+    "information": {
+      "title": "积分说明",
+      "description": "了解积分的获得和使用规则",
+      "howToEarn": {
+        "title": "如何获得积分",
+        "items": [
+          "• 购买产品或服务",
+          "• 订阅月度或年度计划",
+          "• 参与活动和推广",
+          "• 邀请好友注册"
+        ]
+      },
+      "usageRules": {
+        "title": "积分使用规则",
+        "items": [
+          "• 积分可用于购买产品",
+          "• 1积分 = $0.01",
+          "• 积分有效期为1年",
+          "• 过期积分将自动清零"
+        ]
+      }
+    }
+  },
+  "orders": {
+    "title": "订单管理",
+    "description": "查看您的购买历史和订单详情",
+    "stats": {
+      "totalOrders": "总订单数",
+      "totalSpent": "总消费", 
+      "pointsEarned": "获得积分"
+    },
+    "status": {
+      "pending": "待付款",
+      "succeeded": "已完成",
+      "failed": "失败",
+      "refunded": "已退款"
+    },
+    "orderHistory": {
+      "title": "订单历史",
+      "description": "您的最近购买记录",
+      "orderNumber": "订单: {{orderNumber}}",
+      "pointsAdded": "+{{points}} 积分"
+    },
+    "empty": {
+      "noOrders": "暂无订单",
+      "purchaseProducts": "去购买一些产品吧！"
+    }
+  }
+}

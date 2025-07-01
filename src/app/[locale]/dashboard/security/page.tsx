@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Key, Eye, EyeOff, Loader2, AlertCircle, Plus } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const PasswordInput = ({ 
   label, 
@@ -60,6 +61,7 @@ const PasswordInput = ({
 
 export default function SecurityPage() {
   const { data: session } = useSession();
+  const { t } = useTranslation('dashboard');
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -102,16 +104,16 @@ export default function SecurityPage() {
   const validatePassword = (password: string) => {
     const errors = [];
     if (password.length < 8) {
-      errors.push("至少8个字符");
+      errors.push(t('security.validation.minLength'));
     }
     if (!/[A-Z]/.test(password)) {
-      errors.push("至少包含1个大写字母");
+      errors.push(t('security.validation.uppercase'));
     }
     if (!/[a-z]/.test(password)) {
-      errors.push("至少包含1个小写字母");
+      errors.push(t('security.validation.lowercase'));
     }
     if (!/\d/.test(password)) {
-      errors.push("至少包含1个数字");
+      errors.push(t('security.validation.number'));
     }
     return errors;
   };
@@ -126,22 +128,22 @@ export default function SecurityPage() {
     const formErrors: Record<string, string> = {};
     
     if (!currentPassword) {
-      formErrors.currentPassword = "请输入当前密码";
+      formErrors.currentPassword = t('security.errors.currentPasswordRequired');
     }
     
     if (!newPassword) {
-      formErrors.newPassword = "请输入新密码";
+      formErrors.newPassword = t('security.errors.newPasswordRequired');
     } else {
       const passwordErrors = validatePassword(newPassword);
       if (passwordErrors.length > 0) {
-        formErrors.newPassword = passwordErrors.join("，");
+        formErrors.newPassword = passwordErrors.join(', ');
       }
     }
     
     if (!confirmPassword) {
-      formErrors.confirmPassword = "请确认新密码";
+      formErrors.confirmPassword = t('security.errors.confirmPasswordRequired');
     } else if (newPassword !== confirmPassword) {
-      formErrors.confirmPassword = "两次输入的密码不一致";
+      formErrors.confirmPassword = t('security.errors.passwordMismatch');
     }
 
     if (Object.keys(formErrors).length > 0) {
@@ -165,15 +167,15 @@ export default function SecurityPage() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("密码修改成功！");
+        setMessage(t('security.success'));
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");
       } else {
-        setMessage(data.error || "密码修改失败，请稍后重试");
+        setMessage(data.error || t('security.failed'));
       }
     } catch (error) {
-      setMessage("密码修改失败，请稍后重试");
+      setMessage(t('security.failed'));
     } finally {
       setLoading(false);
     }
@@ -189,18 +191,18 @@ export default function SecurityPage() {
     const formErrors: Record<string, string> = {};
     
     if (!newPassword) {
-      formErrors.newPassword = "请输入密码";
+      formErrors.newPassword = t('security.errors.passwordRequired');
     } else {
       const passwordErrors = validatePassword(newPassword);
       if (passwordErrors.length > 0) {
-        formErrors.newPassword = passwordErrors.join("，");
+        formErrors.newPassword = passwordErrors.join(', ');
       }
     }
     
     if (!confirmPassword) {
-      formErrors.confirmPassword = "请确认密码";
+      formErrors.confirmPassword = t('security.errors.confirmPasswordRequired');
     } else if (newPassword !== confirmPassword) {
-      formErrors.confirmPassword = "两次输入的密码不一致";
+      formErrors.confirmPassword = t('security.errors.passwordMismatch');
     }
 
     if (Object.keys(formErrors).length > 0) {
@@ -222,18 +224,18 @@ export default function SecurityPage() {
       const result = await response.json();
       
       if (response.ok) {
-        setSetPasswordMessage("密码设置成功！");
+        setSetPasswordMessage(t('security.setPasswordSuccess'));
         setNewPassword("");
         setConfirmPassword("");
         
         // 更新 hasPassword 状态，因为用户现在有密码了
         setHasPassword(true);
       } else {
-        setSetPasswordMessage(result.error || "设置密码失败，请稍后重试");
+        setSetPasswordMessage(result.error || t('security.setPasswordFailed'));
       }
     } catch (error) {
       console.error('Set password error:', error);
-      setSetPasswordMessage("设置密码失败，请稍后重试");
+      setSetPasswordMessage(t('security.setPasswordFailed'));
     } finally {
       setSetPasswordLoading(false);
     }
@@ -248,7 +250,7 @@ export default function SecurityPage() {
           <div className="flex items-center justify-center py-12">
             <div className="flex items-center space-x-2">
               <Loader2 className="w-6 h-6 animate-spin" />
-              <span>加载安全设置...</span>
+              <span>{t('security.loading')}</span>
             </div>
           </div>
         </DashboardLayout>
@@ -264,8 +266,8 @@ export default function SecurityPage() {
       <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">安全设置</h1>
-            <p className="text-gray-600">管理您的账户安全和密码</p>
+            <h1 className="text-2xl font-bold text-gray-900">{t('security.title')}</h1>
+            <p className="text-gray-600">{t('security.description')}</p>
           </div>
 
           {/* 设置密码 / 修改密码 */}
@@ -273,12 +275,12 @@ export default function SecurityPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 {hasPassword ? <Key className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-                {hasPassword ? "修改密码" : "设置密码"}
+                {hasPassword ? t('security.changePassword') : t('security.setPassword')}
               </CardTitle>
               <CardDescription>
                 {hasPassword 
-                  ? "定期更换密码可以提高账户安全性" 
-                  : "为您的账户设置密码，增强安全性"}
+                  ? t('security.changePasswordDesc') 
+                  : t('security.setPasswordDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -286,33 +288,33 @@ export default function SecurityPage() {
                 // 修改密码表单
                 <form onSubmit={handleChangePassword} className="space-y-4">
                   <PasswordInput
-                    label="当前密码"
+                    label={t('security.currentPassword')}
                     value={currentPassword}
                     onChange={setCurrentPassword}
                     show={showCurrentPassword}
                     onToggleShow={() => setShowCurrentPassword(!showCurrentPassword)}
                     error={errors.currentPassword}
-                    placeholder="请输入当前密码"
+                    placeholder={t('security.currentPasswordPlaceholder')}
                   />
 
                   <PasswordInput
-                    label="新密码"
+                    label={t('security.newPassword')}
                     value={newPassword}
                     onChange={setNewPassword}
                     show={showNewPassword}
                     onToggleShow={() => setShowNewPassword(!showNewPassword)}
                     error={errors.newPassword}
-                    placeholder="请输入新密码"
+                    placeholder={t('security.newPasswordPlaceholder')}
                   />
 
                   <PasswordInput
-                    label="确认新密码"
+                    label={t('security.confirmPassword')}
                     value={confirmPassword}
                     onChange={setConfirmPassword}
                     show={showConfirmPassword}
                     onToggleShow={() => setShowConfirmPassword(!showConfirmPassword)}
                     error={errors.confirmPassword}
-                    placeholder="请再次输入新密码"
+                    placeholder={t('security.confirmPasswordPlaceholder')}
                   />
 
                   {/* 密码强度提示 */}
@@ -320,11 +322,11 @@ export default function SecurityPage() {
                     <div className="flex items-start">
                       <AlertCircle className="w-4 h-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
                       <div className="text-sm text-blue-800">
-                        <p className="font-medium mb-1">密码安全要求：</p>
+                        <p className="font-medium mb-1">{t('security.requirements.title')}</p>
                         <ul className="list-disc list-inside space-y-1 text-xs">
-                          <li>至少8个字符</li>
-                          <li>包含大写字母、小写字母和数字</li>
-                          <li>避免使用个人信息作为密码</li>
+                          <li>{t('security.requirements.minLength')}</li>
+                          <li>{t('security.requirements.mixedCase')}</li>
+                          <li>{t('security.requirements.avoidPersonal')}</li>
                         </ul>
                       </div>
                     </div>
@@ -348,12 +350,12 @@ export default function SecurityPage() {
                     {loading ? (
                       <>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        修改中...
+                        {t('security.changing')}
                       </>
                     ) : (
                       <>
                         <Shield className="w-4 h-4 mr-2" />
-                        修改密码
+                        {t('security.changePassword')}
                       </>
                     )}
                   </Button>
@@ -365,30 +367,30 @@ export default function SecurityPage() {
                     <div className="flex items-start">
                       <AlertCircle className="w-4 h-4 text-yellow-600 mr-2 mt-0.5 flex-shrink-0" />
                       <div className="text-sm text-yellow-800">
-                        <p className="font-medium mb-1">提示：</p>
-                        <p>您目前通过第三方登录，未设置账户密码。设置密码后可以使用邮箱密码直接登录。</p>
+                        <p className="font-medium mb-1">{t('security.tip')}</p>
+                        <p>{t('security.oauthAccountTip')}</p>
                       </div>
                     </div>
                   </div>
 
                   <PasswordInput
-                    label="新密码"
+                    label={t('security.newPassword')}
                     value={newPassword}
                     onChange={setNewPassword}
                     show={showNewPassword}
                     onToggleShow={() => setShowNewPassword(!showNewPassword)}
                     error={setPasswordErrors.newPassword}
-                    placeholder="请输入密码"
+                    placeholder={t('security.passwordPlaceholder')}
                   />
 
                   <PasswordInput
-                    label="确认密码"
+                    label={t('security.confirmPassword')}
                     value={confirmPassword}
                     onChange={setConfirmPassword}
                     show={showConfirmPassword}
                     onToggleShow={() => setShowConfirmPassword(!showConfirmPassword)}
                     error={setPasswordErrors.confirmPassword}
-                    placeholder="请再次输入密码"
+                    placeholder={t('security.confirmPasswordPlaceholder2')}
                   />
 
                   {/* 密码强度提示 */}
@@ -396,11 +398,11 @@ export default function SecurityPage() {
                     <div className="flex items-start">
                       <AlertCircle className="w-4 h-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
                       <div className="text-sm text-blue-800">
-                        <p className="font-medium mb-1">密码安全要求：</p>
+                        <p className="font-medium mb-1">{t('security.requirements.title')}</p>
                         <ul className="list-disc list-inside space-y-1 text-xs">
-                          <li>至少8个字符</li>
-                          <li>包含大写字母、小写字母和数字</li>
-                          <li>避免使用个人信息作为密码</li>
+                          <li>{t('security.requirements.minLength')}</li>
+                          <li>{t('security.requirements.mixedCase')}</li>
+                          <li>{t('security.requirements.avoidPersonal')}</li>
                         </ul>
                       </div>
                     </div>
@@ -424,12 +426,12 @@ export default function SecurityPage() {
                     {setPasswordLoading ? (
                       <>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        设置中...
+                        {t('security.setting')}
                       </>
                     ) : (
                       <>
                         <Plus className="w-4 h-4 mr-2" />
-                        设置密码
+                        {t('security.setPassword')}
                       </>
                     )}
                   </Button>
@@ -443,41 +445,41 @@ export default function SecurityPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="w-5 h-5" />
-                账户安全状态
+                {t('security.accountSecurityStatus')}
               </CardTitle>
               <CardDescription>
-                检查您的账户安全设置
+                {t('security.checkSecuritySettings')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-2 border-b border-gray-100">
                   <div>
-                    <span className="text-sm font-medium text-gray-900">邮箱验证</span>
-                    <p className="text-xs text-gray-500">已验证的邮箱地址用于账户恢复</p>
+                    <span className="text-sm font-medium text-gray-900">{t('security.emailVerification')}</span>
+                    <p className="text-xs text-gray-500">{t('security.emailVerificationDesc')}</p>
                   </div>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    已验证
+                    {t('security.verified')}
                   </span>
                 </div>
                 
                 <div className="flex items-center justify-between py-2 border-b border-gray-100">
                   <div>
-                    <span className="text-sm font-medium text-gray-900">密码强度</span>
-                    <p className="text-xs text-gray-500">强密码可以保护您的账户安全</p>
+                    <span className="text-sm font-medium text-gray-900">{t('security.passwordStrength')}</span>
+                    <p className="text-xs text-gray-500">{t('security.passwordStrengthDesc')}</p>
                   </div>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                    中等
+                    {t('security.medium')}
                   </span>
                 </div>
                 
                 <div className="flex items-center justify-between py-2">
                   <div>
-                    <span className="text-sm font-medium text-gray-900">登录保护</span>
-                    <p className="text-xs text-gray-500">异常登录时会发送邮件通知</p>
+                    <span className="text-sm font-medium text-gray-900">{t('security.loginProtection')}</span>
+                    <p className="text-xs text-gray-500">{t('security.loginProtectionDesc')}</p>
                   </div>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    已启用
+                    {t('security.enabled')}
                   </span>
                 </div>
               </div>

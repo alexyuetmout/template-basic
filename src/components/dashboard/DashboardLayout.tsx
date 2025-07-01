@@ -14,41 +14,43 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSession } from "@/lib/auth-client";
+import { useTranslation } from "@/hooks/useTranslation";
+import { usePath } from "@/hooks/usePath";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-const menuItems = [
+const createMenuItems = (t: any, routes: any) => [
   {
-    title: "Dashboard",
-    href: "/dashboard",
+    title: t('dashboard.navigation.dashboard'),
+    href: routes.DASHBOARD,
     icon: User,
-    description: "Manage your profile information"
+    description: t('dashboard.navigation.dashboardDesc')
   },
   {
-    title: "Security",
-    href: "/dashboard/security",
+    title: t('dashboard.navigation.security'),
+    href: routes.DASHBOARD_SECURITY,
     icon: Shield,
-    description: "Password and security settings"
+    description: t('dashboard.navigation.securityDesc')
   },
   {
-    title: "Orders",
-    href: "/dashboard/orders",
+    title: t('dashboard.navigation.orders'),
+    href: routes.DASHBOARD_ORDERS,
     icon: ShoppingBag,
-    description: "View purchase history"
+    description: t('dashboard.navigation.ordersDesc')
   },
   {
-    title: "Points",
-    href: "/dashboard/points",
+    title: t('dashboard.navigation.points'),
+    href: routes.DASHBOARD_POINTS,
     icon: Coins,
-    description: "Points usage and history"
+    description: t('dashboard.navigation.pointsDesc')
   },
   {
-    title: "Subscriptions",
-    href: "/dashboard/subscriptions",
+    title: t('dashboard.navigation.subscriptions'),
+    href: routes.DASHBOARD_SUBSCRIPTIONS,
     icon: CreditCard,
-    description: "Manage your subscriptions"
+    description: t('dashboard.navigation.subscriptionsDesc')
   },
 ];
 
@@ -56,11 +58,15 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const { data: session, isPending } = useSession();
   const router = useRouter();
   const pathname = usePathname();
+  const { t } = useTranslation();
+  const { routes } = usePath();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const menuItems = createMenuItems(t, routes);
 
   useEffect(() => {
     if (!isPending && !session) {
-      router.push("/auth/sign-in");
+      router.push(routes.SIGN_IN);
       return;
     }
   }, [session, isPending, router]);
@@ -71,7 +77,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="flex items-center space-x-2">
           <Loader2 className="w-6 h-6 animate-spin" />
-          <span>Loading...</span>
+          <span>{t('common.loading')}</span>
         </div>
       </div>
     );
@@ -91,7 +97,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             <div className="lg:col-span-1 bg-gray-50 rounded-l-lg">
               <div className="p-6">
                 <h2 className="text-lg font-semibold text-gray-900 mb-6">
-                  Dashboard
+                  {t('dashboard.title')}
                 </h2>
                 
                 {/* Mobile menu button */}
@@ -100,7 +106,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                   <Settings className="w-4 h-4 inline mr-2" />
-                  Menu
+                  {t('dashboard.menu')}
                 </button>
 
                 {/* Menu list */}

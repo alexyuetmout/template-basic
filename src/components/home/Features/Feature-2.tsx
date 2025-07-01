@@ -7,6 +7,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useTranslation } from "@/hooks/useTranslation";
+import { HeadingH2 } from "@/components/ui/headings";
 
 export function Features2() {
   const { t } = useTranslation("home");
@@ -63,9 +64,9 @@ export function Features2() {
           <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide text-primary bg-primary/10 dark:bg-primary/5 mb-6">
             {t("features2.badge")}
           </div>
-          <h2 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4">
+          <HeadingH2 className="text-neutral-900 dark:text-neutral-100 mb-4">
             {t("features2.title")}
-          </h2>
+          </HeadingH2>
           <p className="max-w-2xl mx-auto text-base text-neutral-600 dark:text-neutral-400">
             {t("features2.subtitle")}
           </p>

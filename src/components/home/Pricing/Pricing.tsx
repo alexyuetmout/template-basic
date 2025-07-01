@@ -5,6 +5,8 @@ import { Check, X } from "lucide-react";
 import Link from "next/link";
 import { useTranslation } from "@/hooks/useTranslation";
 import { usePath } from "@/lib/utils/path";
+import { PRICING_CTA_ROUTES } from "@/lib/routes";
+import { HeadingH1 } from "@/components/ui/headings";
 
 interface PricingFeature {
   text: string;
@@ -20,12 +22,21 @@ interface PricingPlan {
   features: PricingFeature[];
   ctaText: string;
   ctaVariant?: "default" | "outline";
-  ctaHref: string;
 }
 
-function PricingCard({ plan }: { plan: PricingPlan }) {
+function PricingCard({ plan, planIndex }: { plan: PricingPlan; planIndex: number }) {
   const { t } = useTranslation("home");
   const path = usePath();
+  
+  // 根据计划索引获取对应的路由
+  const getCtaHref = (index: number): string => {
+    switch (index) {
+      case 0: return PRICING_CTA_ROUTES.BASIC;      // Basic plan
+      case 1: return PRICING_CTA_ROUTES.COMPLETE;   // Complete Course plan  
+      case 2: return PRICING_CTA_ROUTES.ADVANCED;   // Advanced plan
+      default: return PRICING_CTA_ROUTES.BASIC;     // 默认回退到注册页面
+    }
+  };
 
   return (
     <div
@@ -81,7 +92,7 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
         ))}
       </div>
 
-      <Link href={path(plan.ctaHref || "/sign-up")}>
+      <Link href={path(getCtaHref(planIndex))}>
         <Button
           variant={plan.ctaVariant || "outline"}
           className={`w-full h-12 rounded-xl ${
@@ -112,7 +123,6 @@ export function Pricing() {
     .filter((plan) => plan && plan.name && plan.ctaText)
     .map((plan) => ({
       ...plan,
-      ctaHref: plan.ctaHref || "/sign-up",
       ctaVariant: plan.ctaVariant || "outline",
     }));
 
@@ -123,12 +133,12 @@ export function Pricing() {
     >
       <div className="container mx-auto px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <h2 className="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide text-primary bg-primary/10 dark:bg-primary/5 mb-6">
+          <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide text-primary bg-primary/10 dark:bg-primary/5 mb-6">
             {t("pricing.badge")}
-          </h2>
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-5xl">
+          </div>
+          <HeadingH1 className="mb-4 text-neutral-900 dark:text-neutral-100">
             {t("pricing.title")}
-          </h1>
+          </HeadingH1>
           <p className="text-lg text-neutral-600 dark:text-neutral-300">
             {t("pricing.subtitle")}
           </p>
@@ -136,7 +146,7 @@ export function Pricing() {
 
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-3">
           {validPlans.map((plan, index) => (
-            <PricingCard key={index} plan={plan} />
+            <PricingCard key={index} plan={plan} planIndex={index} />
           ))}
         </div>
       </div>

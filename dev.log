@@ -1,0 +1,52 @@
+
+> template-basic@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.3.4
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.115:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ✓ Compiled /middleware in 140ms (109 modules)
+ ○ Compiling /[locale] ...
+ ✓ Compiled /[locale] in 1875ms (1238 modules)
+ HEAD / 200 in 2719ms
+ ✓ Compiled in 441ms (551 modules)
+ ✓ Compiled in 391ms (551 modules)
+ GET / 200 in 735ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 1875ms (1673 modules)
+ GET /api/auth/get-session 200 in 2657ms
+ ✓ Compiled in 269ms (552 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 527ms (1677 modules)
+ GET / 404 in 595ms
+ GET /_next/static/css/app/layout.css?v=1751336824095 404 in 70ms
+ GET / 200 in 795ms
+ GET /_next/static/chunks/main-app.js?v=1751336824095 404 in 188ms
+ GET /_next/static/chunks/app/%5Blocale%5D/layout.js 404 in 182ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 238ms
+ GET /_next/static/chunks/app/%5Blocale%5D/page.js 404 in 229ms
+ ⨯ Failed to generate static paths for /[locale]:
+Error: Cannot find module './vendor-chunks/next@15.3.4_react-dom@19.1.0_react@19.1.0__react@19.1.0.js'
+Require stack:
+- /Users/yuewuwang/workspaces/techfusion/template-basic/.next/server/webpack-runtime.js
+- /Users/yuewuwang/workspaces/techfusion/template-basic/.next/server/app/[locale]/page.js
+- /Users/yuewuwang/workspaces/techfusion/template-basic/node_modules/.pnpm/next@15.3.4_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/server/require.js
+- /Users/yuewuwang/workspaces/techfusion/template-basic/node_modules/.pnpm/next@15.3.4_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/server/load-components.js
+- /Users/yuewuwang/workspaces/techfusion/template-basic/node_modules/.pnpm/next@15.3.4_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/build/utils.js
+- /Users/yuewuwang/workspaces/techfusion/template-basic/node_modules/.pnpm/next@15.3.4_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/server/dev/static-paths-worker.js
+- /Users/yuewuwang/workspaces/techfusion/template-basic/node_modules/.pnpm/next@15.3.4_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:203:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ✓ Compiled in 189ms (555 modules)
+ ✓ Compiled in 255ms (1243 modules)
+ ✓ Compiled in 297ms (555 modules)

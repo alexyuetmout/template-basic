@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTranslation } from "@/hooks/useTranslation";
 import { usePath } from "@/lib/utils/path";
+import { HeadingH1 } from "@/components/ui/headings";
 
 function HeroBackground() {
   return (
@@ -78,12 +79,12 @@ export function Hero() {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <HeadingH1 className="text-gray-900 dark:text-white">
             <span className="block bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
               {t("hero.title.main")}
             </span>
             <span className="block mt-2">{t("hero.title.sub")}</span>
-          </h1>
+          </HeadingH1>
 
           {/* Subtitle */}
           <p className="mt-6 max-w-2xl mx-auto text-base text-gray-600 dark:text-gray-300">

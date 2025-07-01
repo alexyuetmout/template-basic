@@ -3,8 +3,13 @@ import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { usePath } from "@/hooks/usePath";
+import { useTranslation } from "@/hooks/useTranslation";
 
 function PaymentSuccessContent() {
+  const { routes } = usePath();
+  const { t } = useTranslation('payment');
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50 p-4">
       <Card className="max-w-md w-full">
@@ -13,32 +18,32 @@ function PaymentSuccessContent() {
             <Check className="w-8 h-8 text-green-600" />
           </div>
           <CardTitle className="text-2xl font-bold text-green-800">
-            支付成功！
+            {t('success.title')}
           </CardTitle>
           <CardDescription className="text-green-600">
-            您的购买已成功完成
+            {t('success.description')}
           </CardDescription>
         </CardHeader>
         
         <CardContent className="space-y-4">
           <div className="text-center text-gray-600">
-            <p>感谢您的购买！我们已经收到您的付款，相关服务将很快激活。</p>
+            <p>{t('success.message')}</p>
             <p className="mt-2 text-sm">
-              您将收到一封确认邮件，其中包含您的购买详情。
+              {t('success.emailConfirmation')}
             </p>
           </div>
           
           <div className="flex flex-col gap-3 pt-4">
             <Button asChild className="w-full">
-              <Link href="/dashboard">
-                Go to Dashboard
+              <Link href={routes.DASHBOARD}>
+                {t('success.goToDashboard')}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
             
             <Button variant="outline" asChild className="w-full">
-              <Link href="/dashboard/orders">
-                View Order History
+              <Link href={routes.DASHBOARD_ORDERS}>
+                {t('success.viewOrderHistory')}
               </Link>
             </Button>
           </div>

@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation"
-import { ArrowLeft, Calendar, User, Clock, Share2 } from "lucide-react"
-import Link from "next/link"
+import { Calendar, User, Clock, Share2 } from "lucide-react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { getBlogPost, getRelatedPosts } from "@/lib/blog-data"
+import { BlogNavigation } from "@/components/blog/BlogNavigation"
+import { RelatedPostLink } from "@/components/blog/RelatedPostLink"
 
 export default async function BlogPostPage({
   params,
@@ -24,13 +25,7 @@ export default async function BlogPostPage({
       {/* Header */}
       <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <Link 
-            href="/blog"
-            className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mb-8"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Blog
-          </Link>
+          <BlogNavigation />
 
           <div className="mb-6">
             <div className="flex flex-wrap gap-2 mb-4">
@@ -135,30 +130,17 @@ export default async function BlogPostPage({
                   </h3>
                   <div className="space-y-4">
                     {relatedPosts.map((relatedPost) => (
-                      <Link 
+                      <RelatedPostLink 
                         key={relatedPost.id}
-                        href={`/blog/${relatedPost.slug}`}
-                        className="block group"
-                      >
-                        <div className="flex gap-3">
-                          <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                            <Image
-                              src={relatedPost.image}
-                              alt={relatedPost.title}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-                              {relatedPost.title}
-                            </h4>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-                              {relatedPost.readTime}
-                            </p>
-                          </div>
-                        </div>
-                      </Link>
+                        post={{
+                          id: relatedPost.id.toString(),
+                          slug: relatedPost.slug,
+                          title: relatedPost.title,
+                          excerpt: relatedPost.content || '',
+                          imageUrl: relatedPost.image,
+                          date: relatedPost.readTime
+                        }}
+                      />
                     ))}
                   </div>
                 </CardContent>

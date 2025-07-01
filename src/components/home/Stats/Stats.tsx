@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
+import { HeadingH2 } from "@/components/ui/headings";
 
 export function Stats() {
   const { t } = useTranslation("home");
@@ -89,9 +90,9 @@ export function Stats() {
     <div className="relative py-20 bg-white dark:bg-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4">
+          <HeadingH2 className="text-neutral-900 dark:text-neutral-100 mb-4">
             {t("stats.title")}
-          </h2>
+          </HeadingH2>
           <p className="max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-400">
             {t("stats.subtitle")}
           </p>

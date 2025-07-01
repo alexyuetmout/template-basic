@@ -1,12 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "@/hooks/useTranslation";
 import { Header } from "@/components/home/Header/Header";
 import { Footer } from "@/components/home/Footer/Footer";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Coins, TrendingUp, TrendingDown, Calendar, Gift, Loader2, Clock } from "lucide-react";
+import {
+  Coins,
+  TrendingUp,
+  TrendingDown,
+  Calendar,
+  Gift,
+  Loader2,
+  Clock,
+} from "lucide-react";
 
 interface PointTransaction {
   id: string;
@@ -31,35 +46,36 @@ interface PointsBalance {
   expiringSoon: number; // 30天内过期的积分
 }
 
-const transactionTypeConfig = {
-  PURCHASE: { 
-    label: "Purchase", 
+const getTransactionTypeConfig = (t: any) => ({
+  PURCHASE: {
+    label: t("points.transactionTypes.PURCHASE"),
     color: "bg-green-100 text-green-800",
-    icon: TrendingUp
+    icon: TrendingUp,
   },
-  SUBSCRIPTION: { 
-    label: "Subscription", 
+  SUBSCRIPTION: {
+    label: t("points.transactionTypes.SUBSCRIPTION"),
     color: "bg-blue-100 text-blue-800",
-    icon: Gift
+    icon: Gift,
   },
-  SPEND: { 
-    label: "Spent", 
+  SPEND: {
+    label: t("points.transactionTypes.SPEND"),
     color: "bg-red-100 text-red-800",
-    icon: TrendingDown
+    icon: TrendingDown,
   },
-  EXPIRE: { 
-    label: "Expired", 
+  EXPIRE: {
+    label: t("points.transactionTypes.EXPIRE"),
     color: "bg-gray-100 text-gray-800",
-    icon: Clock
+    icon: Clock,
   },
-  REFUND: { 
-    label: "Refund", 
+  REFUND: {
+    label: t("points.transactionTypes.REFUND"),
     color: "bg-yellow-100 text-yellow-800",
-    icon: TrendingDown
+    icon: TrendingDown,
   },
-};
+});
 
 export default function PointsPage() {
+  const { t } = useTranslation("dashboard");
   const [transactions, setTransactions] = useState<PointTransaction[]>([]);
   const [balance, setBalance] = useState<PointsBalance>({
     totalPoints: 0,
@@ -95,7 +111,7 @@ export default function PointsPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("zh-CN", {
+    return new Date(dateString).toLocaleDateString(undefined, {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -105,19 +121,19 @@ export default function PointsPage() {
   };
 
   const formatExpiryDate = (dateString: string | null) => {
-    if (!dateString) return "永不过期";
-    
+    if (!dateString) return t("points.expiry.neverExpires");
+
     const expiryDate = new Date(dateString);
     const now = new Date();
     const diffTime = expiryDate.getTime() - now.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays <= 0) {
-      return "已过期";
+      return t("points.expiry.expired");
     } else if (diffDays <= 30) {
-      return `${diffDays}天后过期`;
+      return t("points.expiry.daysLeft", { days: diffDays });
     } else {
-      return expiryDate.toLocaleDateString("zh-CN");
+      return expiryDate.toLocaleDateString();
     }
   };
 
@@ -138,12 +154,14 @@ export default function PointsPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-900">
       <Header />
-      
+
       <DashboardLayout>
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Points Center</h1>
-            <p className="text-gray-600">View your points balance and usage history</p>
+            <h1 className="text-2xl font-bold text-gray-900">
+              {t("points.title")}
+            </h1>
+            <p className="text-gray-600">{t("points.description")}</p>
           </div>
 
           {/* 积分概览 */}
@@ -153,8 +171,12 @@ export default function PointsPage() {
                 <div className="flex items-center">
                   <Coins className="w-8 h-8 text-yellow-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">总积分</p>
-                    <p className="text-2xl font-bold text-gray-900">{balance.totalPoints}</p>
+                    <p className="text-sm font-medium text-gray-600">
+                      {t("points.overview.totalPoints")}
+                    </p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {balance.totalPoints}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -165,8 +187,12 @@ export default function PointsPage() {
                 <div className="flex items-center">
                   <TrendingUp className="w-8 h-8 text-green-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">可用积分</p>
-                    <p className="text-2xl font-bold text-gray-900">{balance.availablePoints}</p>
+                    <p className="text-sm font-medium text-gray-600">
+                      {t("points.overview.availablePoints")}
+                    </p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {balance.availablePoints}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -177,9 +203,15 @@ export default function PointsPage() {
                 <div className="flex items-center">
                   <Clock className="w-8 h-8 text-orange-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">即将过期</p>
-                    <p className="text-2xl font-bold text-gray-900">{balance.expiringSoon}</p>
-                    <p className="text-xs text-gray-500">30天内</p>
+                    <p className="text-sm font-medium text-gray-600">
+                      {t("points.overview.expiringSoon")}
+                    </p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {balance.expiringSoon}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {t("points.overview.within30Days")}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -194,10 +226,12 @@ export default function PointsPage() {
                   <Clock className="w-5 h-5 text-orange-600 mr-2" />
                   <div>
                     <p className="text-sm font-medium text-orange-800">
-                      积分过期提醒
+                      {t("points.expiryWarning.title")}
                     </p>
                     <p className="text-sm text-orange-700">
-                      您有 {balance.expiringSoon} 积分将在30天内过期，请及时使用
+                      {t("points.expiryWarning.message", {
+                        count: balance.expiringSoon,
+                      })}
                     </p>
                   </div>
                 </div>
@@ -208,36 +242,52 @@ export default function PointsPage() {
           {/* 积分交易记录 */}
           <Card>
             <CardHeader>
-              <CardTitle>积分记录</CardTitle>
+              <CardTitle>{t("points.history.title")}</CardTitle>
               <CardDescription>
-                您的积分获得和使用历史
+                {t("points.history.description")}
               </CardDescription>
             </CardHeader>
             <CardContent>
               {transactions.length === 0 ? (
                 <div className="text-center py-8">
                   <Coins className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-500">暂无积分记录</p>
+                  <p className="text-gray-500">
+                    {t("points.history.noRecords")}
+                  </p>
                   <p className="text-sm text-gray-400 mt-1">
-                    购买产品或订阅服务即可获得积分
+                    {t("points.history.noRecordsDesc")}
                   </p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {transactions.map((transaction) => {
-                    const config = transactionTypeConfig[transaction.transactionType as keyof typeof transactionTypeConfig];
+                    const transactionTypeConfig = getTransactionTypeConfig(t);
+                    const config =
+                      transactionTypeConfig[
+                        transaction.transactionType as keyof typeof transactionTypeConfig
+                      ];
                     const Icon = config?.icon || Coins;
-                    const isPositive = transaction.transactionType === "PURCHASE" || transaction.transactionType === "SUBSCRIPTION";
-                    
+                    const isPositive =
+                      transaction.transactionType === "PURCHASE" ||
+                      transaction.transactionType === "SUBSCRIPTION";
+
                     return (
-                      <div 
+                      <div
                         key={transaction.id}
                         className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
                       >
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center space-x-3">
-                            <div className={`p-2 rounded-full ${isPositive ? "bg-green-100" : "bg-red-100"}`}>
-                              <Icon className={`w-4 h-4 ${isPositive ? "text-green-600" : "text-red-600"}`} />
+                            <div
+                              className={`p-2 rounded-full ${
+                                isPositive ? "bg-green-100" : "bg-red-100"
+                              }`}
+                            >
+                              <Icon
+                                className={`w-4 h-4 ${
+                                  isPositive ? "text-green-600" : "text-red-600"
+                                }`}
+                              />
                             </div>
                             <div>
                               <h3 className="font-medium text-gray-900">
@@ -249,10 +299,19 @@ export default function PointsPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className={`text-lg font-bold ${isPositive ? "text-green-600" : "text-red-600"}`}>
-                              {isPositive ? "+" : "-"}{Math.abs(transaction.points)}
+                            <div
+                              className={`text-lg font-bold ${
+                                isPositive ? "text-green-600" : "text-red-600"
+                              }`}
+                            >
+                              {isPositive ? "+" : "-"}
+                              {Math.abs(transaction.points)}
                             </div>
-                            <Badge className={config?.color || "bg-gray-100 text-gray-800"}>
+                            <Badge
+                              className={
+                                config?.color || "bg-gray-100 text-gray-800"
+                              }
+                            >
                               {config?.label || transaction.transactionType}
                             </Badge>
                           </div>
@@ -265,7 +324,11 @@ export default function PointsPage() {
                               {formatDate(transaction.createdAt)}
                             </div>
                             {transaction.order && (
-                              <span>订单: {transaction.order.orderNumber}</span>
+                              <span>
+                                {t("points.history.orderNumber", {
+                                  orderNumber: transaction.order.orderNumber,
+                                })}
+                              </span>
                             )}
                           </div>
                           {transaction.expiresAt && (
@@ -286,29 +349,39 @@ export default function PointsPage() {
           {/* 积分说明 */}
           <Card>
             <CardHeader>
-              <CardTitle>积分说明</CardTitle>
+              <CardTitle>{t("points.information.title")}</CardTitle>
               <CardDescription>
-                了解积分的获得和使用规则
+                {t("points.information.description")}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">如何获得积分</h4>
+                  <h4 className="font-medium text-gray-900 mb-2">
+                    {t("points.information.howToEarn.title")}
+                  </h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• 购买产品或服务</li>
-                    <li>• 订阅月度或年度计划</li>
-                    <li>• 参与活动和推广</li>
-                    <li>• 邀请好友注册</li>
+                    {(
+                      t("points.information.howToEarn.items", {
+                        returnObjects: true,
+                      }) as string[]
+                    ).map((item: string, index: number) => (
+                      <li key={index}>{item}</li>
+                    ))}
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">积分使用规则</h4>
+                  <h4 className="font-medium text-gray-900 mb-2">
+                    {t("points.information.usageRules.title")}
+                  </h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• 积分可用于购买产品</li>
-                    <li>• 1积分 = $0.01</li>
-                    <li>• 积分有效期为1年</li>
-                    <li>• 过期积分将自动清零</li>
+                    {(
+                      t("points.information.usageRules.items", {
+                        returnObjects: true,
+                      }) as string[]
+                    ).map((item: string, index: number) => (
+                      <li key={index}>{item}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -316,7 +389,7 @@ export default function PointsPage() {
           </Card>
         </div>
       </DashboardLayout>
-      
+
       <Footer />
     </div>
   );

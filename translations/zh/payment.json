@@ -1,0 +1,38 @@
+{
+  "cancel": {
+    "title": "支付取消",
+    "description": "您的支付已被取消",
+    "message": "没关系，您可以随时重新开始购买流程。",
+    "support": "如果您遇到任何问题，请随时联系我们的客服团队。",
+    "backToPricing": "返回定价页面",
+    "backToHome": "返回首页"
+  },
+  "success": {
+    "title": "支付成功！",
+    "description": "您的购买已成功完成",
+    "message": "感谢您的购买！我们已经收到您的付款，相关服务将很快激活。",
+    "emailConfirmation": "您将收到一封确认邮件，其中包含您的购买详情。",
+    "goToDashboard": "前往仪表板",
+    "viewOrderHistory": "查看订单历史"
+  },
+  "subscription": {
+    "cancel": {
+      "title": "订阅取消",
+      "description": "您的订阅流程已被取消",
+      "message": "没关系，您可以随时重新订阅我们的服务。",
+      "flexiblePlans": "随时可以重新订阅",
+      "flexibleDescription": "我们提供灵活的订阅选项，满足您的不同需求",
+      "viewPlans": "查看订阅计划",
+      "backToHome": "返回首页"
+    },
+    "success": {
+      "title": "订阅成功！",
+      "description": "欢迎加入我们的订阅服务",
+      "message": "感谢您订阅我们的服务！您的订阅已激活，可以立即开始使用。",
+      "activated": "订阅已激活",
+      "billingReminder": "您将在下一个计费周期前收到提醒邮件",
+      "goToDashboard": "前往仪表板",
+      "manageSubscriptions": "管理订阅"
+    }
+  }
+}

@@ -12,6 +12,8 @@ import {
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
+import { useTranslation } from "@/hooks/useTranslation"
+import { usePath } from "@/hooks/usePath"
 
 interface UserDropdownProps {
   user: {
@@ -34,6 +36,8 @@ interface UserDropdownProps {
 
 export function UserDropdown({ user, className }: UserDropdownProps) {
   const router = useRouter()
+  const { t } = useTranslation()
+  const { routes } = usePath()
 
   // 计算总积分（现在直接从session用户数据获取）
   const totalPoints = (user.balance || 0) + (user.oneTimePoints || 0) + (user.subscriptionPoints || 0)
@@ -42,7 +46,7 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
   const handleSignOut = async () => {
     try {
       await authClient.signOut()
-      router.push("/")
+      router.push(routes.HOME)
       router.refresh()
     } catch (error) {
       console.error('Sign out error:', error)
@@ -52,12 +56,12 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
 
   // 菜单项配置
   const menuItems = [
-    { label: "Dashboard", href: "/dashboard" },
-    { label: "Points", href: "/dashboard/points" },
-    { label: "Orders", href: "/dashboard/orders" },
-    { label: "Subscriptions", href: "/dashboard/subscriptions" },
-    ...(user.isAdmin ? [{ label: "Admin Panel", href: "/admin" }] : []),
-    { label: "Security", href: "/dashboard/security" },
+    { label: t('dashboard.navigation.dashboard'), href: routes.DASHBOARD },
+    { label: t('dashboard.navigation.points'), href: routes.DASHBOARD_POINTS },
+    { label: t('dashboard.navigation.orders'), href: routes.DASHBOARD_ORDERS },
+    { label: t('dashboard.navigation.subscriptions'), href: routes.DASHBOARD_SUBSCRIPTIONS },
+    ...(user.isAdmin ? [{ label: t('dashboard.userDropdown.adminPanel'), href: routes.ADMIN }] : []),
+    { label: t('dashboard.navigation.security'), href: routes.DASHBOARD_SECURITY },
   ]
 
   return (
@@ -101,7 +105,7 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
         {/* 积分显示 */}
         <DropdownMenuLabel className="font-normal">
           <div className="flex items-center gap-2 py-1">
-            <span className="text-base text-gray-600">Points: </span>
+            <span className="text-base text-gray-600">{t('dashboard.userDropdown.points')}</span>
             <span className="text-base font-medium text-gray-900">
               {totalPoints.toLocaleString()}
             </span>
@@ -123,8 +127,8 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
 
         {/* 操作按钮区域 */}
         <DropdownMenuItem asChild>
-          <Link href="/pricing" className="cursor-pointer text-base text-blue-600">
-            Upgrade Plan
+          <Link href={routes.PRICING} className="cursor-pointer text-base text-blue-600">
+            {t('dashboard.userDropdown.upgradePlan')}
           </Link>
         </DropdownMenuItem>
         
@@ -132,7 +136,7 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
           onClick={handleSignOut}
           className="cursor-pointer text-base text-red-600 focus:text-red-600"
         >
-          Sign Out
+          {t('dashboard.userDropdown.signOut')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

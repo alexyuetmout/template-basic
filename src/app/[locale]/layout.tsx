@@ -1,8 +1,9 @@
 import initTranslations from "../i18n";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import i18nConfig from "../../../i18nConfig";
+import { i18nConfig as appI18nConfig } from "@/lib/i18n-config";
 
-const i18nNamespaces = ["common", "home"];
+const i18nNamespaces = [...appI18nConfig.namespaces];
 
 export default async function LocaleLayout({
   children,

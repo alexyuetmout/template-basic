@@ -1,0 +1,216 @@
+{
+  "subscriptions": {
+    "title": "Subscription Management",
+    "description": "Manage your subscription plans and billing information",
+    "activeSubscriptions": "Active Subscriptions",
+    "historySubscriptions": "Subscription History",
+    "noSubscriptions": "No Subscriptions",
+    "noSubscriptionsDesc": "You don't have any subscription plans yet",
+    "viewPlans": "View Subscription Plans",
+    "price": "Price",
+    "currentPeriod": "Current Period",
+    "nextBilling": "Next Billing",
+    "subscriptionTime": "Subscription Time",
+    "cancelTime": "Cancellation Time",
+    "cancelReason": "Cancellation Reason",
+    "cancelling": "Cancelling...",
+    "cancelSubscription": "Cancel Subscription",
+    "confirmCancel": "Are you sure you want to cancel this subscription? The service will stop at the end of the current billing cycle.",
+    "cancelSuccess": "Subscription cancelled successfully! Service will stop at the end of the current billing cycle.",
+    "cancelFailed": "Failed to cancel subscription, please try again later",
+    "status": {
+      "active": "Active",
+      "cancelled": "Cancelled",
+      "expired": "Expired"
+    },
+    "help": {
+      "title": "Subscription Information",
+      "description": "Important information about subscription management",
+      "cancellationPolicy": "Cancellation Policy",
+      "policies": [
+        "• Cancel subscription anytime",
+        "• Service continues until cycle end after cancellation",
+        "• No refunds for partial periods",
+        "• Can resubscribe to restore service"
+      ],
+      "billing": "Billing Information",
+      "billingInfo": [
+        "• Automatic renewal before expiration",
+        "• Can upgrade or downgrade plans",
+        "• Billing history available in orders section",
+        "• Contact support for billing issues"
+      ]
+    }
+  },
+  "security": {
+    "title": "Security Settings",
+    "description": "Manage your account security and password",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "saveChanges": "Save Changes",
+    "saving": "Saving...",
+    "errors": {
+      "currentPasswordRequired": "Please enter current password",
+      "newPasswordRequired": "Please enter new password",
+      "newPasswordShort": "New password must be at least 6 characters",
+      "confirmPasswordRequired": "Please confirm new password",
+      "passwordMismatch": "Passwords don't match"
+    },
+    "success": "Password changed successfully!",
+    "failed": "Failed to change password, please try again later",
+    "setPassword": "Set Password",
+    "setPasswordSuccess": "Password set successfully!",
+    "setPasswordFailed": "Failed to set password, please try again later",
+    "setPasswordDesc": "Set a password for your account to enhance security",
+    "changePasswordDesc": "Regularly changing your password can improve account security",
+    "loading": "Loading security settings...",
+    "setting": "Setting...",
+    "accountSecurityStatus": "Account Security Status",
+    "checkSecuritySettings": "Check your account security settings",
+    "placeholders": {
+      "currentPassword": "Please enter current password",
+      "newPassword": "Please enter new password",
+      "confirmPassword": "Please enter new password again",
+      "password": "Please enter password"
+    },
+    "validation": {
+      "minLength": "At least 8 characters",
+      "uppercase": "At least 1 uppercase letter",
+      "lowercase": "At least 1 lowercase letter",
+      "number": "At least 1 number"
+    },
+    "requirements": {
+      "title": "Password security requirements:",
+      "items": [
+        "At least 8 characters",
+        "Contains uppercase, lowercase letters and numbers",
+        "Avoid using personal information as password"
+      ]
+    },
+    "hint": {
+      "title": "Notice:",
+      "description": "You are currently logged in via third party and have not set an account password. After setting a password, you can log in directly with email and password."
+    },
+    "status": {
+      "emailVerification": "Email Verification",
+      "emailVerificationDesc": "Verified email address for account recovery",
+      "verified": "Verified",
+      "passwordStrength": "Password Strength",
+      "passwordStrengthDesc": "Strong passwords protect your account security",
+      "medium": "Medium",
+      "loginProtection": "Login Protection",
+      "loginProtectionDesc": "Email notifications for unusual login activity",
+      "enabled": "Enabled"
+    },
+    "errors": {
+      "currentPasswordRequired": "Please enter current password",
+      "newPasswordRequired": "Please enter new password",
+      "confirmPasswordRequired": "Please confirm new password",
+      "passwordRequired": "Please enter password",
+      "passwordMismatch": "Passwords don't match"
+    }
+  },
+  "profile": {
+    "title": "Dashboard",
+    "description": "Manage your profile and account information",
+    "basicInformation": "Basic Information",
+    "updateProfileInfo": "Update your profile information",
+    "username": "Username",
+    "enterUsername": "Enter your username",
+    "emailAddress": "Email Address",
+    "emailCannotChange": "Email address cannot be changed, please contact support if needed",
+    "saving": "Saving...",
+    "saveChanges": "Save Changes",
+    "updateSuccess": "Profile updated successfully!",
+    "updateFailed": "Update failed, please try again",
+    "accountInformation": "Account Information",
+    "accountBasicInfo": "Your account basic information",
+    "userId": "User ID",
+    "registrationDate": "Registration Date",
+    "accountStatus": "Account Status",
+    "active": "Active"
+  },
+  "points": {
+    "title": "Points Center",
+    "description": "View your points balance and usage history",
+    "overview": {
+      "totalPoints": "Total Points",
+      "availablePoints": "Available Points",
+      "expiringSoon": "Expiring Soon",
+      "within30Days": "within 30 days"
+    },
+    "expiryWarning": {
+      "title": "Points Expiry Reminder",
+      "message": "You have {{count}} points that will expire within 30 days, please use them in time"
+    },
+    "history": {
+      "title": "Points History",
+      "description": "Your points earning and spending history",
+      "noRecords": "No points records",
+      "noRecordsDesc": "Purchase products or subscribe to services to earn points",
+      "orderNumber": "Order: {{orderNumber}}"
+    },
+    "transactionTypes": {
+      "PURCHASE": "Purchase",
+      "SUBSCRIPTION": "Subscription",
+      "SPEND": "Spent",
+      "EXPIRE": "Expired",
+      "REFUND": "Refund"
+    },
+    "expiry": {
+      "neverExpires": "Never expires",
+      "expired": "Expired",
+      "daysLeft": "{{days}} days left",
+      "expiresIn": "Expires in {{days}} days"
+    },
+    "information": {
+      "title": "Points Information",
+      "description": "Learn about points earning and usage rules",
+      "howToEarn": {
+        "title": "How to Earn Points",
+        "items": [
+          "• Purchase products or services",
+          "• Subscribe to monthly or annual plans",
+          "• Participate in activities and promotions",
+          "• Invite friends to register"
+        ]
+      },
+      "usageRules": {
+        "title": "Points Usage Rules",
+        "items": [
+          "• Points can be used to purchase products",
+          "• 1 point = $0.01",
+          "• Points are valid for 1 year",
+          "• Expired points are automatically cleared"
+        ]
+      }
+    }
+  },
+  "orders": {
+    "title": "Orders",
+    "description": "View your purchase history and order details",
+    "stats": {
+      "totalOrders": "Total Orders",
+      "totalSpent": "Total Spent", 
+      "pointsEarned": "Points Earned"
+    },
+    "status": {
+      "pending": "Pending",
+      "succeeded": "Completed",
+      "failed": "Failed",
+      "refunded": "Refunded"
+    },
+    "orderHistory": {
+      "title": "Order History",
+      "description": "Your recent purchase records",
+      "orderNumber": "Order: {{orderNumber}}",
+      "pointsAdded": "+{{points}} points"
+    },
+    "empty": {
+      "noOrders": "No orders yet",
+      "purchaseProducts": "Go purchase some products!"
+    }
+  }
+}
